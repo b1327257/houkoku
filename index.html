@@ -1,0 +1,4260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="授業報告書">
+<title>index</title>
+<style>
+  :root {
+    --bg: #eef2f6;
+    --card: #ffffff;
+    --card-sub: #f6f8fb;
+    --ink: #17212f;
+    --muted: #5b6878;
+    --line: #d5dce5;
+    --accent: #0f5c73;
+    --accent-hover: #0b4a5d;
+    --accent-soft: #e3f0f4;
+    --accent-ink: #ffffff;
+    --ok: #157347;
+    --ok-soft: #e6f4ea;
+    --pos2: #1d6f8a;
+    --pos2-soft: #e3f2f7;
+    --mid: #3b5998;
+    --mid-soft: #eaeff8;
+    --warn: #b45309;
+    --warn-soft: #fef3c7;
+    --neg: #b42318;
+    --neg-soft: #fdeceb;
+    --err: #b42318;
+    --err-bg: #fdeceb;
+    --field-bg: #ffffff;
+    --focus: #2a8fb0;
+    --shadow: 0 4px 14px rgba(15, 30, 50, 0.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f151c;
+      --card: #18212b;
+      --card-sub: #131b24;
+      --ink: #e6ecf2;
+      --muted: #97a4b3;
+      --line: #2e3b49;
+      --accent: #4fb3d0;
+      --accent-hover: #6cc3dc;
+      --accent-soft: #17323d;
+      --accent-ink: #08222c;
+      --ok: #4ade80;
+      --ok-soft: #142e20;
+      --pos2: #38bdf8;
+      --pos2-soft: #132d3e;
+      --mid: #93c5fd;
+      --mid-soft: #1b283d;
+      --warn: #fbbf24;
+      --warn-soft: #3b2a10;
+      --neg: #ff8d84;
+      --neg-soft: #3a1f1d;
+      --err: #ff8d84;
+      --err-bg: #3a1f1d;
+      --field-bg: #111820;
+      --focus: #6cc3dc;
+      --shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) calc(12px + env(safe-area-inset-right, 0px)) calc(36px + env(safe-area-inset-bottom, 0px)) calc(12px + env(safe-area-inset-left, 0px));
+  }
+  main { max-width: 780px; margin: 0 auto; }
+
+  .top-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 2px 0 14px;
+  }
+  h1 { font-size: 1.2rem; letter-spacing: .02em; }
+
+  .nav-tabs {
+    display: inline-flex;
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 4px;
+  }
+  .nav-tab {
+    font: inherit;
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    padding: 6px 14px;
+    cursor: pointer;
+    min-height: 34px;
+  }
+  .nav-tab[aria-selected="true"] {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .card-title { font-size: 1rem; font-weight: 700; }
+  .badge {
+    font-size: .73rem;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+  }
+  .badge.opt {
+    background: var(--card-sub);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .badge.ctx {
+    background: var(--ok-soft);
+    color: var(--ok);
+  }
+
+  label.field-label, .section-label {
+    display: block;
+    font-size: .88rem;
+    font-weight: 700;
+    margin: 12px 0 4px;
+  }
+  label.field-label:first-of-type { margin-top: 4px; }
+  .sub-hint {
+    font-size: .76rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 4px;
+  }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+  }
+  .row-units {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 560px) {
+    .row-units { grid-template-columns: 1fr 1fr; }
+  }
+
+  input[type="text"], select, textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--field-bg);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 9px 11px;
+  }
+  select {
+    width: auto;
+    min-width: 84px;
+    cursor: pointer;
+  }
+  textarea { min-height: 76px; resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 1px;
+  }
+  [aria-invalid="true"] { border-color: var(--err); }
+
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .pill {
+    font: inherit;
+    font-size: .82rem;
+    color: var(--ink);
+    background: var(--field-bg);
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 12px;
+    min-height: 34px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-align: left;
+  }
+  .pill:hover { border-color: var(--accent); }
+  .pill[aria-pressed="true"] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 700;
+  }
+  .pill[aria-pressed="true"]::before {
+    content: "✓";
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .pill.sm {
+    font-size: .77rem;
+    min-height: 30px;
+    padding: 4px 10px;
+  }
+
+  /* =========================================================
+     数直線（5段階状態ゲージ：左＝ポジティブ ➔ 右＝ネガティブ／要フォロー）
+     ========================================================= */
+  .gauge-block {
+    background: var(--field-bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-top: 8px;
+  }
+  .gauge-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .gauge-title {
+    font-size: .83rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .gauge-Ends {
+    font-size: .72rem;
+    color: var(--muted);
+    display: flex;
+    gap: 10px;
+  }
+  .gauge-Ends .pos-label { color: var(--ok); font-weight: 700; }
+  .gauge-Ends .neg-label { color: var(--warn); font-weight: 700; }
+
+  .number-line {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    position: relative;
+  }
+  @media (max-width: 520px) {
+    .number-line {
+      grid-template-columns: 1fr;
+    }
+  }
+  .nl-node {
+    font: inherit;
+    font-size: .75rem;
+    line-height: 1.3;
+    padding: 7px 6px;
+    border-radius: 8px;
+    border: 1.5px solid var(--line);
+    background: var(--card-sub);
+    color: var(--ink);
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-height: 48px;
+    user-select: none;
+  }
+  @media (max-width: 520px) {
+    .nl-node {
+      flex-direction: row;
+      justify-content: flex-start;
+      text-align: left;
+      min-height: 38px;
+      padding: 6px 10px;
+      gap: 8px;
+    }
+  }
+  .nl-step {
+    font-size: .68rem;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 999px;
+    background: var(--line);
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .nl-node[data-lv="1"] .nl-step { background: var(--ok-soft); color: var(--ok); }
+  .nl-node[data-lv="2"] .nl-step { background: var(--pos2-soft); color: var(--pos2); }
+  .nl-node[data-lv="3"] .nl-step { background: var(--mid-soft); color: var(--mid); }
+  .nl-node[data-lv="4"] .nl-step { background: var(--warn-soft); color: var(--warn); }
+  .nl-node[data-lv="5"] .nl-step { background: var(--neg-soft); color: var(--neg); }
+
+  .nl-node[aria-pressed="true"][data-lv="1"] { border-color: var(--ok); background: var(--ok-soft); font-weight: 700; }
+  .nl-node[aria-pressed="true"][data-lv="2"] { border-color: var(--pos2); background: var(--pos2-soft); font-weight: 700; }
+  .nl-node[aria-pressed="true"][data-lv="3"] { border-color: var(--mid); background: var(--mid-soft); font-weight: 700; }
+  .nl-node[aria-pressed="true"][data-lv="4"] { border-color: var(--warn); background: var(--warn-soft); font-weight: 700; }
+  .nl-node[aria-pressed="true"][data-lv="5"] { border-color: var(--neg); background: var(--neg-soft); font-weight: 700; }
+
+  /* =========================================================
+     最終文例セレクター（候補リスト＋お気に入りピン留め＋自由記述切替）
+     ========================================================= */
+  .step-box {
+    background: var(--card-sub);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px;
+    margin-top: 12px;
+  }
+  .step-title {
+    font-size: .92rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: .76rem;
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .mode-switch {
+    display: inline-flex;
+    background: var(--field-bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px;
+    gap: 2px;
+  }
+  .mode-btn {
+    font: inherit;
+    font-size: .74rem;
+    font-weight: 700;
+    color: var(--muted);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    padding: 4px 10px;
+    cursor: pointer;
+  }
+  .mode-btn[aria-pressed="true"] {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  .candidates-wrap {
+    margin-top: 10px;
+    border-top: 1px solid var(--line);
+    padding-top: 10px;
+  }
+  .candidates-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .candidates-title {
+    font-size: .79rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .candidate-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .cand-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px;
+    align-items: stretch;
+  }
+  .cand-btn {
+    font: inherit;
+    font-size: .83rem;
+    line-height: 1.5;
+    text-align: left;
+    color: var(--ink);
+    background: var(--field-bg);
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    width: 100%;
+  }
+  .cand-btn:hover { border-color: var(--accent); }
+  .cand-btn[aria-pressed="true"] {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 600;
+  }
+  .cand-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1.5px solid var(--line);
+    background: var(--card);
+    color: transparent;
+    font-size: .72rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .cand-btn[aria-pressed="true"] .cand-check {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .cand-axis-tag {
+    font-size: .68rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: var(--card-sub);
+    color: var(--muted);
+    border: 1px solid var(--line);
+    margin-right: 5px;
+    white-space: nowrap;
+  }
+  .fav-btn {
+    font: inherit;
+    font-size: .9rem;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--line);
+    background: var(--field-bg);
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fav-btn[aria-pressed="true"] {
+    color: #eab308;
+    border-color: #eab308;
+    background: var(--warn-soft);
+  }
+
+  .live-preview-box {
+    margin-top: 10px;
+    padding: 9px 11px;
+    border-radius: 8px;
+    background: var(--field-bg);
+    border: 1.5px dashed var(--accent);
+    font-size: .84rem;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .live-preview-box.empty {
+    border-color: var(--line);
+    color: var(--muted);
+  }
+  .live-preview-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 3px;
+  }
+  .live-preview-label {
+    font-size: .73rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .field-wrap { position: relative; }
+  .suggest {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin-top: 4px;
+    z-index: 40;
+    background: var(--card);
+    border: 1.5px solid var(--accent);
+    border-radius: 8px;
+    overflow-y: auto;
+    max-height: 250px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.2);
+  }
+  .suggest[hidden] { display: none; }
+  .suggest button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    font-size: .86rem;
+    color: var(--ink);
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 9px 12px;
+    cursor: pointer;
+  }
+  .suggest button:last-child { border-bottom: 0; }
+  .suggest button:hover, .suggest button:focus-visible {
+    background: var(--accent-soft);
+  }
+  .suggest-meta {
+    font-size: .71rem;
+    color: var(--muted);
+    background: var(--card-sub);
+    padding: 2px 7px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    margin-top: 6px;
+  }
+  .chips[hidden] { display: none; }
+  .chips-label { font-size: .74rem; color: var(--muted); font-weight: 600; }
+  .chip {
+    font: inherit;
+    font-size: .77rem;
+    color: var(--ink);
+    background: var(--field-bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 10px;
+    min-height: 28px;
+    cursor: pointer;
+    text-align: left;
+  }
+  .chip:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .chip.active {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    font-weight: 700;
+  }
+
+  .unit-picker-box {
+    margin-top: 7px;
+    padding: 8px 10px;
+    background: var(--card-sub);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .unit-picker-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+    margin-top: 4px;
+    min-height: 1.2em;
+  }
+  .field-error { color: var(--err); font-size: .82rem; font-weight: 600; }
+
+  .toggle-btn {
+    font: inherit;
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--field-bg);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 3px 10px;
+    cursor: pointer;
+  }
+  .toggle-btn:hover { background: var(--accent-soft); }
+
+  .btn {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    padding: 12px;
+    border: 0;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 1.02rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .btn:hover:not(:disabled) { background: var(--accent-hover); }
+  .btn:disabled { opacity: .45; cursor: not-allowed; }
+  .btn.secondary {
+    background: transparent;
+    color: var(--muted);
+    border: 1.5px solid var(--line);
+    font-size: .9rem;
+    min-height: 44px;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+  .btn.copy.done { background: var(--ok); color: #fff; }
+  .btn.copy.fail { background: var(--err); color: #fff; }
+
+  .action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .action-row .btn.secondary { margin-top: 0; }
+
+  #summary {
+    color: var(--err);
+    background: var(--err-bg);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: .88rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  #summary[hidden] { display: none; }
+  #summary ul { margin: 4px 0 0 1.2em; font-weight: 500; }
+
+  #output-text {
+    min-height: 280px;
+    line-height: 1.7;
+    margin-top: 6px;
+  }
+  .char-meter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .char-count {
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--ok);
+    font-variant-numeric: tabular-nums;
+  }
+  .char-count.warn { color: var(--warn); }
+  .char-count.over { color: var(--err); }
+  .meter-bar {
+    width: 72px;
+    height: 7px;
+    background: var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .meter-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--ok);
+    transition: width .15s, background-color .15s;
+  }
+  .meter-fill.warn { background: var(--warn); }
+  .meter-fill.over { background: var(--err); }
+
+  #ending-notice {
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--warn);
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  #ending-notice[hidden] { display: none; }
+
+  #copy-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  /* 文例バンク確認・編集ページ */
+  .editor-group {
+    border: 1px solid var(--line);
+    background: var(--card-sub);
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 12px;
+  }
+  .editor-item {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 8px;
+  }
+  .editor-item-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .editor-item-head span {
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .del-btn {
+    font: inherit;
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--err);
+    background: var(--err-bg);
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 3px 9px;
+    cursor: pointer;
+  }
+  .add-row-btn {
+    margin-top: 10px;
+    font: inherit;
+    font-size: .84rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1.5px dashed var(--accent);
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--ink);
+    color: var(--card);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: .85rem;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    z-index: 90;
+  }
+  .toast[hidden] { display: none; }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 100;
+  }
+  .modal-backdrop[hidden] { display: none; }
+  .modal {
+    background: var(--card);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    max-width: 400px;
+    width: 100%;
+    padding: 18px;
+    box-shadow: 0 16px 36px rgba(0,0,0,.28);
+  }
+  .modal-msg { font-size: .95rem; margin-bottom: 14px; }
+  .modal-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+  .modal-actions button {
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1.5px solid var(--line);
+    background: var(--field-bg);
+    color: var(--ink);
+  }
+  .modal-actions button.primary {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="top-bar">
+    <h1>授業報告書作成</h1>
+    <div class="nav-tabs" role="tablist" aria-label="画面切替">
+      <button type="button" class="nav-tab" id="tab-generator" role="tab" aria-selected="true" aria-controls="view-generator">報告書を作成</button>
+      <button type="button" class="nav-tab" id="tab-editor" role="tab" aria-selected="false" aria-controls="view-editor">文例バンク確認・編集</button>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       VIEW 1: 報告書作成ページ
+       ========================================================= -->
+  <div id="view-generator" role="tabpanel" aria-labelledby="tab-generator">
+    <div id="summary" role="alert" hidden></div>
+
+    <form id="form" novalidate autocomplete="off">
+      <!-- 1. 基本情報・単元（大分類・小分類） -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">基本情報・本日の単元</div>
+          <span class="badge" id="bank-count-badge">文例バンク連動</span>
+        </div>
+
+        <label class="field-label" for="student-name">生徒名<span class="sub-hint">（空欄なら冒頭の生徒名行を省略）</span></label>
+        <div class="row-2">
+          <input type="text" id="student-name" placeholder="任意（例: 生徒A）" autocomplete="off">
+          <select id="student-honorific" aria-label="敬称">
+            <option value="さん" selected>さん</option>
+            <option value="くん">くん</option>
+            <option value="様">様</option>
+          </select>
+        </div>
+        <div class="chips" id="recent-names" hidden></div>
+
+        <span class="section-label">学年</span>
+        <div class="pills" id="grade-pills" role="group" aria-label="学年選択"></div>
+
+        <span class="section-label">教科</span>
+        <div class="pills" id="subject-pills" role="group" aria-label="教科選択"></div>
+        <div id="custom-subject-wrap" class="memo-input" hidden style="margin-top:8px">
+          <input type="text" id="custom-subject" placeholder="教科名を入力（例: 小論文、情報、英検対策）">
+        </div>
+        <div class="meta"><span class="field-error" id="err-subject"></span></div>
+
+        <div class="row-units" style="margin-top:10px">
+          <div>
+            <label class="field-label" for="unit-major">メイン単元（大分類）</label>
+            <div class="field-wrap">
+              <input type="text" id="unit-major" placeholder="例: 不定詞 / 一次関数 / 漢字の読み書き" aria-describedby="err-unit-major" autocomplete="off">
+              <div class="suggest" id="suggest-major" role="listbox" hidden></div>
+            </div>
+            <div class="unit-picker-box">
+              <div class="unit-picker-head">
+                <span class="chips-label" id="major-picker-title">単元候補（タップで選択）</span>
+                <button type="button" class="toggle-btn" id="btn-more-majors">すべて表示</button>
+              </div>
+              <div class="chips" id="major-chips"></div>
+            </div>
+          </div>
+
+          <div>
+            <label class="field-label" for="unit-minor">具体的な内容（小分類）<span class="sub-hint">（選ぶと文例に自動挿入）</span></label>
+            <div class="field-wrap">
+              <input type="text" id="unit-minor" placeholder="空欄でもOK（再タップで解除可）" autocomplete="off">
+              <div class="suggest" id="suggest-minor" role="listbox" hidden></div>
+            </div>
+            <div class="unit-picker-box">
+              <div class="unit-picker-head">
+                <span class="chips-label" id="minor-picker-title">具体内容（大分類に連動）</span>
+              </div>
+              <div class="chips" id="minor-chips"></div>
+            </div>
+          </div>
+        </div>
+        <div class="chips" id="recent-units" hidden></div>
+        <div class="meta"><span class="field-error" id="err-unit-major"></span></div>
+      </section>
+
+      <!-- 2. 項目別：状態ゲージ ➔ 最終文例選択 or 完全自由記述 -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">項目別・状態ゲージと最終文例の選択</div>
+          <span class="badge ctx" id="active-cat-badge">初期状態はすべて未選択です</span>
+        </div>
+
+        <!-- ==========================================
+             STEP 1: お子様の様子（4軸細分化ゲージ）
+             ========================================== -->
+        <div class="step-box">
+          <div class="step-title">
+            <span><span class="step-num">1</span>お子様の様子</span>
+            <div class="mode-switch" role="group" aria-label="お子様の様子の入力モード">
+              <button type="button" class="mode-btn" id="mode-att-select" aria-pressed="true">文例から選ぶ</button>
+              <button type="button" class="mode-btn" id="mode-att-free" aria-pressed="false">完全自由記述</button>
+            </div>
+          </div>
+
+          <div id="att-select-pane">
+            <div id="att-gauges-container"></div>
+
+            <div class="candidates-wrap" id="att-candidates-wrap" hidden>
+              <div class="candidates-bar">
+                <span class="candidates-title" id="att-cand-title">最終文例候補（タップして採用・★でピン留め）</span>
+                <button type="button" class="toggle-btn" id="btn-shuffle-att">🔄 別の言い回し候補に切替</button>
+              </div>
+              <div class="candidate-list" id="att-candidate-list"></div>
+            </div>
+          </div>
+
+          <div id="att-free-pane" hidden style="margin-top:8px">
+            <textarea id="attitude-free-text" placeholder="お子様の様子を自由に記入してください（文例を選んでからここで手直しすることもできます）"></textarea>
+          </div>
+
+          <div class="live-preview-box empty" id="preview-attitude">
+            <div class="live-preview-head">
+              <span class="live-preview-label">【お子様の様子 確定文面】</span>
+              <button type="button" class="toggle-btn" id="btn-edit-att-inline" hidden>この文面を手直し</button>
+            </div>
+            <div id="preview-attitude-text">（未選択：上の数直線ゲージから該当する段階をタップするか、「完全自由記述」で入力してください）</div>
+          </div>
+          <div class="meta"><span class="field-error" id="err-attitude"></span></div>
+        </div>
+
+        <!-- ==========================================
+             STEP 2: 授業のポイント（アプローチ別フィルタ＋単元別最終文例）
+             ========================================== -->
+        <div class="step-box">
+          <div class="step-title">
+            <span><span class="step-num">2</span>授業のポイント（要点＋具体的アドバイス）</span>
+            <div class="mode-switch" role="group" aria-label="授業のポイントの入力モード">
+              <button type="button" class="mode-btn" id="mode-pt-select" aria-pressed="true">文例から選ぶ</button>
+              <button type="button" class="mode-btn" id="mode-pt-free" aria-pressed="false">完全自由記述</button>
+            </div>
+          </div>
+
+          <div id="pt-select-pane">
+            <span class="chips-label">指導アプローチで絞り込み（単元連動）:</span>
+            <div class="pills" id="pt-approach-pills" role="group" aria-label="指導アプローチ"></div>
+
+            <div class="candidates-wrap">
+              <div class="candidates-bar">
+                <span class="candidates-title" id="pt-cand-title">単元別の最終文例候補（語尾・切り口別）</span>
+                <button type="button" class="toggle-btn" id="btn-shuffle-pt">🔄 別の文末バリエーションに切替</button>
+              </div>
+              <div class="candidate-list" id="pt-candidate-list"></div>
+            </div>
+          </div>
+
+          <div id="pt-free-pane" hidden style="margin-top:8px">
+            <textarea id="point-free-text" placeholder="授業のポイント・伝えたアドバイスを自由に記入してください"></textarea>
+          </div>
+
+          <div class="live-preview-box empty" id="preview-point">
+            <div class="live-preview-head">
+              <span class="live-preview-label">【授業のポイント 確定文面】</span>
+              <button type="button" class="toggle-btn" id="btn-edit-pt-inline" hidden>この文面を手直し</button>
+            </div>
+            <div id="preview-point-text">（未選択：上の最終文例から1つ選ぶか、「完全自由記述」で入力してください）</div>
+          </div>
+          <div class="meta"><span class="field-error" id="err-advice"></span></div>
+        </div>
+
+        <!-- ==========================================
+             STEP 3: 所感（3軸細分化ゲージ：理解度・正確性・今後の方針）
+             ========================================== -->
+        <div class="step-box">
+          <div class="step-title">
+            <span><span class="step-num">3</span>所感（理解プロセス・正確性・今後の方針）</span>
+            <div class="mode-switch" role="group" aria-label="所感の入力モード">
+              <button type="button" class="mode-btn" id="mode-imp-select" aria-pressed="true">文例から選ぶ</button>
+              <button type="button" class="mode-btn" id="mode-imp-free" aria-pressed="false">完全自由記述</button>
+            </div>
+          </div>
+
+          <div id="imp-select-pane">
+            <div id="imp-gauges-container"></div>
+
+            <div class="candidates-wrap" id="imp-candidates-wrap" hidden>
+              <div class="candidates-bar">
+                <span class="candidates-title" id="imp-cand-title">最終文例候補（タップして採用・★でピン留め）</span>
+                <button type="button" class="toggle-btn" id="btn-shuffle-imp">🔄 別の言い回し候補に切替</button>
+              </div>
+              <div class="candidate-list" id="imp-candidate-list"></div>
+            </div>
+          </div>
+
+          <div id="imp-free-pane" hidden style="margin-top:8px">
+            <textarea id="impression-free-text" placeholder="所感を自由に記入してください"></textarea>
+          </div>
+
+          <div class="live-preview-box empty" id="preview-impression">
+            <div class="live-preview-head">
+              <span class="live-preview-label">【所感 確定文面】</span>
+              <button type="button" class="toggle-btn" id="btn-edit-imp-inline" hidden>この文面を手直し</button>
+            </div>
+            <div id="preview-impression-text">（未選択：上の3つの数直線ゲージから該当する段階をタップするか、「完全自由記述」で入力してください）</div>
+          </div>
+          <div class="meta"><span class="field-error" id="err-impression"></span></div>
+        </div>
+      </section>
+
+      <!-- 3. 宿題 -->
+      <section class="card">
+        <div class="card-header">
+          <div class="card-title">宿題</div>
+          <span class="badge opt">任意（空欄なら宿題欄を省略）</span>
+        </div>
+        <input type="text" id="homework" placeholder="例: ワークp.80リピート、81リピート">
+        <div class="chips" id="homework-chips"></div>
+      </section>
+
+      <button type="button" class="btn" id="btn-generate">報告書を作成する</button>
+      <div class="action-row">
+        <button type="button" class="btn secondary" id="btn-next" disabled>次の生徒へ（学年・教科・単元を維持）</button>
+        <button type="button" class="btn secondary" id="btn-reset">すべて未選択・クリア</button>
+      </div>
+    </form>
+
+    <!-- 4. 出力（最大500文字メーター＆語尾かぶりチェッカー付き） -->
+    <section class="card" style="margin-top:16px" aria-labelledby="out-title">
+      <div class="card-header">
+        <div class="card-title" id="out-title">作成された報告書</div>
+        <div class="char-meter">
+          <button type="button" class="toggle-btn" id="btn-diversify-endings">✨ 語尾の重複を散らす</button>
+          <div class="meter-bar" aria-hidden="true"><div class="meter-fill" id="meter-fill"></div></div>
+          <span class="char-count" id="out-count">0 / 500文字</span>
+          <button type="button" class="toggle-btn" id="btn-trim-500" hidden>500文字以内に短縮</button>
+        </div>
+      </div>
+      <div id="ending-notice" hidden>
+        <span id="ending-notice-text">同じ文末表現が重なっています。</span>
+        <button type="button" class="toggle-btn" id="btn-fix-ending-now">ワンタップで語尾を変える</button>
+      </div>
+      <textarea id="output-text" aria-label="作成された報告書テキスト" placeholder="「報告書を作成する」を押すと、ここに報告書が表示されます。直接手直しもできます。"></textarea>
+      <div style="margin-top:8px">
+        <button type="button" class="btn copy" id="btn-copy" disabled>テキストをコピー</button>
+      </div>
+      <div id="copy-status" role="status" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <!-- =========================================================
+       VIEW 2: 文例バンクの確認・編集ページ
+       ========================================================= -->
+  <div id="view-editor" role="tabpanel" aria-labelledby="tab-editor" hidden>
+    <section class="card">
+      <div class="card-header">
+        <div class="card-title" id="editor-main-title">文例バンクの確認・編集</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button type="button" class="toggle-btn" id="btn-export-config">文例バンクをJSON保存</button>
+          <button type="button" class="toggle-btn" id="btn-import-config">JSON読込</button>
+          <input type="file" id="file-import-config" accept=".json,application/json" hidden>
+          <button type="button" class="toggle-btn" id="btn-reset-config">初期設定に戻す</button>
+        </div>
+      </div>
+
+      <span class="section-label">1. 確認・編集する項目を選択</span>
+      <div class="pills" id="editor-scope-pills" role="group" aria-label="編集対象の項目"></div>
+
+      <div id="editor-subfilter-wrap" style="margin-top:10px"></div>
+
+      <div id="editor-content-area"></div>
+    </section>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- 確認モーダル -->
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-msg" hidden>
+  <div class="modal">
+    <p class="modal-msg" id="modal-msg"></p>
+    <div class="modal-actions">
+      <button type="button" id="modal-cancel">キャンセル</button>
+      <button type="button" id="modal-ok" class="primary">実行する</button>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   1. 基本定数とカリキュラム単元ツリー（大分類×小分類）
+   ========================================================= */
+const MAX_REPORT_CHARS = 500;
+const STORAGE_KEY_UNITS = "report_app_recent_units_v6";
+const STORAGE_KEY_CUSTOM_BANK = "report_app_custom_bank_v6";
+const STORAGE_KEY_FAVS = "report_app_favs_v6";
+
+const GRADES = [
+  { id: "all", label: "全学年" },
+  { id: "e13", label: "小1〜小3" },
+  { id: "e4", label: "小4" },
+  { id: "e5", label: "小5" },
+  { id: "e6", label: "小6" },
+  { id: "j1", label: "中1" },
+  { id: "j2", label: "中2" },
+  { id: "j3", label: "中3" },
+  { id: "h1", label: "高1" },
+  { id: "h2", label: "高2" },
+  { id: "h3", label: "高3・受験" }
+];
+
+const SUBJECTS = ["英語", "数学", "国語", "算数", "理科", "社会", "その他"];
+
+const APPROACH_FILTERS = [
+  { id: "all", label: "すべて表示" },
+  { id: "rule", label: "見分け方・ルール整理" },
+  { id: "visual", label: "印つけ・図表で視覚化" },
+  { id: "step", label: "手順・途中式の徹底" },
+  { id: "meaning", label: "意味・理由からの理解" }
+];
+
+const CURRICULUM_TREE = [
+  // --- 英語 ---
+  { s: "英語", g: ["e13", "e4", "e5", "e6", "j1", "j2", "j3", "h1", "h2", "h3"], major: "英単語・熟語", cat: "en_vocab", minors: ["発音とつづり（フォニックス）", "代名詞の格変化", "不規則動詞の活用", "重要熟語・前置詞"] },
+  { s: "英語", g: ["e5", "e6", "j1"], major: "be動詞と一般動詞", cat: "en_basic", minors: ["肯定文の基本語順", "否定文と疑問文の作り方", "be動詞と一般動詞の使い分け"] },
+  { s: "英語", g: ["e6", "j1"], major: "疑問詞の疑問文", cat: "en_basic", minors: ["What / Who / Where の疑問文", "When / How / Which の疑問文"] },
+  { s: "英語", g: ["j1"], major: "三人称単数現在形", cat: "en_tense", minors: ["三単現のsのつけ方", "does / doesn't の疑問文・否定文"] },
+  { s: "英語", g: ["j1", "j2"], major: "現在進行形・過去進行形", cat: "en_tense", minors: ["現在進行形（be動詞＋〜ing）", "過去進行形と一般動詞との使い分け"] },
+  { s: "英語", g: ["j1", "j2"], major: "過去形", cat: "en_tense", minors: ["規則動詞と不規則動詞の過去形", "過去の疑問文・否定文（did）", "be動詞の過去形（was / were）"] },
+  { s: "英語", g: ["j1", "j2"], major: "未来表現・助動詞", cat: "en_basic", minors: ["be going to と will", "can / must / have to / should の使い分け"] },
+  { s: "英語", g: ["j2", "j3", "h1", "h2"], major: "不定詞", cat: "en_infinitive", minors: ["名詞的・副詞的・形容詞的用法の訳し分け", "不定詞と前置詞toの違い", "不定詞と動名詞の使い分け", "It is ... for 人 to 〜 / 疑問詞＋to"] },
+  { s: "英語", g: ["j2", "j3", "h1"], major: "動名詞", cat: "en_infinitive", minors: ["動名詞（〜すること）の基本文", "不定詞と動名詞の目的語の使い分け"] },
+  { s: "英語", g: ["j2", "h1"], major: "文型（SVOO・SVOC）・接続詞", cat: "en_basic", minors: ["第4文型（give 人 物）と第5文型（call A B）", "接続詞（when / if / because / that）"] },
+  { s: "英語", g: ["j2", "h1", "h2"], major: "比較表現", cat: "en_clause", minors: ["原級（as〜as）と比較級", "最上級と書き換え表現"] },
+  { s: "英語", g: ["j2", "j3", "h1"], major: "受動態（受け身）", cat: "en_tense", minors: ["be動詞＋過去分詞の基本形", "能動態から受動態への書き換え"] },
+  { s: "英語", g: ["j3", "h1", "h2"], major: "現在完了形", cat: "en_tense", minors: ["継続・経験・完了の3用法の見分け方", "現在完了進行形と過去形との違い"] },
+  { s: "英語", g: ["j3", "h1", "h2"], major: "分詞", cat: "en_clause", minors: ["現在分詞と過去分詞の後置修飾", "分詞構文"] },
+  { s: "英語", g: ["j3", "h1", "h2"], major: "関係代名詞", cat: "en_clause", minors: ["主格（who / which / that）の文構造", "目的格の関係代名詞と省略", "関係副詞"] },
+  { s: "英語", g: ["j3", "h1", "h2"], major: "間接疑問文・仮定法", cat: "en_clause", minors: ["間接疑問文の語順", "仮定法（I wish / If I were 〜）"] },
+  { s: "英語", g: ["j1", "j2", "j3", "h1", "h2", "h3"], major: "長文読解", cat: "en_read", minors: ["スラッシュリーディングでの構文把握", "設問の根拠探しと内容一致問題"] },
+  { s: "英語", g: ["j1", "j2", "j3", "h1", "h2", "h3"], major: "英作文・並び替え問題", cat: "en_write", minors: ["整序（並び替え）問題の組み立て", "条件英作文・和文英訳"] },
+
+  // --- 数学 ---
+  { s: "数学", g: ["j1"], major: "正負の数", cat: "ma_calc", minors: ["加法・減法とかっこ外し", "乗法・除法と累乗", "四則混合計算と分配法則"] },
+  { s: "数学", g: ["j1"], major: "文字と式", cat: "ma_calc", minors: ["文字式の表し方と式の値", "1次式の加減・乗除", "数量の関係を文字式で表す問題"] },
+  { s: "数学", g: ["j1"], major: "一次方程式の計算", cat: "ma_calc", minors: ["移項を使った基本計算", "かっこ・小数・分数を含む一次方程式", "比例式の解き方"] },
+  { s: "数学", g: ["j1"], major: "一次方程式の利用（文章題）", cat: "ma_word", minors: ["代金と個数・過不足の文章題", "速さ・時間・道のりの文章題", "割合・食塩水の文章題"] },
+  { s: "数学", g: ["j1"], major: "比例と反比例", cat: "ma_func", minors: ["比例・反比例の式の求め方", "座標とグラフのかき方・読み取り", "比例と反比例の利用"] },
+  { s: "数学", g: ["j2"], major: "式の計算", cat: "ma_calc", minors: ["多項式の加減と単項式の乗除", "式の値と等式の変形", "文字式による整数の性質の説明"] },
+  { s: "数学", g: ["j2"], major: "連立方程式の計算", cat: "ma_calc", minors: ["加減法と代入法の使い分け", "かっこ・分数・小数を含む連立方程式"] },
+  { s: "数学", g: ["j2"], major: "連立方程式の利用（文章題）", cat: "ma_word", minors: ["個数と代金・2桁の自然数の問題", "速さ・道のりの文章題", "割合・増減の文章題"] },
+  { s: "数学", g: ["j2"], major: "一次関数", cat: "ma_func", minors: ["変化の割合・傾きと切片・グラフ", "一次関数の変域", "2点を通る直線の式の求め方", "2直線の交点と座標平面上の面積", "動点・水量・料金プランの利用問題"] },
+  { s: "数学", g: ["j2"], major: "平行と合同・証明", cat: "ma_proof", minors: ["平行線と角・多角形の内角と外角", "三角形の合同条件と証明の書き方", "二等辺三角形・平行四辺形の性質と証明"] },
+  { s: "数学", g: ["j3"], major: "展開と因数分解", cat: "ma_calc", minors: ["乗法公式を使った展開", "共通因数と乗法公式による因数分解", "式の計算の利用"] },
+  { s: "数学", g: ["j3"], major: "平方根", cat: "ma_calc", minors: ["根号（ルート）の変形と有理化", "平方根の四則計算と乗法公式の利用"] },
+  { s: "数学", g: ["j3"], major: "二次方程式", cat: "ma_word", minors: ["因数分解と解の公式による計算", "二次方程式の利用（数・図形・動点の文章題）"] },
+  { s: "数学", g: ["j3"], major: "二次関数（y=ax²）", cat: "ma_func", minors: ["放物線のグラフと変域", "変化の割合", "放物線と直線の交点・図形の面積"] },
+  { s: "数学", g: ["j3"], major: "相似な図形", cat: "ma_geom", minors: ["相似条件と証明", "平行線と線分の比・中点連結定理", "相似比と面積比・体積比"] },
+  { s: "数学", g: ["j1", "j2", "j3"], major: "平面図形・空間図形・三平方の定理", cat: "ma_geom", minors: ["おうぎ形の弧と面積・立体の表面積と体積", "円周角の定理", "三平方の定理と平面・空間図形への応用"] },
+  { s: "数学", g: ["j1", "j2", "j3", "h1", "h2"], major: "確率・データの活用", cat: "ma_prob", minors: ["樹形図や表を使った確率", "ヒストグラム・四分位数と箱ひげ図", "順列（P）と組合せ（C）・条件付き確率"] },
+  { s: "数学", g: ["h1", "h2", "h3"], major: "高校数学（二次関数・三角比・微積・数列・ベクトル）", cat: "ma_func", minors: ["二次関数の平方完成と最大最小", "三角比・三角関数", "図形と方程式・指数対数", "微分法と積分法", "数列・ベクトル"] },
+
+  // --- 国語 ---
+  { s: "国語", g: ["e13", "e4", "e5", "e6", "j1", "j2", "j3"], major: "漢字の読み書き・語彙", cat: "ja_kanji", minors: ["新出漢字と部首の成り立ち", "同音異義語・同訓異字の使い分け", "ことわざ・慣用句・四字熟語"] },
+  { s: "国語", g: ["e13", "e4", "e5", "e6", "j1", "j2", "j3", "h1", "h2", "h3"], major: "説明文・論説文の読解", cat: "ja_logic", minors: ["接続語と指示語の整理", "筆者の主張（要旨）と根拠の探し方", "文章表現のイメージ化と内容理解"] },
+  { s: "国語", g: ["e13", "e4", "e5", "e6", "j1", "j2", "j3", "h1", "h2", "h3"], major: "物語文・小説の読解", cat: "ja_story", minors: ["登場人物の心情変化ときっかけ", "行動・セリフ・情景描写からの読み取り"] },
+  { s: "国語", g: ["e4", "e5", "e6", "j1", "j2", "j3", "h1", "h2", "h3"], major: "記述問題・要約", cat: "ja_desc", minors: ["理由説明（「なぜ〜か」）の組み立て", "キーワード抜き出しと指定字数での要約"] },
+  { s: "国語", g: ["e13", "e4", "e5", "e6", "j1", "j2", "j3"], major: "国語文法", cat: "ja_grammar", minors: ["主語・述語・修飾語", "品詞分類と用言の活用", "助詞・助動詞の識別と敬語"] },
+  { s: "国語", g: ["j1", "j2", "j3", "h1", "h2", "h3"], major: "古文・漢文", cat: "ja_classic", minors: ["歴史的仮名遣いと主語の補い方", "古典文法（用言・助動詞・敬語）", "漢文の返り点と書き下し文・句形"] },
+
+  // --- 算数 ---
+  { s: "算数", g: ["e13", "e4", "e5", "e6"], major: "整数の計算・筆算", cat: "ma_calc", minors: ["たし算・ひき算・かけ算・わり算の筆算", "計算のきまりと逆算（□を求める計算）", "倍数と約数（最小公倍数・最大公約数）"] },
+  { s: "算数", g: ["e4", "e5", "e6"], major: "小数・分数の計算", cat: "ma_calc", minors: ["小数のかけ算・わり算", "異分母分数の通分・約分と加減", "分数のかけ算・わり算と小数混合計算"] },
+  { s: "算数", g: ["e13", "e4", "e5", "e6"], major: "文章題（割合・速さ・比・単位量）", cat: "ma_word", minors: ["線分図を使った文章題", "単位量あたりの大きさと速さ", "割合と百分率・歩合", "比と等しい比の利用"] },
+  { s: "算数", g: ["e13", "e4", "e5", "e6"], major: "図形（角度・面積・体積）", cat: "ma_geom", minors: ["三角形・四角形・平行線の角度", "四角形・三角形・円の面積", "直方体・角柱・円柱の体積と展開図"] },
+  { s: "算数", g: ["e5", "e6"], major: "比例・場合の数・グラフ", cat: "ma_func", minors: ["比例と反比例の表・式・グラフ", "並べ方と組み合わせ（場合の数）"] },
+
+  // --- 理科 ---
+  { s: "理科", g: ["e13", "e4", "e5", "e6", "j1", "j3", "h1", "h2", "h3"], major: "光・音・力・運動とエネルギー", cat: "sc_phys", minors: ["光の反射・屈折と凸レンズの作図", "フックの法則・圧力・てこのつり合い", "力の合成・分解と物体の運動・仕事"] },
+  { s: "理科", g: ["e4", "e5", "j2", "h1", "h2", "h3"], major: "電流と回路（オームの法則）・磁界", cat: "sc_elec", minors: ["直列回路と並列回路のルール", "オームの法則と回路の計算", "電力・熱量と電流がつくる磁界・電磁誘導"] },
+  { s: "理科", g: ["e4", "e5", "e6", "j1", "j2", "j3", "h1", "h2", "h3"], major: "水溶液・気体・化学変化・イオン", cat: "sc_chem", minors: ["気体の性質と密度・濃度の計算", "溶解度曲線と再結晶", "化学反応式と質量保存・定比例の法則", "水溶液とイオン・酸とアルカリの中和"] },
+  { s: "理科", g: ["e13", "e4", "e5", "e6", "j1", "j2", "j3", "h1", "h2", "h3"], major: "植物・動物・人体・細胞と遺伝", cat: "sc_bio", minors: ["植物の光合成・呼吸・蒸散", "人体の消化・呼吸・血液循環・神経系", "細胞分裂と遺伝の規則性"] },
+  { s: "理科", g: ["e4", "e5", "e6", "j1", "j2", "j3", "h1", "h2"], major: "火山・地震・地層・天気・天体", cat: "sc_earth", minors: ["火山と火成岩・地震の計算・地層の柱状図", "湿度と露点の計算・前線と天気の変化", "太陽・月・星の日周運動と年周運動・満ち欠け"] },
+
+  // --- 社会 ---
+  { s: "社会", g: ["e13", "e4", "e5", "j1", "j2", "h1", "h2", "h3"], major: "日本地理・世界地理", cat: "so_geo", minors: ["時差・世界の気候帯と各州の特色", "日本の都道府県・地形・気候区分と農業・工業"] },
+  { s: "社会", g: ["e4", "e5", "j1", "j2", "j3", "h1", "h2", "h3"], major: "地形図・雨温図・統計資料の読み取り", cat: "so_data", minors: ["雨温図と気候の判別", "農業・工業・貿易の統計グラフ判別", "地形図の縮尺と等高線・地図記号"] },
+  { s: "社会", g: ["e6", "j1", "j2", "j3", "h1", "h2", "h3"], major: "日本の歴史・世界の歴史", cat: "so_hist", minors: ["古代〜中世の政治と文化", "近世（織豊政権・江戸幕府と鎖国・三大改革）", "近代〜現代（明治維新・戦争と戦後改革）"] },
+  { s: "社会", g: ["e6", "j3", "h1", "h2", "h3"], major: "公民（憲法・政治・経済・国際社会）", cat: "so_civ", minors: ["日本国憲法と国会・内閣・裁判所（三権分立）", "市場経済・金融・財政・社会保障と国際社会"] },
+  { s: "社会", g: ["e5", "e6", "j1", "j2", "j3", "h1", "h2", "h3"], major: "社会の理由記述・史料読解", cat: "so_desc", minors: ["地理・歴史・公民の理由説明と背景記述"] }
+];
+
+/* =========================================================
+   2. 7本の5段階数直線ゲージ定義（左[1]:ポジティブ ➔ 右[5]:ネガティブ/要フォロー）
+   ========================================================= */
+const ATTITUDE_GAUGES = [
+  {
+    axisId: "focus",
+    title: "① 集中度・コンディション",
+    levels: [
+      { lv: 1, short: "終始高い集中" },
+      { lv: 2, short: "よく集中" },
+      { lv: 3, short: "落ち着いて取組" },
+      { lv: 4, short: "後半やや疲れ" },
+      { lv: 5, short: "集中切れ・声かけ" }
+    ]
+  },
+  {
+    axisId: "question",
+    title: "② 質問・主体性",
+    levels: [
+      { lv: 1, short: "自ら鋭い質問" },
+      { lv: 2, short: "不明点を素直に質問" },
+      { lv: 3, short: "問いかけに応答" },
+      { lv: 4, short: "遠慮がち・汲み取り" },
+      { lv: 5, short: "曖昧なまま進行・確認" }
+    ]
+  },
+  {
+    axisId: "note",
+    title: "③ ノート・途中式・作業",
+    levels: [
+      { lv: 1, short: "途中式や図が丁寧" },
+      { lv: 2, short: "要点を整理して記述" },
+      { lv: 3, short: "必要な過程を記述" },
+      { lv: 4, short: "暗算頼り・省略気味" },
+      { lv: 5, short: "書き方を一から指導" }
+    ]
+  },
+  {
+    axisId: "homework",
+    title: "④ 宿題・前回内容の定着",
+    levels: [
+      { lv: 1, short: "宿題完璧・定着◎" },
+      { lv: 2, short: "しっかり取組" },
+      { lv: 3, short: "概ね定着・一部復習" },
+      { lv: 4, short: "やり方を忘れ気味" },
+      { lv: 5, short: "未実施・基礎再確認" }
+    ]
+  }
+];
+
+const IMPRESSION_GAUGES = [
+  {
+    axisId: "understand",
+    title: "① 本日の理解・到達度",
+    levels: [
+      { lv: 1, short: "即理解・応用突破" },
+      { lv: 2, short: "自力でスラスラ完答" },
+      { lv: 3, short: "悩んだが後半解けた" },
+      { lv: 4, short: "ヒントで一緒に完答" },
+      { lv: 5, short: "苦戦・基礎に絞り反復" }
+    ]
+  },
+  {
+    axisId: "accuracy",
+    title: "② 正確性・ミスの傾向",
+    levels: [
+      { lv: 1, short: "見直し◎・ノーミス" },
+      { lv: 2, short: "ほぼ正確に解答" },
+      { lv: 3, short: "途中で気づき自力修正" },
+      { lv: 4, short: "うっかりミス散見" },
+      { lv: 5, short: "ルール混同・手順確認" }
+    ]
+  },
+  {
+    axisId: "closing",
+    title: "③ 今後の方針（結び）",
+    levels: [
+      { lv: 1, short: "応用・発展へ挑戦" },
+      { lv: 2, short: "類題反復で定着強化" },
+      { lv: 3, short: "手順・印つけ習慣化" },
+      { lv: 4, short: "宿題反復と次回確認" },
+      { lv: 5, short: "基礎から自信をつける" }
+    ]
+  }
+];
+
+/* =========================================================
+   3. 1,000+ 自然文例バンク生成エンジン（AI臭さゼロ・現場講師の自然な言葉）
+      {topic} には選択中の単元・小分類が自動で自然に入ります
+   ========================================================= */
+function buildDefaultBank() {
+  // --- A. お子様の様子バンク（4軸 × 5段階 × 各12文例 ＝ 240テンプレート × 単元展開） ---
+  const attitudeBank = {
+    focus: {
+      1: [
+        "授業開始から終わりまで非常に高い集中力を保ち、{topic}の演習に一生懸命取り組めていました。",
+        "終始やる気に満ちた表情で、{topic}の問題へ前のめりに挑戦する姿が大変素晴らしかったです。",
+        "本日はいつにも増して集中度が高く、説明した内容を一つも漏らさず吸収しようとする姿勢が見られました。",
+        "最初から最後まで集中が途切れることなく、自分のペースでどんどん問題を解き進めることができていました。",
+        "授業への切り替えがとてもスムーズで、{topic}の課題に対して終始真剣な眼差しで向き合えていました。",
+        "難しい問題が続く場面でもまったく気持ちを切らさず、楽しみながら意欲的に手を動かしていました。",
+        "姿勢よく机に向かい、解説を聞くときも問題を解くときも抜群の集中力を発揮してくれました。",
+        "「今日のうちにマスターしよう」という意欲が伝わってくるほど、密度の濃い時間を過ごせていました。",
+        "1問ごとの集中力が非常に高く、周りの物音にも気を取られず目の前の課題に没頭できていました。",
+        "最初からエンジン全開で、予定していた{topic}の演習メニューをテンポよく消化することができました。",
+        "講師の説明に対する反応がとても良く、高い集中力をキープしたまま最後まで駆け抜けてくれました。",
+        "張り切って授業に臨んでくれ、難しい問題にも臆せずチャレンジする頼もしい姿が見られました。"
+      ],
+      2: [
+        "よく集中して取り組めていました。",
+        "授業を通してしっかりと集中できており、{topic}の練習に前向きに取り組む姿勢が良かったです。",
+        "メリハリをつけて集中して学習に向き合うことができ、良いリズムで演習を進められました。",
+        "解説を聞く姿勢がしっかりしており、今日やるべき課題にまっすぐ向き合えていました。",
+        "{topic}の演習中も集中を切らすことなく、一問一問にじっくりと取り組むことができていました。",
+        "落ち着いた態度で授業に臨み、最後までしっかり集中して手を動かし続けていました。",
+        "全体的に集中して取り組めており、講師のアドバイスを素直に吸収しようとする様子が見られました。",
+        "自分の力で解き切ろうと集中して机に向かい、時間いっぱい丁寧に取り組めていました。",
+        "ポイントの説明にしっかり耳を傾け、集中して問題演習へと移ることができていました。",
+        "本日も安定した集中力で、{topic}の一つひとつの課題に真面目に取り組む姿が印象的でした。",
+        "分からない問題が出ても投げ出さず、集中して粘り強く考え抜く姿勢が良かったです。",
+        "最後まで集中力を保ちながら、前向きな雰囲気で授業を進めることができました。"
+      ],
+      3: [
+        "落ち着いた様子で、自分のペースを守りながらコツコツと{topic}に取り組めていました。",
+        "焦らず着実に1問ずつ向き合い、最後まで丁寧に取り組むことができていました。",
+        "穏やかな雰囲気の中でもやるべきことをしっかり意識し、着実に手を動かしていました。",
+        "自分のペースでじっくり考えながら、{topic}の基本問題から順番に取り組めていました。",
+        "派手さはないものの、一問一問を大切にしながら真面目に机に向かう姿が見られました。",
+        "講師と一つずつ確認しながら、落ち着いて授業のペースについてくることができていました。",
+        "途中で少し考え込む場面もありましたが、気持ちを乱さず最後まで落ち着いて取り組めました。",
+        "与えられた課題に対して実直に向き合い、時間内に予定の演習を一通りこなすことができました。",
+        "じっくり腰を据えて考える姿勢があり、丁寧なペースで学習を進められていました。",
+        "静かに集中して解説を聞き、自分の力でできるところまで書いてみようとする姿勢がありました。",
+        "急がず一歩ずつ確かめるように、{topic}の演習を着実に進めることができていました。",
+        "普段通りの落ち着いた様子で、最後まで自分のペースを崩さずやり切っていました。"
+      ],
+      4: [
+        "学校や部活の後で少しお疲れの様子も見られましたが、声かけで気持ちを切り替えて最後までやり切っていました。",
+        "授業後半は少し疲れや眠気が出る場面もありましたが、小刻みに区切って進めることで最後まで手を動かせました。",
+        "最初は少しエンジンがかかりにくそうな様子でしたが、問題が解け始めると徐々に集中を取り戻してくれました。",
+        "少し疲れが溜まっている様子でしたので、ペースを調整しながら無理なく重要ポイントに絞って進めました。",
+        "長時間の学習で後半はやや集中が緩む場面もありましたが、「あと2問頑張ろう」と声をかけるとしっかり踏ん張れました。",
+        "体調や疲れの影響か少し眠そうな時間帯もありましたが、投げ出さずに最後まで机に向かい続けてくれました。",
+        "難しめの内容が続いたこともあり後半は少し疲れが見えましたが、休憩を挟みつつ最後まで解き切っています。",
+        "最初は少しぼんやりしてしまう場面もありましたが、一緒に声を出して確認するうちにペースを掴めていました。",
+        "少しお疲れ気味の様子でしたので、書く負担を減らしつつ口頭での確認を交えてリズムよく進めました。",
+        "途中少し手が止まりがちな時間帯もありましたが、励ましながら進めることで予定の範囲を完了できています。",
+        "やや疲れが見える中でも、自分のやるべき問題は最後まで終わらせようとする責任感が見られました。",
+        "後半に少し集中が切れかける場面はありましたが、声かけに素直に反応してもう一踏ん張りしてくれました。"
+      ],
+      5: [
+        "本日は少し集中が切れやすい様子でしたので、問題を1問ずつ細かく区切り、隣で声をかけながら一緒に進めました。",
+        "疲れや気分の波もあってか手が止まりがちでしたが、ハードルを下げた基本問題から始めることで少しずつ軌道に乗せました。",
+        "周囲や別のことが気になって集中しづらそうな場面がありましたが、その都度目線を合わせて声をかけ、最後まで取り組みました。",
+        "最初はなかなか気持ちが乗らない様子でしたので、まずは一緒に例題を解いて「できる感覚」を作ってから演習に入りました。",
+        "難しい問題を前にして集中が途切れそうになる場面がありましたが、1ステップずつヒントを出して伴走し、完走できています。",
+        "眠気が強く集中を保つのが大変そうでしたので、口頭での一問一答を交えてテンポを変えながら指導いたしました。",
+        "一人だと手が止まってしまう場面が多かったため、時間制限を短く設定してゲーム感覚で1問ずつクリアしていきました。",
+        "本日は少し落ち着かない様子も見られましたが、やるべき問題を3問ずつに絞って提示することで最後までやり遂げました。",
+        "集中が続きにくいコンディションでしたので、長々とした解説は避け、手を動かしながらルールを確認する形で進めました。",
+        "途中で諦めそうになる場面もありましたが、「ここまで合っているよ」と途中経過を認めながら最後まで伴走いたしました。",
+        "気持ちの切り替えに少し時間がかかりましたが、後半は講師と一緒にペンを動かして重要問題を解き切ることができました。",
+        "集中をキープするのが少し難しい日でしたが、対話を多く取り入れることで最後まで投げ出さずに終えられています。"
+      ]
+    },
+    question: {
+      1: [
+        "{topic}の核心を突くような鋭い質問を自分から挙げるなど、深く理解しようとする姿勢が大変素晴らしかったです。",
+        "「なぜこの形になるのですか？」と自分から積極的に質問してくれ、丸暗記で終わらせない強い意欲を感じました。",
+        "解説の途中でも疑問に思った点をすぐに自分の言葉で質問でき、双方向の活発なやり取りができました。",
+        "「この場合はどうなりますか？」と一歩踏み込んだ質問をしてくれるなど、主体的に考える姿勢が光っていました。",
+        "似た問題との違いに自分で気づいて質問を挙げるなど、頭をフル回転させて授業に参加してくれていました。",
+        "自分の考えを言葉にして「こう考えたのですが合っていますか？」と確認してくれる頼もしい姿が見られました。",
+        "分からない箇所を具体的に言語化して質問できており、どこで迷っているかが明確で非常にスムーズに解決できました。",
+        "納得がいくまで自分から質問を重ねる前向きな姿勢があり、理解の深まりを強く実感いたしました。",
+        "ただ教わるのを待つのではなく、自分から疑問点をぶつけて解決しようとする積極性が大変良かったです。",
+        "「ここが紛らわしい」と自分の弱点を客観的に掴んで質問してくれたため、ピンポイントで深い指導ができました。",
+        "質問の内容が回を追うごとに具体的になっており、理解度が一段上がっていることを感じました。",
+        "解説後に「つまりこういうことですね」と自分の言葉で言い換えて確認してくれる素晴らしい姿勢でした。"
+      ],
+      2: [
+        "{topic}について質問を挙げるなど、不明点をそのままにしない姿勢が良かったです。",
+        "分からない点を曖昧なままにせず、素直に「ここが分かりません」と質問して確認する姿勢が良かったです。",
+        "迷った場面でそのまま進めず、自分から質問して疑問を解消しようとする前向きな態度が見られました。",
+        "解説の中で気になったところを素直に聞き返してくれ、納得してから次の問題へ進むことができていました。",
+        "疑問点をその場で質問してスッキリ解消できており、とても良い雰囲気で学習を進められました。",
+        "「ここはどう分けるのですか？」と素直に質問してくれたおかげで、つまずきを早めにフォローできました。",
+        "分からない問題を恥ずかしがらずに質問できる素直さがあり、着実に理解を積み重ねられています。",
+        "手が止まった際に自分からヘルプを出してくれたため、無駄に悩む時間を作らず効率よく演習できました。",
+        "不明点をうやむやにせず、その日のうちに質問して解決しようとする姿勢が大変素晴らしかったです。",
+        "少しでも自信がない箇所は自分から確認してくれたため、抜け漏れなく丁寧につぶしていくことができました。",
+        "素直に質問してアドバイスを受け入れる柔軟さがあり、教えたコツをすぐに実践できていました。",
+        "分からないところを率直に伝えてくれたことで、一番つまずきやすいポイントを重点的に練習できました。"
+      ],
+      3: [
+        "講師からの「ここはなぜこうなると思う？」という問いかけに対して、自分の頭で考えてしっかり答えてくれました。",
+        "自分から質問するのは少し控えめでしたが、こちらからの確認の問いかけには一生懸命考えて応答してくれました。",
+        "一問ごとに「ここまでは大丈夫？」と確認すると、頷いたり自分の考えを答えたりと丁寧なやり取りができました。",
+        "講師の質問に対して当てずっぽうではなく、ノートを見返しながら根拠を持って答えようとする姿勢が見られました。",
+        "対話形式で手順を確認していく中で、こちらのヒントにしっかり反応して答えを導き出せていました。",
+        "解説中の問いかけにも真面目に耳を傾け、一つひとつ納得しながらうなずいて聞いてくれていました。",
+        "最初は少し自信なさげな返答でしたが、正解を重ねるうちにハキハキと答えてくれるようになりました。",
+        "口頭での確認クイズにも前向きに答えてくれ、理解できている部分と迷っている部分を一緒に整理できました。",
+        "講師とのやり取りを通じて少しずつ考えがまとまり、最後は自分の口で手順を説明してくれました。",
+        "問いかけに対して黙り込まず、分かる範囲で答えようと努力する誠実な姿勢が良かったです。",
+        "一つずつ対話で確認しながら進めることで、安心した表情で演習に取り組めていました。",
+        "こちらのアドバイスに素直に反応し、言われた手順をその場で試してみようとする姿勢が見られました。"
+      ],
+      4: [
+        "自分からは少し質問しづらそうな遠慮がちな様子でしたので、手が止まっている箇所を講師側から汲み取って解説いたしました。",
+        "分からない箇所があっても一人で抱え込んで考え込む傾向が見られたため、途中経過を覗き込みながら早めに声をかけました。",
+        "「大丈夫？」と聞くと遠慮して頷いてしまう場面がありましたので、実際に1問目の解き方を口頭で説明してもらって理解度を確認しました。",
+        "質問するのを少し迷っている様子が見受けられたため、「ここはみんな迷うところだよ」と声をかけて質問しやすい雰囲気を作りました。",
+        "表情やペンの動きから迷っているサインが見えたため、こちらからヒントを出して一緒に考えを整理しました。",
+        "自力で頑張ろうとするあまり質問を我慢してしまう様子がありましたので、時間の上限を決めて声をかけるようにいたしました。",
+        "少し緊張や遠慮があったのか質問は少なめでしたが、こちらからポイントを補足するとホッとした表情で解き進めていました。",
+        "どこが分からないかを言葉にするのが少し難しそうでしたので、選択肢を示しながらどこで詰まったかを一緒に特定しました。",
+        "控えめな性格もあり自分から声を上げるのは遠慮がちでしたが、個別に対話すると迷っていた点を素直に話してくれました。",
+        "手が止まった際にすぐ声をかけることで、分からないまま時間が過ぎてしまうのを防ぎながら進めました。",
+        "「間違えたら恥ずかしい」という気持ちが少し見られましたので、途中の考え方を褒めながら安心して書けるよう促しました。",
+        "表情を見ながら小まめに理解度を確認し、疑問が残らないよう丁寧にフォローして進めました。"
+      ],
+      5: [
+        "分からない箇所をそのまま飛ばしたり当てずっぽうで進めてしまいやすい場面があったため、1問ごとに根拠を確認しながら進めました。",
+        "曖昧な理解のまま次の問題へ進もうとする傾向が見られましたので、丸つけを1問単位で行い、その場でやり方を定着させました。",
+        "「なんとなく」で答えを書いてしまいやすい場面があったため、なぜその答えになるのかを口頭で説明してもらう時間を設けました。",
+        "解説を聞いただけで「わかったつもり」になりやすいところがありましたので、すぐに類題を自力で解いてもらって定着を確かめました。",
+        "つまずいている自覚がないまま同じミスを繰り返す場面があったため、一度ペンを止めてルールを最初から一緒に整理しました。",
+        "答えが合っていれば良しとしてしまいがちでしたので、途中の考え方や見分け方のプロセスを重視してチェックいたしました。",
+        "分からない問題を飛ばして進めてしまう様子が見られたため、解く順番とヒントの使い方を一緒に約束して取り組みました。",
+        "疑問点をそのままにしてしまわないよう、講師側から「なぜここはこの形にしたの？」と細かく声かけを行って確認しました。",
+        "感覚で解いてしまっている箇所が見受けられたため、必ず問題文の中に根拠の印をつけてから答えを書くよう徹底いたしました。",
+        "解説を聞き流してしまわないよう、大事なポイントは本人に復唱してもらいながら一歩ずつ進めました。",
+        "分からない時に適当に埋めてしまう癖を直すため、「迷ったらまず印をつける」という具体的な行動ルールを一緒に実践しました。",
+        "理解が曖昧な箇所をそのままにしないよう、本日は進む範囲を絞って1問ごとの完全理解を最優先に指導いたしました。"
+      ]
+    },
+    note: {
+      1: [
+        "解説したポイントや途中経過をノートに非常に丁寧に書き残せており、後から見返しても一目で分かる素晴らしいノートでした。",
+        "図や印、途中式を惜しまずに大きく丁寧に書くことができており、思考の過程がノート上で綺麗に整理されていました。",
+        "間違えた問題の横に「なぜ間違えたか」のメモを自分で書き添えるなど、ノートの使い方が大変上手でした。",
+        "アドバイスした印のつけ方や図の描き方をすぐに取り入れ、見やすく丁寧なノート作りができていました。",
+        "計算の過程や文構造のメモを省略せず、1行ずつゆとりを持って丁寧に記述する姿勢が素晴らしかったです。",
+        "色ペンや余白を上手に使い分けながら、今日学んだ大事なルールを自分の言葉でノートにまとめられていました。",
+        "途中式や図を丁寧に書く習慣がしっかり身についており、それが計算や解答の正確さにも直結していました。",
+        "お手本のように整理されたノートで、どこでどう考えたのかが明確に伝わる丁寧な取り組みぶりでした。",
+        "問題文への線引きや余白への図示を面倒がらずに行い、手を動かしながら考える姿勢が徹底できていました。",
+        "一字一字を丁寧に書き、ケアレスミスを未然に防ごうとする高い意識がノートからも伝わってきました。",
+        "ノートのまとめ方が回を追うごとに上手になっており、家庭学習での復習にもそのまま役立つ内容になっていました。",
+        "途中経過を省かず書き残す良さを本人が実感できており、終始丁寧な記述を心がけてくれていました。"
+      ],
+      2: [
+        "伝えたポイントや途中式をノートに整理しながら、丁寧に取り組むことができていました。",
+        "大事なルールや着眼点を余白にメモしながら進めるなど、工夫してノートを使えていました。",
+        "途中経過を書き残す意識があり、見直しがしやすい形でノートをまとめることができていました。",
+        "問題への印つけや簡単な図示を素直に取り入れ、視覚的に整理しながら解き進められていました。",
+        "解説した手順をノートにしっかり書き留め、それを参照しながら次の類題に取り組む姿勢が良かったです。",
+        "文字や数字を落ち着いて丁寧に書いており、読み間違いによるミスを自分で防げていました。",
+        "ポイントを自分の目で確認できるよう、ノートに印や矢印を書き込みながら進めることができていました。",
+        "直しの際にもただ答えを写すのではなく、正しい途中経過をノートに書き直して確認できていました。",
+        "整理された読みやすいノートで、順序立てて考える習慣が育ってきていることを感じました。",
+        "必要なメモや途中式をきちんと言われた通りに書き残し、着実に演習を進められていました。",
+        "図や表を自分でノートに書き写しながら、条件を整理して考える姿勢が見られました。",
+        "丁寧なノート記述を心がけており、落ち着いた取り組みが解答の安定感につながっていました。"
+      ],
+      3: [
+        "必要な途中式やメモは一通りノートに書き残すことができ、手順を追いながら取り組めていました。",
+        "講師が指示した箇所のメモや途中経過はしっかりノートに書いて確認することができていました。",
+        "基本的なノートの書き方は守れており、必要な計算過程やメモを残しながら進められていました。",
+        "声をかけた箇所については図や途中式を書き出し、手順を確認しながら解き進めることができました。",
+        "特別な工夫はまだこれからですが、言われた通りの手順でノートに式や答えを整理できていました。",
+        "間違えた問題の解き直しもノートに書き残し、一通りの過程を確認することができていました。",
+        "普段通りのペースでノートに記述し、大きく乱れることなく最後まで演習を進められました。",
+        "最低限必要な途中経過はノートに残せており、どこでつまずいたかを一緒に確認することができました。",
+        "最初はメモが少なめでしたが、声をかけると必要な印や式を書き足しながら取り組めていました。",
+        "ノートに順序よく問題を解き進め、解説した箇所の修正もきちんと行えていました。",
+        "書くべき途中式を確認しながら、一歩ずつノート上で整理して進めることができました。",
+        "標準的な記述量で、授業内の演習と直しをノート上で一通り完了できています。"
+      ],
+      4: [
+        "頭の中（暗算）だけで処理しようとして途中式やメモを省きがちな場面があったため、手を動かして書き出すよう促しました。",
+        "プリントの狭い余白に小さく詰めて書いてしまう傾向が見られましたので、ノートに広く大きく書くようアドバイスいたしました。",
+        "問題文に印をつけずに目だけで読んで迷う場面があったため、必ずペンを持って線を引きながら読むよう声をかけました。",
+        "計算や考え方の途中経過を飛ばしてしまい、どこで間違えたか分からなくなる場面があったため、1行ずつ残すよう指導しました。",
+        "焦って解こうとすると少し字や数字が乱れて読み間違いにつながりやすいため、落ち着いて丁寧に書くよう声をかけました。",
+        "間違えた問題を消しゴムで全部消してしまう癖が見られたため、どこで間違えたか比較できるよう残して横に書き直すよう伝えました。",
+        "図や表を描かずに頭の中だけで考えようとして手が止まっていたため、簡単な図を書き出す習慣を一緒に練習しました。",
+        "答えだけを書いて満足してしまいやすい場面がありましたので、途中の根拠や式こそ大事であることを伝えて書き足してもらいました。",
+        "メモを省いた箇所でうっかりミスが出ていたため、「書けば防げるミス」であることを一緒に確認して書き方を改めました。",
+        "最初は手を動かさずに考え込んでいたため、「まず分かっていることを1つ書き出そう」と促してペンを動かしてもらいました。",
+        "途中式を端折ったことで符号や語順のミスにつながっていたため、後半は1ステップずつ省略せずに書く練習を行いました。",
+        "目で追うだけの学習になりかけていたため、印つけやメモを義務づけて手を動かしながら解くスタイルへ修正しました。"
+      ],
+      5: [
+        "ノートのどこに何を書いてあるか乱雑になりやすかったため、本日は問題番号を揃えて1行ずつ改行するノートの書き方から丁寧に指導いたしました。",
+        "途中経過をまったく書かずに感覚で答えを出そうとする場面が多かったため、見本を示して同じ形で途中式や印を書く練習を徹底しました。",
+        "数字や文字が崩れて自分の書いた字を読み間違えるミスが見られたため、マス目や行を意識して大きく丁寧に書くよう隣で指導いたしました。",
+        "直しをする際に赤ペンで答えだけを写して終わらせようとする様子があったため、なぜそうなるのかの過程を自分の手で書き直すよう徹底しました。",
+        "問題用紙もノートも真っ白なまま考え込んでしまっていたため、まずは問題文のキーワードに丸をつける作業から一緒に手を取って進めました。",
+        "計算スペースと答えを書く場所が混ざって混乱しやすかったため、ノートに線を引いてエリアを分ける整理術から導入いたしました。",
+        "図や途中式を書くこと自体にまだ慣れがない様子でしたので、講師が半分描いた図に数値を書き込むステップから練習しました。",
+        "ノートの取り方が分からず手が止まる場面があったため、「何をメモすべきか」を1問ごとに具体的に指示しながら一緒に作っていきました。",
+        "早く終わらせようとして雑な記述になりミスが重なっていたため、量よりも「1問を丁寧に正しく書くこと」を最優先に切り替えて指導しました。",
+        "頭の中だけでパンクしてしまっている状態でしたので、考えていることを紙の上に書き出して頭を軽くする手順を一から確認しました。",
+        "どこを見直せばよいか分からないノートになっていたため、イコールを縦に揃える・印をつけるといった基本の型を反復練習しました。",
+        "まずは「丁寧に書けば必ず正解できる」という成功体験を作ってもらうため、ノートの使い方をマンツーマンで細かくサポートいたしました。"
+      ]
+    },
+    homework: {
+      1: [
+        "宿題に完璧に取り組めており、前回指導した内容もしっかり定着していたため、本日の新しい内容へ非常にスムーズに入れました。",
+        "ご家庭での宿題のやり込みが素晴らしく、丸つけと直しまで丁寧に行ってきてくれたおかげで理解が一段と深まっていました。",
+        "前回の復習がバッチリ身についており、授業冒頭の確認問題も迷わずスラスラと全問正解できていました。",
+        "宿題で間違えた箇所に自分で印をつけて質問できるよう準備してきてくれ、家庭学習の質の高さを感じました。",
+        "前回お伝えした解き方のルールを宿題でも忠実に実践してきてくれており、着実な成長を実感いたしました。",
+        "家庭学習の習慣がしっかりと定着しており、前回の内容を土台として本日の応用問題までスムーズにステップアップできました。",
+        "宿題のノートを見ても途中経過まで丁寧に書かれており、ご家庭で集中して取り組めたことがよく伝わってきました。",
+        "前回苦戦していた単元を宿題でしっかり反復してきてくれたおかげで、本日は自信を持って解くことができていました。",
+        "宿題の完成度が非常に高く、前回の授業内容が完全に自分のものになっている頼もしいスタートでした。",
+        "小テストや前回内容のチェックでも満点に近い出来栄えで、日々のコツコツとした努力がしっかり実を結んでいます。",
+        "宿題をただ終わらせるだけでなく、「なぜそうなるか」を意識して丁寧に解いてきてくれたことがよく分かりました。",
+        "前回のポイントをしっかり覚えた状態で授業に臨んでくれたため、本日はより実践的な演習にたっぷりと時間を割けました。"
+      ],
+      2: [
+        "前回の宿題にしっかり取り組めており、基本事項の定着を確認したうえでスムーズに本日の学習へ入れました。",
+        "宿題をきちんと最後までやり切ってきてくれており、前回の内容を思い出しながら順調にスタートできました。",
+        "家庭学習のペースが守れており、前回学んだ基本の解き方をしっかり維持できていました。",
+        "宿題の提出がしっかりできており、間違えた問題を少し確認するだけでスムーズに本日の単元へ進むことができました。",
+        "前回の内容がよく頭に残っており、宿題を通じて基礎の反復ができていることを確認いたしました。",
+        "宿題を忘れずに取り組んで来てくれたおかげで、前回の続きからテンポよく指導を進めることができました。",
+        "ご家庭でも頑張っている様子が伺え、前回の基本問題については迷わず手が動くようになっていました。",
+        "宿題の範囲を丁寧にこなしてきてくれており、学習のリズムが安定してきていると感じます。",
+        "前回の復習が順調にできていたため、冒頭の確認を短時間で終えてメインの演習に集中できました。",
+        "宿題の取り組み状況が良好で、前回伝えたポイントを覚えて使おうとする姿勢が見られました。",
+        "決められた宿題をしっかりこなしてきてくれ、前向きな気持ちで本日の授業をスタートできました。",
+        "前回の授業内容が順調に定着しており、積み重ねの手応えを感じられる導入となりました。"
+      ],
+      3: [
+        "宿題は一通り取り組めており、大まかな流れは定着していましたが、一部曖昧な箇所があったため冒頭で軽く復習してから進めました。",
+        "前回の内容は概ね理解できていたものの、少し迷う問題が見られたため、要点を5分ほどおさらいしてから本日の単元に入りました。",
+        "宿題の基本問題はよくできていましたが、少しひねった問題で手が止まっていたため、そこを一緒に解消してから本題へ進みました。",
+        "前回の記憶が少し薄れかけている部分もありましたので、最初に例題を1問一緒に振り返ることでスムーズに感覚を取り戻せました。",
+        "宿題には取り組めていましたが、丸つけ後の直しがまだ途中でしたので、間違えた問題の確認から授業をスタートいたしました。",
+        "前回のポイント自体は覚えていたものの、実際の問題での使い方に少し迷いがあったため、冒頭で手順を再確認いたしました。",
+        "概ね定着は進んでいますが、時間が経つと少し抜けやすい箇所が見られたため、復習を交えながら本日の内容と関連付けて指導しました。",
+        "宿題の中でケアレスミスがいくつか見受けられましたので、どこでミスが起きたかを最初に点検してから本日の演習へ移りました。",
+        "前回の基本パターンは押さえられていましたので、宿題でつまずいた1〜2問を重点的にフォローしてから先へ進めました。",
+        "家庭学習の取り組みは見られましたが、少し自己流に戻りかけている部分があったため、正しい手順を改めて整えました。",
+        "一通り宿題はこなせていましたので、正答率の低かった問題だけピックアップして一緒に解き直しを行いました。",
+        "前回の内容の定着度は7〜8割ほどでしたので、抜けている部分を補強しつつ本日のステップへとつなげました。"
+      ],
+      4: [
+        "宿題には取り組んでくれたものの、前回の授業から日が空いてやり方を忘れてしまっている様子でしたので、冒頭で基礎から復習を行いました。",
+        "「授業中は解けたけれど家で一人だと迷ってしまった」とのことでしたので、宿題のつまずき箇所を丁寧に解き直す時間を取りました。",
+        "前回の公式や手順が頭から抜けてしまっている場面が見られたため、新しい単元を急がず、まずは前回の定着を固め直しました。",
+        "宿題の後半部分が難しく手が止まってしまっていたため、どこで迷ったのかを一緒に振り返り、ヒントを出しながら完成させました。",
+        "ご家庭で解く際にノートを見返さずに当てずっぽうになっていた箇所があったため、授業ノートを見ながら宿題を解く手順を伝えました。",
+        "前回のルールが少し混同してしまっていたため、本日はまず前回の復習演習を行って頭の中を整理してから本題へ入りました。",
+        "宿題の丸つけがされていなかったため、まずは一緒に答え合わせを行い、つまずきやすいパターンを洗い出してから指導いたしました。",
+        "時間が経つと解き方の手順が曖昧になりやすい様子でしたので、家庭学習で迷わないようノートに「手順メモ」を大きく書いて渡しました。",
+        "前回の内容を思い出すのに少し時間がかかっていましたので、授業の最初に小テスト形式で反復してから進めました。",
+        "宿題で同じパターンのミスが続いていたため、誤ったやり方で定着してしまわないよう、冒頭で重点的に軌道修正を行いました。",
+        "一人での宿題だと少し負荷が高かった様子でしたので、次回からは確実に自力で解けるレベルに絞って宿題を出すよう調整いたします。",
+        "前回の復習にしっかり時間を割いて土台を固め直したことで、後半は納得して本日の問題に取り組めるようになりました。"
+      ],
+      5: [
+        "本日は学校行事やご予定との兼ね合いで宿題が未実施となっていましたので、まずは前回の重要問題を授業内で一緒に演習して穴埋めを行いました。",
+        "宿題を忘れてしまい前回の内容も多く抜けてしまっている状態でしたので、無理に先へ進まず、基礎の反復と定着を最優先に指導いたしました。",
+        "家庭学習の時間がなかなか取れず前回の記憶がリセットされかけていたため、一から手順を確認し直し、授業内で反復練習を重ねました。",
+        "宿題のテキストを忘れてしまったとのことでしたので、教室のプリントを使って前回の復習から本日の範囲までしっかり手を動かしてもらいました。",
+        "家庭での復習が抜けるとどうしても定着しづらくなるため、本日は「家で1日10分だけ見直すやり方」を本人と一緒に決めて約束しました。",
+        "前回の内容にまだ大きな抜けが見られたため、予定を変更して基礎の徹底復習を行い、自力で解ける状態まで引き上げてから終えています。",
+        "宿題が追いついていない様子でしたので、まずは負担になりすぎない分量に調整し、「必ずやり切って持ってくる」サイクル作りからサポートします。",
+        "前回の単元が消化不良のままになっていたため、本日は焦らず基礎問題に立ち返り、一つずつ納得して解けるよう立て直しを図りました。",
+        "家庭学習での反復が不足していた分、授業内で演習量を多めに確保し、その場で書いて覚える時間をしっかりと取りました。",
+        "まずは「宿題をやってくると授業がよく分かる」という好循環を作れるよう、本日の最後には宿題の1問目を一緒に解いてやり方を確認しました。",
+        "前回の抜けをそのままにすると今後さらに苦しくなるため、本日は基礎の土台固めに時間をかけ、確実に解ける問題を増やしました。",
+        "宿題の取り組み方そのものに迷いがあった様子でしたので、どのページのどの問題をいつやるかを具体的にメモして渡しております。"
+      ]
+    }
+  };
+
+  // --- B. 単元カテゴリ別「授業のポイント」バンク（29カテゴリ × 各8〜10個の完成文パターン） ---
+  const categoryPointTemplates = {
+    en_infinitive: {
+      name: "英語｜不定詞・動名詞",
+      points: [
+        { app: "rule", text: "不定詞は「本物の動詞」と「不定詞になる動詞」をうまく見分けることがポイントです。まず解き始める時には主語と動詞にマークをつけ、動詞と不定詞の見分けをつけやすくしようとアドバイスいたしました。" },
+        { app: "rule", text: "{topic}では、「文全体の動詞」と「to＋動詞の原形」の役割を混同しないことが大切です。英文を見たらまず主語と本物の動詞に線を引いて骨格を掴むようお伝えしています。" },
+        { app: "visual", text: "不定詞の3用法は、toの塊が「何を説明しているか」を視覚的に整理することがカギになります。toの直前にある言葉へ矢印を引き、「こと・ため・ための」のどれが自然か確かめる手順を一緒に確認しました。" },
+        { app: "rule", text: "同じtoでも、後ろに「動詞の原形」が来るか「名詞」が来るかで不定詞と前置詞に分かれる点が重要です。toを見つけたらすぐ後ろの単語に丸をつけて品詞を見極めるよう指導いたしました。" },
+        { app: "meaning", text: "後ろに不定詞（to〜）をとるか動名詞（〜ing）をとるかは、前に来る動詞のイメージで決まることを解説しました。want toやenjoy 〜ingなど、よく出る動詞とセットの形で声に出して覚えるよう促しています。" },
+        { app: "step", text: "修飾語が長い英文では、いきなり前から訳そうとせず「誰が・どうする」のメイン構造を先に作ることが鉄則です。不定詞の塊をかっこでくくって文の骨組みを整理する練習を重ねました。" },
+        { app: "visual", text: "It is ... for 人 to 〜 や疑問詞＋toの構文は、文の型（パターン）を塊として捉えることがポイントになります。印をつけながらどこにどの語句が入るかをパズルのように当てはめる手順を確認しました。" },
+        { app: "step", text: "書き換えや並び替え問題では、使わなくなった動詞や余ったtoを見落とさないことが大切です。使った単語を一つずつ消しながら、主語＋動詞の後ろに不定詞の塊をつなげる手順を徹底しました。" }
+      ]
+    },
+    en_vocab: {
+      name: "英語｜英単語・熟語",
+      points: [
+        { app: "meaning", text: "{topic}では、アルファベットの並びをただ丸暗記するのではなく、発音とつづりのルールを結びつけることがポイントです。実際に声に出して読みながら、音のまとまりごとに区切って書くようアドバイスいたしました。" },
+        { app: "step", text: "英単語や不規則動詞は、目で眺めるだけでなく「発音する・書く・テストする」を短いサイクルで回すことが大切です。間違えた単語だけ印をつけてその場で3回ずつ書き直す手順を一緒に実践しました。" },
+        { app: "visual", text: "前置詞や熟語は、日本語訳だけで覚えるよりもコアイメージ（矢印や位置の図）で捉える方が圧倒的に忘れにくくなります。簡単なイラストを描きながら前置詞のニュアンスを整理しました。" },
+        { app: "rule", text: "代名詞の格変化（I-my-me-mineなど）は、文の中のどの位置（主語・所有・目的語）に入るかで形が決まることがポイントです。表を声に出してリズムで唱えながら問題に当てはめる練習を行いました。" },
+        { app: "step", text: "長い英単語のスペルミスを防ぐには、母音（a, i, u, e, o）の位置に注目して音節ごとにスラッシュを入れて覚えるのが効果的です。つづりを分解して確認する方法をお伝えしています。" },
+        { app: "meaning", text: "単語単体で覚えると実際の文の中で使い方に迷いやすいため、短いフレーズや基本例文とセットで音読して定着させる方法をアドバイスいたしました。" }
+      ]
+    },
+    en_basic: {
+      name: "英語｜基本文構造・語順",
+      points: [
+        { app: "rule", text: "{topic}では、日本語の語順に引きずられず「誰が（主語）＋どうする（動詞）」を必ず先頭に置くことがポイントです。書き始める前に問題文の主語と動詞に線を引いてから組み立てるようアドバイスいたしました。" },
+        { app: "rule", text: "疑問文や否定文を作る際は、「be動詞の文」か「一般動詞の文」かを最初に判別することが最大のポイントです。文の中の動詞に丸をつけて種類を見極めてからルールを適用する手順を徹底しました。" },
+        { app: "visual", text: "場所や時間を表す言葉が増えると語順が崩れやすいため、「主語＋動詞＋目的語」の骨格を四角で囲み、場所・時は一番後ろに回すという視覚的なルールを一緒に確認しました。" },
+        { app: "step", text: "疑問詞（What / Where / Howなど）の文は、「疑問詞を先頭に出し、その後ろは普通の疑問文の語順にする」という2ステップで作ることが鉄則です。1段階ずつ分けて考える練習を行いました。" },
+        { app: "meaning", text: "助動詞（can / must / should等）が入る文では、助動詞のすぐ後ろの動詞を必ず「原形」に戻すことがポイントです。助動詞と動詞をセットで線で結んで形をチェックするよう指導いたしました。" },
+        { app: "rule", text: "第4文型（give 人 物）などの文型は、動詞の後ろに「誰に・何を」の順で並べる型を押さえることが大切です。語順のパターンを声に出しながら書き換える演習を重ねました。" }
+      ]
+    },
+    en_tense: {
+      name: "英語｜時制・受動態・現在完了",
+      points: [
+        { app: "visual", text: "{topic}では、文中にある「いつの話か」を表すキーワード（yesterday / now / since / for等）を最初に見つけることがポイントです。時の目印に丸をつけてから動詞の形を決めるようアドバイスいたしました。" },
+        { app: "rule", text: "主語が三人称単数のときの s や過去形・現在完了形の使い分けは、主語と時制の2箇所を必ずセットで点検することが大切です。主語に下線を引いて動詞の形を確認する手順を徹底しました。" },
+        { app: "meaning", text: "現在完了形（have＋過去分詞）の3用法は、一緒に使われている目印の言葉（for / ever / already等）から見分けることがポイントです。数直線で時間の流れをイメージしながら訳し分ける練習を行いました。" },
+        { app: "step", text: "受動態（受け身）は「〜される」という文末に注目し、「be動詞＋過去分詞」の2語セットを崩さないことが鉄則です。時制によってbe動詞だけを変化させる手順を一緒に整理しました。" },
+        { app: "rule", text: "進行形（be動詞＋〜ing）でbe動詞を書き忘れたり一般動詞の疑問文と混同したりしないよう、「be動詞が含まれる文のルール」として統一して整理する方法をお伝えしています。" },
+        { app: "step", text: "不規則動詞の過去形・過去分詞形は、頭の中で迷う時間をなくすため、問題演習の前に頻出パターンを声に出して確認してから解き始める習慣づけを行いました。" }
+      ]
+    },
+    en_clause: {
+      name: "英語｜分詞・関係代名詞・比較・仮定法",
+      points: [
+        { app: "visual", text: "{topic}では、「文全体のメインの主語・動詞」と「名詞を後ろから詳しく説明する塊」を分けて捉えることがポイントです。修飾の塊をかっこでくくり、前の名詞へ矢印を引いて整理するようアドバイスいたしました。" },
+        { app: "rule", text: "現在分詞（〜ing）と過去分詞の使い分けは、説明される名詞が「自分から〜している（能動）」か「〜されている（受動）」かで判断するのが鉄則です。2語以上の塊になるときに後ろへ置く語順ルールを確認しました。" },
+        { app: "step", text: "関係代名詞（who / which / that）は、先行詞が「人」か「物」かを見たうえで、後ろの文で主語が抜けているか目的語が抜けているかを確かめる手順を一緒に整理しました。" },
+        { app: "rule", text: "比較表現（原級・比較級・最上級）は、比較する対象の数（2つか3つ以上か）と文末の than / in / of の目印から形を選ぶことがポイントです。基本の型に印をつけながら書き換える練習を行いました。" },
+        { app: "step", text: "間接疑問文は、文の途中に疑問詞が入るときに「疑問詞＋主語＋動詞」の肯定文の語順に戻ることが最大のポイントです。疑問詞の後ろの主語と動詞に番号を振って語順を整えるよう指導いたしました。" },
+        { app: "meaning", text: "仮定法は「事実に反する願いや仮定」を表すため、現在の話でも動詞を過去形にずらすというコアイメージを解説し、基本の型に当てはめて英作する練習を重ねました。" }
+      ]
+    },
+    en_read: {
+      name: "英語｜長文読解",
+      points: [
+        { app: "visual", text: "長文読解では、一文が長くなっても後ろから返り読みせず、英語の語順のまま前から意味の塊ごとに理解することがポイントです。前置詞や接続詞の前でスラッシュ（／）を引いて読むようアドバイスいたしました。" },
+        { app: "step", text: "設問を解く際は、本文を最初から漫然と読むのではなく、先に設問の疑問詞とキーワードに線を引いてから本文中の根拠を探す手順を一緒に確認しました。" },
+        { app: "visual", text: "代名詞（it / they / this / that）が出てきたときは、そのまま読み飛ばさず「直前のどの言葉を指しているか」を矢印で結んで確認する読み方を徹底いたしました。" },
+        { app: "meaning", text: "知らない英単語が出てきても焦って止まらず、前後の文脈やbut / soなどの接続詞の流れからプラス・マイナスの意味を推測するコツをお伝えしています。" }
+      ]
+    },
+    en_write: {
+      name: "英語｜英作文・並び替え問題",
+      points: [
+        { app: "step", text: "{topic}では、最初に「誰が・どうする（主語と動詞）」の骨格を決め、セットになる熟語を先にくっつけることがポイントです。使った語句に線を引いて消し込みながら組み立てるようアドバイスいたしました。" },
+        { app: "meaning", text: "自由英作文や和文英訳では、難しい日本語をそのまま直訳しようとせず、自分が確実に書けるシンプルな日本語に一度言い換えてから英語にする手順を一緒に練習しました。" },
+        { app: "rule", text: "英文を書き終えた後に、「主語と動詞の対応（三単現のs）」「時制」「冠詞や複数形」の3点を必ず自分で点検する見直しルールを徹底いたしました。" }
+      ]
+    },
+
+    // --- 数学・算数 ---
+    ma_calc: {
+      name: "数学・算数｜計算・式処理",
+      points: [
+        { app: "step", text: "{topic}では、頭の中だけで暗算して飛ばさず、途中式を1行に1ステップずつ縦に揃えて書くことが最大のポイントです。符号や移項の変化を目で見て確認できるよう丁寧に書き残すようアドバイスいたしました。" },
+        { app: "rule", text: "分数や小数が混ざった計算では、最初に計算しやすい形へ統一することが鉄則です。方程式の分数は分母の最小公倍数をすべての項にかけて払い、式の計算の分数は通分して分子にかっこをつける違いを整理しました。" },
+        { app: "visual", text: "マイナスのかっこ外しや負の数の代入では、符号の反転ミスが最も起きやすいため、代入する数に必ずかっこをつけ、分配する矢印を書き込んでから計算する手順を徹底いたしました。" },
+        { app: "step", text: "乗法公式や因数分解・平方根の計算では、いきなり計算に入る前に「共通因数でくくれないか」「約分で数を小さくできないか」を最初に確認する着眼点をお伝えしています。" },
+        { app: "rule", text: "筆算や四則混合計算では、計算する順番に①・②と番号を振り、位を縦に揃えて大きく書くことで桁ズレや繰り上がりミスを防ぐ方法を一緒に実践しました。" },
+        { app: "meaning", text: "公式をただ丸暗記して当てはめるのではなく、「なぜその変形ができるのか」の基本ルールを確認し、迷った時にも基本に立ち返って計算できる力を養いました。" }
+      ]
+    },
+    ma_word: {
+      name: "数学・算数｜文章題・方程式の利用",
+      points: [
+        { app: "step", text: "{topic}では、いきなり式を立てようとせず、問題文の条件を整理して「何を文字（XやY）で置き、何と何をイコールで結ぶか」を明確にすることがポイントです。条件を1つずつ数式へ翻訳する手順をアドバイスいたしました。" },
+        { app: "visual", text: "速さ・割合・代金や過不足などの文章題は、問題文の数字をそのまま式にするのではなく、まず線分図や表に書き出して全体の関係を視覚的に整理する方法を一緒に確認しました。" },
+        { app: "meaning", text: "文字の式が立てにくい時は、まず簡単な具体的な数字（例えば1個100円を3個など）を当てはめて何算になるかを確かめ、その数字の部分をそのままXに置き換える考え方を伝授いたしました。" },
+        { app: "rule", text: "問題文の中の「〜は」「合わせると」「〜より…大きい」といった言葉に線を引き、それをそのまま「＝」「＋」「−」の記号に対応させて言葉の式から作る手順を徹底しました。" },
+        { app: "step", text: "単位（分と時間、mとkm、%と歩合など）が混ざっている文章題では、式を立てる前に必ず問題文の単位に丸をつけて1つに揃える鉄則をアドバイスいたしました。" },
+        { app: "meaning", text: "計算して出た解が問題文の条件（個数や人数、長さなど）として自然かどうかを最後に必ず確かめる検算の習慣を一緒に確認しております。" }
+      ]
+    },
+    ma_func: {
+      name: "数学・算数｜関数・グラフ",
+      points: [
+        { app: "visual", text: "{topic}では、頭の中だけで数字を処理しようとせず、視覚的に状況を整理することがポイントです。まずはフリーハンドで構わないので十字の座標軸とグラフの概形をサッと書き出し、情報を図に書き込んで考えるようアドバイスいたしました。" },
+        { app: "meaning", text: "グラフの交点を求める問題は、これまでに学んだ直線同士の交点とまったく同じ理屈で、2つの式を連立方程式として解けば求められるという考え方を提示し、計算へ持ち込む手順を確認しました。" },
+        { app: "visual", text: "変域（最大値・最小値）を求める問題では、式にただ両端の値を代入するのではなく、簡単なグラフを描いて該当する範囲を太線でなぞり、0をまたいでいないか目で見て確認する鉄則をお伝えしています。" },
+        { app: "step", text: "座標平面上の面積や応用問題では、分かっている点の座標をすべてグラフの中に書き込み、分からない点は文字（tなど）で置いて辺の長さを表す手順を1ステップずつ整理しました。" },
+        { app: "rule", text: "変化の割合・傾き・切片などの用語がグラフ上のどの動きを表しているかを整理し、「Xの増加量分のYの増加量」を表を使って確実に求める練習を重ねました。" },
+        { app: "visual", text: "動点や水槽の水量変化などの利用問題は、 구간ごとに図を描き分け、どこでグラフの傾きが変わるのかを視覚的に掴んでから式を立てる方法を指導いたしました。" }
+      ]
+    },
+    ma_geom: {
+      name: "数学・算数｜平面・空間図形",
+      points: [
+        { app: "visual", text: "{topic}では、図をただ目で眺めるのではなく、問題文で与えられた角度・辺の長さ・平行や等しい印をすべて図の中に直接書き込むことがポイントです。情報を図に集約して考えるようアドバイスいたしました。" },
+        { app: "visual", text: "重なっている相似・合同な図形や空間図形の断面を考える際は、元の図のままで悩まず、必要な平面図形を余白に同じ向きで抜き出して描く手順を一緒に実践しました。" },
+        { app: "rule", text: "円周角の定理や平行線と角の問題では、「中心角と円周角の2倍関係」「錯角・同位角のZ型・F型」を色ペンや太線でなぞって見つけ出すコツをお伝えしています。" },
+        { app: "step", text: "三平方の定理や面積・体積の計算では、数が大きくなる前に比（1:1:√2や1:2:√3など）や途中の約分を活用して計算の負担を減らす工夫をアドバイスいたしました。" },
+        { app: "meaning", text: "おうぎ形の弧の長さや面積は、円全体に対する「中心角÷360度」の割合であることを図で確認し、公式の丸暗記に頼らず納得して立式できるよう整理しました。" }
+      ]
+    },
+    ma_proof: {
+      name: "数学｜図形の合同・相似と証明",
+      points: [
+        { app: "step", text: "{topic}では、いきなり証明の文章を書き始めるのではなく、まず図の上に等しい辺や角の印をつけ、「どの合同・相似条件を使うか」をゴールから逆算して決めることがポイントです。" },
+        { app: "visual", text: "対応する頂点の順番ミスを防ぐため、証明したい2つの三角形を余白に同じ向きで並べて描き、3つの根拠を箇条書きメモにしてから型どおりに清書するようアドバイスいたしました。" },
+        { app: "rule", text: "「仮定より」「対頂角は等しいので」「平行線の錯角は等しいので」など、等しいと言える理由の決まり文句をセットで添えるルールを一緒に確認いたしました。" }
+      ]
+    },
+    ma_prob: {
+      name: "数学・算数｜場合の数・確率・データ",
+      points: [
+        { app: "visual", text: "{topic}では、頭の中だけでパターンを数えようとせず、樹形図や表を書いて数え漏れ・重複を防ぐことがポイントです。必ず小さい順（辞書順）に規則正しく書き出すようアドバイスいたしました。" },
+        { app: "rule", text: "「順番を区別して並べる（順列）」か「選ぶだけ（組合せ）」かを問題文から最初に見極めることが大切です。2つのさいころの問題は6×6の表を書いて丸をつける鉄則を確認しました。" },
+        { app: "step", text: "箱ひげ図やヒストグラムの読み取りでは、データの総数から中央値・四分位数が「何番目のデータか」を先にメモしてから値を読み取る手順を指導いたしました。" }
+      ]
+    },
+
+    // --- 国語 ---
+    ja_kanji: {
+      name: "国語｜漢字の読み書き・語彙",
+      points: [
+        { app: "meaning", text: "漢字練習は単純な丸暗記ではなく、漢字が持つ意味や部首の成り立ちと結びつけて覚えることがポイントです。「車のスピードが速いときはしんにょうの速い」「涙が出るからさんずいの泣く」のように意味と関連付けて覚えるようアドバイスいたしました。" },
+        { app: "visual", text: "画数の多い漢字や抜けやすい漢字は、偏（へん）と旁（つくり）のパーツに分解して視覚的に特徴を掴むことが大切です。間違えやすい部分に丸をつけて見比べる方法を一緒に確認しました。" },
+        { app: "rule", text: "同音異義語や同訓異字の使い分けは、熟語1字ずつの意味や反対語・前後の文脈から判断することがポイントです。短い例文とセットで意味を確認しながら練習するようお伝えしています。" },
+        { app: "meaning", text: "ことわざや慣用句・四字熟語は、言葉の丸暗記ではなく「どんな場面から生まれた言葉か」の具体的なイメージを思い浮かべながら覚える工夫をアドバイスいたしました。" }
+      ]
+    },
+    ja_logic: {
+      name: "国語｜説明文・論説文の読解",
+      points: [
+        { app: "visual", text: "{topic}では、接続語や指示語を目印にして筆者の主張を追うことがポイントです。「しかし」「つまり」に印をつけ、指示語が指す直前の内容を矢印で結んで整理するようアドバイスいたしました。" },
+        { app: "visual", text: "本文中に「レモンの輪切り」のように言葉だけではイメージしにくい表現が出てきた際は、実際にどのような形や関係になるのかを余白に図示して具体化する読み方を一緒に確認しました。" },
+        { app: "rule", text: "選択肢問題では、全体の印象で選ばず、選択肢を要素ごとに区切って本文の表現と言い換えになっているかを1つずつ照らし合わせる消去法の手順をお伝えしています。" },
+        { app: "step", text: "「筆者の主張（抽象）」と「たとえ話・データ（具体例）」を区別しながら読み、設問で理由を聞かれたら傍線部の前後の因果関係を探す鉄則を指導いたしました。" }
+      ]
+    },
+    ja_story: {
+      name: "国語｜物語文・小説の読解",
+      points: [
+        { app: "visual", text: "{topic}では、自分の主観で気持ちを想像するのではなく、本文中の行動・セリフ・表情から心情の根拠を探すことがポイントです。「きっかけとなる出来事」と「気持ちの言葉」をセットで線を引くようアドバイスいたしました。" },
+        { app: "meaning", text: "直接「嬉しい・悲しい」と書かれていない場面でも、背景の情景描写や登場人物の小さなしぐさに気持ちが表れていることを解説し、前後の場面変化を追う読み方を一緒に確認しました。" },
+        { app: "step", text: "登場人物が多い文章では、誰の発言や行動かを見失わないよう、人物名に丸をつけて関係性を整理しながら読み進める手順を指導いたしました。" }
+      ]
+    },
+    ja_desc: {
+      name: "国語｜記述問題・要約",
+      points: [
+        { app: "step", text: "{topic}では、いきなり解答欄に書き始めるのではなく、必要な要素をパーツごとに抜き出して文末の形を揃えることがポイントです。まず問いに合わせて「〜から。」「〜ということ。」と文末を決め、余白で組み立ててから書くようアドバイスいたしました。" },
+        { app: "rule", text: "指定字数にまとめる要約・記述では、具体例を削って筆者の主張部分のキーワードを2〜3個拾い出し、主語と述語がねじれないようシンプルにつなぐ手順を一緒に練習しました。" }
+      ]
+    },
+    ja_grammar: {
+      name: "国語｜国語文法",
+      points: [
+        { app: "rule", text: "{topic}では、感覚に頼らず文節の区切り方や下に続く言葉（ない・ます・とき等）のルールに当てはめて機械的に判別することがポイントです。まず文節ごとにスラッシュを引いて主語と述語を見抜くようアドバイスいたしました。" }
+      ]
+    },
+    ja_classic: {
+      name: "国語｜古文・漢文",
+      points: [
+        { app: "visual", text: "{topic}では、頻繁に省略される主語（誰の行動・セリフか）を補いながら大筋を掴むことがポイントです。登場人物を丸で囲み、動詞の横に動作主をメモしながら読み進めるようアドバイスいたしました。" },
+        { app: "step", text: "漢文の返り点（レ点・一二点）は、読む順番の番号を実際に書き込み、英語と同じ「主語＋動詞＋目的語」の構造を意識して書き下す手順を一緒に確認しました。" }
+      ]
+    },
+
+    // --- 理科 ---
+    sc_phys: {
+      name: "理科｜光・音・力・運動とエネルギー",
+      points: [
+        { app: "visual", text: "{topic}では、公式の丸暗記ではなく、図の中に力の矢印や光の道筋・数値を直接書き込んで整理することがポイントです。計算前に単位（cmとm、gとN等）に丸をつけて揃えてから立式するようアドバイスいたしました。" },
+        { app: "step", text: "記録タイマーや運動のグラフ問題では、まず「1秒間に何打点か」の基準を確認し、グラフの縦軸と横軸が表す意味を指差し確認してから計算に入る手順を徹底しました。" }
+      ]
+    },
+    sc_elec: {
+      name: "理科｜電流と回路（オームの法則）・磁界",
+      points: [
+        { app: "visual", text: "{topic}では、頭の中だけで処理せず、直列・並列のルールを使って回路図の上で電流・電圧・抵抗を視覚化することがポイントです。問題文の数値をすべて回路図に直接書き込み、分かる箇所から1つずつオームの法則で埋めていくようアドバイスいたしました。" },
+        { app: "rule", text: "電流がつくる磁界や電磁誘導では、右手の向きを使って磁界と電流の向きを1つずつ図に矢印で書き込んで判断する手順を一緒に確認しました。" }
+      ]
+    },
+    sc_chem: {
+      name: "理科｜水溶液・気体・化学変化・イオン",
+      points: [
+        { app: "step", text: "{topic}では、過不足なくちょうど反応しきる基準の数値（比例関係）や粒のモデルを表に書き出して整理することがポイントです。グラフの折れ曲がり点に丸をつけ、一番簡単な整数比を表にしてから計算するようアドバイスいたしました。" },
+        { app: "meaning", text: "化学反応式やイオンの電離式は、丸暗記ではなく「反応の前後で原子の粒の数が同じになる」というモデル図を描いて係数を合わせる手順を一緒に練習しました。" }
+      ]
+    },
+    sc_bio: {
+      name: "理科｜植物・動物・人体・細胞と遺伝",
+      points: [
+        { app: "meaning", text: "{topic}では、用語の丸暗記ではなく、対照実験における「なぜその操作をするのか」の理由や仕組みの流れとセットで理解することがポイントです。実験で変える条件と揃える条件に線を引いて図解と結びつけるようアドバイスいたしました。" }
+      ]
+    },
+    sc_earth: {
+      name: "理科｜火山・地震・地層・天気・天体",
+      points: [
+        { app: "visual", text: "{topic}では、空間的な位置関係やグラフの数値を、平面の図や表に直接書き込んで整理することがポイントです。天体図ではまず観測者の位置に十字の方位（東西南北）を書き込んで向きを確認するようアドバイスいたしました。" }
+      ]
+    },
+
+    // --- 社会 ---
+    so_geo: {
+      name: "社会｜日本地理・世界地理",
+      points: [
+        { app: "visual", text: "{topic}では、地名や特産品を言葉だけで暗記するのではなく、白地図上の位置と「なぜその気候・産業になるのか」の理由を結びつけることがポイントです。山脈や季節風・海流との関係を図の上でセットで整理するようアドバイスいたしました。" }
+      ]
+    },
+    so_data: {
+      name: "社会｜地形図・雨温図・統計資料",
+      points: [
+        { app: "visual", text: "{topic}では、なんとなく全体を見るのではなく、判別の決め手となる特徴的な数値に印をつけて消去法で比較することがポイントです。雨温図は冬の気温と夏冬の降水量差に丸をつけ、統計表は上位の組み合わせに注目するようアドバイスいたしました。" }
+      ]
+    },
+    so_hist: {
+      name: "社会｜日本の歴史・世界の歴史",
+      points: [
+        { app: "meaning", text: "{topic}では、人物名や出来事を単発で暗記するのではなく、「なぜその出来事が起き、どう社会が変わったか」の因果関係でつなげることがポイントです。年表で前後の流れを確認し、似た改革や文化は比較表で整理するようアドバイスいたしました。" }
+      ]
+    },
+    so_civ: {
+      name: "社会｜公民（憲法・政治・経済・国際）",
+      points: [
+        { app: "visual", text: "{topic}では、難しい制度や経済の用語をそのまま暗記せず、仕組みの相関図や身近な具体例に置き換えて理解することがポイントです。三権分立や市場の動きを矢印付きの図に書き出して整理するようアドバイスいたしました。" }
+      ]
+    },
+    so_desc: {
+      name: "社会｜理由記述・史料読解",
+      points: [
+        { app: "step", text: "{topic}では、資料中のキーワードを拾い出し「背景（原因）と目的・結果」の2つの要素に分けて組み立てることがポイントです。先に使うべき重要語句を余白に書き出してから一文につなげるようアドバイスいたしました。" }
+      ]
+    }
+  };
+
+  // --- C. 所感バンク（3軸 × 5段階 × 各10文例：左[1]ポジティブ ➔ 右[5]要フォロー・角が立たない変換） ---
+  const impressionBank = {
+    understand: {
+      1: [
+        "{topic}のポイントを伝えるとすぐに要領を掴み、応用問題まで自分の力でスラスラと解き進めることができました。",
+        "のみ込みが非常に早く、基本の確認を終えるとすぐに発展的な問題まで自力で突破できていました。",
+        "最初の説明で仕組みを深く理解でき、初見の応用問題に対しても迷わず的確にアプローチできていました。",
+        "{topic}の考え方がすっきりと腑に落ちた様子で、難しい問題も楽しみながら次々と正解を導き出せていました。",
+        "基礎の定着が盤石だったため、本日はより実戦的なレベルの問題まで余裕を持ってクリアすることができました。",
+        "一度コツを伝えただけで類題にもすぐに応用を利かせることができ、高い理解力を発揮してくれました。",
+        "構造や解法の筋道が最初からよく見えており、頼もしいペースで演習を仕上げることができました。",
+        "本質的な理由から納得して理解できていたため、少しひねった問題でも揺らがずに正答できていました。"
+      ],
+      2: [
+        "{topic}の基本ルールをスムーズに理解でき、後半の演習では自分の力だけで最後まで解き切れるようになりました。",
+        "順調に解き方のコツを掴むことができ、一通りの問題を自力で着実に正解できていました。",
+        "解説した手順をすぐに自分のものにし、後半の類題はヒントなしでも迷わず手が動くようになっていました。",
+        "基本的な考え方からしっかりと理解が進み、授業終盤には自信を持って答えを出せるようになっています。",
+        "一つひとつのステップを順調にクリアし、目標としていた本日の範囲を自力でしっかり完答できました。",
+        "教えた着眼点を素直に実践できたことで、後半は詰まることなくスムーズに解き進められていました。",
+        "練習を重ねるごとに手つきが良くなり、最終的には自分の力だけで安定して解けるようになっています。",
+        "基礎から着実に理解を積み上げることができ、納得感を持って本日のメニューを消化できました。"
+      ],
+      3: [
+        "構造の理解が難しく、悩む場面も多かったですが、最終的にはよく解けるようになりました。",
+        "最初は{topic}の進め方に戸惑う場面も見られましたが、コツを掴んでからは自力で正解できるようになりました。",
+        "前半は少し手が止まる場面もありましたが、一緒に手順を整理したことで後半は見違えるようにスムーズに解けていました。",
+        "最初は使い分けに迷う様子もありましたが、印をつけて確認するうちに最後は自分の力で解き切れるようになっています。",
+        "序盤は難しく感じていた様子でしたが、1問ずつ段階を踏んで練習したことで、終盤には納得の表情で完答できました。",
+        "最初は条件の整理に苦戦していたものの、解き方の型が分かってからは自分で式や形を作れるようになりました。",
+        "途中までは迷いながらの解答でしたが、ポイントを再確認した後半の演習では自信を持って正解できていました。",
+        "最初は少し難しく感じたようでしたが、粘り強く取り組んだ結果、授業の最後には自力で解ける感覚を掴めています。"
+      ],
+      4: [
+        "{topic}は少し複雑な単元のため一人だと手が止まる場面もありましたが、ヒントを出しながら一緒に整理することで最後まで解き切ることができました。",
+        "自力だけで完答するにはまだ少し迷いが残る状態でしたが、最初の着眼点を一緒に確認すると、その後の処理は自分の手で進められました。",
+        "一度にすべての手順をこなすのは少し負荷が高そうでしたので、ステップを細かく分けて1段階ずつ一緒にクリアしていきました。",
+        "まだ定着の途上ということもあり悩む場面が多かったですが、隣で手順をガイドしながら進めることで正答までたどり着けています。",
+        "応用問題では見通しを立てるのに苦戦していましたが、図や印を一緒に書き込むことで「こうすれば解けるのか」と納得できていました。",
+        "一人で解くと途中で迷子になりやすい様子でしたので、本日は「最初の1行目をどう書くか」を一緒に確認しながら演習を重ねました。",
+        "少し手応えのある内容で苦戦する場面もありましたが、ヒントを手がかりに自分の頭で考えて答えを出すことができました。",
+        "まだ少し自信なさげな様子も見られましたが、一つずつ手順を声に出して確認しながら進めることで着実に形にできています。"
+      ],
+      5: [
+        "{topic}はつまずきやすい単元ということもあり理解に少し時間がかかりましたので、本日は無理に先へ進まず、一番大切な基本問題に絞ってじっくり反復いたしました。",
+        "複数のルールが重なると混乱してしまいやすい様子でしたので、まずは確実に得点できる基礎パターン1つに集中して丁寧に練習しました。",
+        "全体的に難しく感じて手が止まる場面が多かったため、前の学年の関連内容まで一度立ち返り、土台を整理し直す時間をしっかり取りました。",
+        "焦って応用へ進むよりも基礎の納得感が最優先と判断し、例題を講師と一緒に何度もなぞりながら基本の型を身につける指導を行いました。",
+        "まだルールが頭に定着しきっておらず苦戦していましたが、最後の1問は自分の手で正解を作ることができ、一歩前進して終えられました。",
+        "情報量が多くて頭がパンクしそうな様子でしたので、覚えるべきルールを1つだけに絞って紙に書き出し、それを見ながら解く練習を重ねました。",
+        "完全な自力定着にはもう少し反復が必要な段階ですが、どこでつまずいているかの原因は明確になりましたので、次回も続けて丁寧にフォローいたします。",
+        "本日は苦戦する場面が多かったものの、最後まで諦めずに基本問題と向き合い、解くための最初の一歩を一緒に固めることができました。"
+      ]
+    },
+    accuracy: {
+      1: [
+        "見直しや確かめの意識も高く、細かいミスなく非常に高い正確性で解き切ることができていました。",
+        "途中経過の確認が丁寧で、うっかりミスを自分の目で防ぎながらノーミスで仕上げられていました。",
+        "細部まで注意が行き届いており、符号や語順・表記などの細かい部分も正確に解答できていました。",
+        "解き終えた後に自分で検算・見直しを行う習慣ができており、安定感抜群の出来栄えでした。",
+        "一つひとつの処理を雑にせず丁寧に行ったことで、正答率が非常に高く本人も手応えを感じていました。",
+        "ひっかけ問題や紛らわしい条件にも惑わされず、根拠を持って正確に答えを導き出せていました。"
+      ],
+      2: [
+        "全体的に安定して正確に解くことができており、基本問題の取りこぼしなく進められました。",
+        "落ち着いた処理ができていたためミスが少なく、高い正答率で演習をクリアできていました。",
+        "伝えた注意点をしっかり意識して解いたことで、細かいミスを抑えて着実に正解を重ねられました。",
+        "ポイントを押さえた丁寧な解答ぶりで、大きな崩れなく安定した精度で解き進められていました。",
+        "基礎的な処理がしっかり身についており、計算や書き換えもスムーズかつ正確に行えていました。",
+        "集中して丁寧に手を動かしていた分、細かい部分まで正確な解答ができていました。"
+      ],
+      3: [
+        "途中で細かいミスが出る場面もありましたが、見直しの声をかけるとすぐに自分で気づいて正しく修正できていました。",
+        "最初は少しうっかりミスが見られたものの、どこに気をつけるべきかを意識してからは自分で直しながら正確に解けていました。",
+        "解き進める中で自分の間違いに途中でハッと気づき、解説前に自力で書き直せる場面が増えてきています。",
+        "1回目は細かい部分で惜しいミスがありましたが、解き直しではミスした原因を理解して自分の手で一発で正解できました。",
+        "印や途中式を書くようになってからはミスが目に見えて減り、自分で正確さをコントロールできるようになっていました。",
+        "惜しいミスをそのままにせず、「なぜ間違えたか」を確認して次の問題ですぐに改善できていた点が良かったです。"
+      ],
+      4: [
+        "考え方や大筋は合っているものの、最後の最後で符号や表記・読み違いなどのうっかりミスが散見されましたので、見直しのポイントを一緒に確認しました。",
+        "「わかっているのに惜しいミス」で落としてしまう場面がいくつかあったため、解き終えた後に必ずチェックする箇所を3つに絞って伝えました。",
+        "焦って次の問題へ行こうとすると細かい部分の抜けが出やすいため、1問ごとに指差し確認をするルールを取り入れて練習しました。",
+        "理解自体はできているのですが、暗算や目読みに頼った箇所でケアレスミスが出ていたため、手を動かして書き残すよう軌道修正いたしました。",
+        "問題文の条件（「〜でないもの」「単位」など）の読み飛ばしが少し見られたため、問題文の条件に必ず丸をつける習慣づけを行いました。",
+        "解き方の方向性はバッチリ合っていますので、あとは細かいミスを防ぐ丁寧さがつけば一気に得点につながる状態です。"
+      ],
+      5: [
+        "似たルールや前後の単元とやり方が混同してしまいミスが重なる場面があったため、本日は1問ごとにルールを指差し確認しながら慎重に進めました。",
+        "焦りからか当てずっぽうな処理になってミスが増えていたため、一度ペースを落とし、見本と照らし合わせながら1行ずつ正確に書く練習に切り替えました。",
+        "複数の手順が絡むと途中でルールが抜けてしまいやすかったため、手順を番号付きのメモにして横に置き、1ステップずつチェックしながら解いてもらいました。",
+        "自己流のやり方でミスが続いていたため、本日は問題数を絞ってでも「正しい手順で1問を完璧に合わせる」ことを徹底いたしました。",
+        "基礎的なルール（符号や語順・単位など）の混同が見受けられたため、その場で基本表を作って見比べながら頭の中を整理しました。",
+        "ミスが出た原因を一つずつ一緒に紐解き、感覚ではなく確かなルールに従って解くフォーム固めを重点的に行いました。"
+      ]
+    },
+    closing: {
+      1: [
+        "基礎から標準レベルはしっかり身についていますので、次回はこの調子でさらなる応用・発展問題へも挑戦の幅を広げていければと思います。",
+        "大変順調に力が伸びておりますので、今後はテストの得点源にできるよう実戦的な応用演習へとステップアップしてまいります。",
+        "理解の土台がしっかり固まってきましたので、より思考力を問う発展問題にもどんどんチャレンジして自信を深めていければと思います。",
+        "現在の良い学習リズムを維持しながら、入試やテスト本番でも武器になる高い実戦力を一緒に磨いてまいります。",
+        "基本の型はバッチリ使いこなせていますので、次回は複数の単元が融合した総合問題にも取り組んでいければと思います。",
+        "この調子で応用力をさらに伸ばし、どんな出題パターンにも余裕を持って対応できるようサポートしてまいります。"
+      ],
+      2: [
+        "この調子で類題をたくさん解いて身に付けていければと思います。",
+        "本日掴んだ解き方のコツが時間が経ってもすぐ引き出せるよう、引き続き類題演習を重ねてしっかり定着させていければと思います。",
+        "やり方はしっかり理解できていますので、あとは反復練習を通じて「考えなくても自然に手が動く」レベルまで仕上げてまいります。",
+        "今回できた感覚を忘れないうちに問題数をこなし、テスト本番でも迷わず解ける確かな力として定着させていければと思います。",
+        "引き続きバリエーションの違う類題にたくさん触れ、安定した得点力へとつなげてまいります。",
+        "この良い流れのまま反復演習を積み重ね、スピードと正確性の両方をさらに高めていければと思います。"
+      ],
+      3: [
+        "本番のテストでも、まずは本日実践した「印や図・途中経過を書いて整理する習慣」をそのまま発揮できるよう定着させていければと思います。",
+        "頭の中だけで処理せず手を動かして整理する習慣が点数アップに直結しますので、今後もこの解き方を徹底してまいります。",
+        "本日お伝えした見分け方の手順を毎回の演習でルーティン化し、うっかりミスをゼロに近づけていければと思います。",
+        "「まず最初に印をつける」という一工夫で正確さが大きく変わりますので、家庭学習でもこの手順を意識して続けていければと思います。",
+        "丸暗記ではなく意味や手順から筋道立てて考える習慣を続け、どんな問題にも応用が利く力を育ててまいります。",
+        "丁寧なノート作りと見直しの手順をこのまま習慣にし、分かっている問題を確実に得点できるようサポートしてまいります。"
+      ],
+      4: [
+        "授業内で掴んだ感覚を忘れないよう、まずはご家庭での宿題で本日の手順を意識して反復し、次回の授業冒頭でもう一度定着を確認いたします。",
+        "「授業では解けたけれど家で一人だと迷う」ということがないよう、本日のノートを見返しながら宿題に取り組むサイクルを一緒に作ってまいります。",
+        "まだ少し記憶が揺らぎやすい部分がありますので、宿題での解き直しと次回の確認テストをセットにして着実に自分のものにしていければと思います。",
+        "一度で完璧にしようと焦らず、本日の宿題と次回の復習を通じて一歩ずつ確実に定着を図ってまいります。",
+        "ご家庭でも迷わず宿題に取り組めるようノートに手順をまとめてありますので、それを見ながら反復して身につけていければと思います。",
+        "次回もまず本日の類題を1〜2問復習してから先へ進み、抜け漏れのないよう丁寧に積み重ねてまいります。"
+      ],
+      5: [
+        "まずは焦らず基本問題に立ち返り、「自分の力で解けた！」という成功体験と自信を一つずつ積み重ねられるよう丁寧に伴走してまいります。",
+        "無理に難しい問題を詰め込むよりも、基礎の土台をじっくり固めることが一番の近道ですので、歩幅を合わせて粘り強くサポートしてまいります。",
+        "苦手意識を少しずつ減らせるよう、次回もスモールステップで「確実にできること」を1つずつ増やしていければと思います。",
+        "まだ時間はかかりますが、着眼点を整理すれば必ず解ける力がありますので、焦らず基礎の反復からじっくりと支えてまいります。",
+        "分からない箇所を一つずつ丁寧に解消し、安心して問題に向き合えるよう引き続き寄り添って指導してまいります。",
+        "基礎のルールが整理できれば一気に視界が開けますので、次回も基本パターンの定着を最優先にサポートしてまいります。"
+      ]
+    }
+  };
+
+
+  // 追加の豊富な自然文例バリエーション（全1,000文例以上を標準搭載）
+  const extraAttitude = {
+    focus: {
+      1: [
+        "開始直後から集中モードに入り、{topic}の演習を自分の力でどんどん進めていました。",
+        "1問解くごとにリズムが良くなり、最後まで高い集中力を切らさずに取り組めています。",
+        "難しい箇所でも集中して解説に耳を傾け、すぐに自分の手で試してみる姿勢が光っていました。",
+        "時間いっぱいまで集中が途切れず、予定していた以上の問題数をこなすことができました。",
+        "「今日はここまで終わらせる」と目標を持って、終始集中して机に向かえていました。",
+        "ペンの進みが非常にスムーズで、集中して思考を巡らせている様子がよく伝わってきました。",
+        "周囲に流されることなく自分の課題にしっかり集中し、密度の濃い演習ができています。",
+        "最後の一問まで丁寧さを失わず、高い集中力でやり切る頼もしい姿が見られました。"
+      ],
+      2: [
+        "{topic}に対して前向きな姿勢で臨み、授業時間を通してよく集中できていました。",
+        "解説を聞く時と自分で手を動かす時の切り替えが良く、集中して取り組めています。",
+        "一問ずつ着実に集中して解き進め、分からない箇所も落ち着いて確認できていました。",
+        "姿勢よく課題に向き合い、時間いっぱいまで集中して演習を重ねることができました。",
+        "集中して粘り強く取り組めたことで、後半の問題もスムーズに手が動いていました。",
+        "真面目な態度で机に向かい、{topic}のポイントを意識しながら集中して解けていました。",
+        "途中で気を散らすことなく、今日やるべき問題にしっかり集中して向き合えていました。",
+        "安定感のある集中ぶりで、一つひとつの問題を丁寧に消化することができています。"
+      ],
+      3: [
+        "自分のペースを保ちながら、{topic}の課題に落ち着いて向き合うことができていました。",
+        "焦ることなく1問ずつ順番に確認し、最後まで着実に手を動かしていました。",
+        "穏やかなペースながらも、指示された演習問題に真面目に取り組む姿が見られました。",
+        "じっくり考えながら進めるタイプですので、急かさず納得感を大切にして演習を進めました。",
+        "落ち着いた態度で解説を聞き、自分の力で書けるところまで丁寧に取り組めていました。",
+        "一つずつ手順を確かめながら、自分のリズムで最後までやり切ることができています。",
+        "大きな波はなく、普段通りの落ち着いたペースで本日の学習範囲を一通り終えられました。",
+        "静かに机に向かい、自分のペースでコツコツと問題を解き進めることができていました。"
+      ],
+      4: [
+        "後半に少し疲れが見えた際は、1問ずつ区切って声をかけることで最後までやり切ることができました。",
+        "部活や学校の後で少し眠そうな場面もありましたが、一緒に声を出して確認するとしっかり手を動かせました。",
+        "最初は少し疲れからかペースがゆっくりでしたが、中盤からは集中を取り戻して解き進めています。",
+        "やや疲れが見えるコンディションでしたので、重要な問題に絞ってメリハリをつけて指導いたしました。",
+        "途中で少し一息つく場面もありましたが、最後まで投げ出さずに予定の問題を解き切っています。",
+        "少しお疲れの様子でしたので、過度な負担にならないよう対話を交えながらテンポよく進めました。",
+        "後半はやや集中が緩みがちな場面もありましたが、「あと少しで終わるよ」と励ますとしっかり踏ん張れました。",
+        "疲れがある中でも、今日やるべき課題からは逃げずに最後まで机に向かい続けてくれました。"
+      ],
+      5: [
+        "集中が続きにくい様子でしたので、まずは1問一緒に解いてリズムを作ってから演習を進めました。",
+        "疲れからか手が止まりがちだったため、問題を小さく区切って1問ごとに丸つけをしながら伴走いたしました。",
+        "少し気持ちが散りやすい場面が見られましたので、口頭でのクイズ形式を取り入れて意識を引きつけました。",
+        "一人で解かせると手が止まりやすかったため、隣で1ステップずつ声をかけながら最後までやり遂げました。",
+        "本日はコンディションに合わせて詰め込みを避け、基本問題を確実に解き切ることに絞ってフォローしました。",
+        "途中で集中が切れかけた際も、できている部分を具体的に褒めることで再びペンを動かすことができました。",
+        "長時間の記述は負担が大きそうでしたので、印つけや口頭確認を中心に据えて無理なく理解を促しました。",
+        "集中を保つのが少し大変な日でしたが、小刻みに目標を設定することで最後まで諦めずに終えられています。"
+      ]
+    },
+    question: {
+      1: [
+        "{topic}の細かい違いについて自分から質問を挙げるなど、納得して進もうとする姿勢が抜群でした。",
+        "「なぜこうなるのか」を自分の言葉で確認してくれ、丸暗記に頼らない素晴らしい学習姿勢でした。",
+        "少しでも疑問に感じた点をその場ですぐに質問してくれたため、非常に密度の濃い指導ができました。",
+        "解説に対して「つまり〜ということですか？」と自分で噛み砕いて質問してくれる頼もしい姿が見られました。",
+        "前回の内容との違いに自分で気づいて質問するなど、深い思考ができていることを実感いたしました。",
+        "自分から積極的に質問して疑問をゼロにしてから次の問題へ進む、理想的なサイクルができていました。",
+        "どこで迷ったかを自分でしっかり説明して質問でき、主体的に学ぶ姿勢が大変素晴らしかったです。",
+        "難しい問題に対しても「ヒントをください」と前向きに声を上げ、自分の力で解き切ろうとしていました。"
+      ],
+      2: [
+        "分からない箇所をそのままにせず、素直に質問して解消しようとする姿勢が良かったです。",
+        "{topic}の演習中、迷った問題を自分から質問して確かめる前向きな様子が見られました。",
+        "不明点を曖昧なまま放置せず、その場で質問してスッキリ納得してから次に進めていました。",
+        "「ここが分かりません」と素直に伝えてくれたおかげで、つまずきポイントを的確にフォローできました。",
+        "質問を通じて自分の勘違いにすぐ気づくことができ、素直にアドバイスを吸収できていました。",
+        "少しでも不安な箇所は自分から確認してくれ、着実に理解を固めながら進められています。",
+        "分からない言葉をそのままにせず、素直に質問できた姿勢が大変素晴らしかったです。",
+        "疑問点をその日のうちに質問して解決できており、とても良いリズムで学習できています。"
+      ],
+      3: [
+        "講師からの確認の問いかけに対して、自分の頭で考えてしっかり言葉を返してくれました。",
+        "自分からの質問は控えめでしたが、「ここはどう考える？」と聞くと一生懸命答えてくれました。",
+        "対話しながら1ステップずつ確認していくと、しっかり頷いて手順を理解してくれていました。",
+        "こちらのヒントや問いかけに素直に反応し、自分の力で答えを導き出そうとする姿勢が見られました。",
+        "口頭での確認に対して当てずっぽうではなく、ノートを見て考えてから答えてくれました。",
+        "一問ごとに理解度を尋ねると、分かるところと迷うところを正直に伝えてくれました。",
+        "講師とのやり取りを通じて考えが整理され、後半は自信を持って答えられるようになっていました。",
+        "問いかけにしっかり耳を傾け、一つずつ納得しながら丁寧に進めることができています。"
+      ],
+      4: [
+        "遠慮して質問を我慢しがちな様子が見られたため、手が止まったタイミングでこちらから声をかけて解説しました。",
+        "一人で抱え込んで考え込む場面がありましたので、「どこまで分かったか」を一緒に確認して糸口を作りました。",
+        "自分からは少し聞きづらそうな様子でしたので、表情やペンの動きを見て早めにヒントを出してフォローしました。",
+        "「大丈夫？」と聞くと頷いてしまう場面があったため、実際に1問目の手順を一緒に声に出して確認いたしました。",
+        "間違えるのを少し怖がっている様子が見られたため、「途中まで合っているよ」と安心させながら進めました。",
+        "控えめな様子でしたが、こちらから隣で声をかけると迷っていた箇所を素直に打ち明けてくれました。",
+        "分からないまま時間が過ぎてしまわないよう、講師側から小まめに進捗を覗き込んでサポートいたしました。",
+        "質問しやすい雰囲気を作りながら1問ずつ声をかけることで、後半は安心して手を動かせていました。"
+      ],
+      5: [
+        "分からない問題を感覚で埋めて進みがちな場面があったため、1問ごとに根拠を口頭で確認しながら進めました。",
+        "「わかったつもり」で先に進もうとする傾向が見られましたので、類題をその場で自力で解いてもらって定着を確かめました。",
+        "どこが分からないか本人も整理しきれていない様子でしたので、問題文を一緒に読みながら1ステップずつ確認しました。",
+        "解説を聞いただけで満足してしまわないよう、大事なルールを本人に復唱してもらいながら進めました。",
+        "当てずっぽうで答えてしまう癖を防ぐため、必ず問題文の中に根拠の印をつけてから解答するよう徹底いたしました。",
+        "疑問点をそのまま通り過ぎてしまわないよう、丸つけを1問単位で細かく行ってその場でフォローいたしました。",
+        "迷った時にすぐ答えを見ようとする場面があったため、ノートの例題を見返して自分で探す手順を一緒に練習しました。",
+        "曖昧な理解を残さないよう、本日は問題数を絞ってでも「なぜその答えになるか」の確認を最優先に行いました。"
+      ]
+    },
+    note: {
+      1: [
+        "途中式や図・印をノートに非常に丁寧に書き残せており、思考の跡がはっきり分かる素晴らしい記述でした。",
+        "アドバイスした印つけや図の書き方をすぐに取り入れ、見直しがしやすい綺麗なノートを作れていました。",
+        "計算過程や考え方のメモを省略せず、余白をゆったり使って丁寧に整理する姿勢が光っていました。",
+        "間違えた問題の横にポイントを自分でメモするなど、復習にそのまま役立つ丁寧なノート作りができています。",
+        "一字一字を落ち着いて丁寧に書いており、それがミスの少なさと正答率の高さに直結していました。",
+        "問題文への線引きや図への書き込みを惜しまず行い、手を動かして考える習慣がしっかり身についています。",
+        "イコールや行を縦に綺麗に揃えて記述できており、途中で迷わない丁寧なフォームが定着しています。",
+        "ノートの上で条件を視覚的に整理する力が育っており、大変頼もしい取り組みぶりでした。"
+      ],
+      2: [
+        "伝えたポイントや途中経過をノートにしっかり書き残しながら、丁寧に取り組めていました。",
+        "必要な途中式や印を省略せずに書く意識があり、落ち着いたノート記述ができていました。",
+        "解説した手順を余白にメモし、それを見ながら次の類題を丁寧に解き進められていました。",
+        "文字や数字を読みやすく丁寧に書いており、自分の字の読み間違いによるミスを防げていました。",
+        "直しの際にも答えだけを写すのではなく、途中の過程を自分の手で書き直して確認できていました。",
+        "図や表をノートに書き出して整理する姿勢が見られ、着実に手が動いていました。",
+        "言われた通りの手順で印や途中式を書き残し、順序立てて考えることができています。",
+        "見やすいノート作りを心がけており、丁寧な作業が解答の安定感につながっていました。"
+      ],
+      3: [
+        "基本的な途中経過やメモはノートに書き残すことができ、手順を追いながら進められていました。",
+        "講師が指示した箇所の印つけや途中式はきちんとノートに書いて確認できていました。",
+        "普段通りの記述量で、必要な式や答えをノート上に一通り整理して進めることができました。",
+        "最初は少しメモが少なめでしたが、声をかけると必要な途中式を書き足しながら取り組めていました。",
+        "大きく乱れることなくノートに順番通り解き進め、間違えた箇所の修正も行えていました。",
+        "最低限必要な途中式は残せており、どこでつまずいたかをノート上で一緒に振り返ることができました。",
+        "言われた箇所については図やメモを書き出し、一歩ずつ確かめながら演習を進められました。",
+        "標準的なノートの使い方で、本日の演習と直しを一通り完了することができています。"
+      ],
+      4: [
+        "暗算だけで処理しようとして途中式やメモを省きがちでしたので、必ず紙に書き出して整理するよう促しました。",
+        "狭い余白に小さく詰めて書いてミスにつながりやすかったため、ノートを広く使って大きく書くようアドバイスしました。",
+        "問題文を目で追うだけで印をつけずに解こうとしていたため、キーワードに線を引く習慣を一緒に実践しました。",
+        "途中の過程を飛ばしてしまいどこで間違えたか分かりにくくなっていたため、1行ずつ残すよう声をかけました。",
+        "急いで解こうとすると少し字や数字が乱れがちでしたので、一文字ずつ落ち着いて書くよう意識づけを行いました。",
+        "間違えた式を消しゴムで全部消してしまう癖があったため、ミスの原因が分かるよう残して横に書き直すよう伝えました。",
+        "図を描かずに頭の中だけで悩んでいたため、「まずフリーハンドで図を描こう」と促して手を動かしてもらいました。",
+        "メモを省いた問題で惜しいミスが出ていたため、手を動かして書き残すことの大切さを一緒に確認しました。"
+      ],
+      5: [
+        "ノートの書く場所がバラバラになりやすかったため、問題番号を揃えて1行ずつ改行する基本の書き方から指導いたしました。",
+        "途中経過をまったく書かずに答えだけを出そうとしていたため、見本を横に置いて同じ形で途中式を書く練習を徹底しました。",
+        "自分の書いた数字や文字を読み間違える場面が見られたため、大きく丁寧に書くよう隣で1問ずつ確認いたしました。",
+        "赤ペンで答えだけを写して直しを終えようとする様子があったため、途中の考え方を自分の手で書き直すよう指導しました。",
+        "ペンが止まったまま紙が真っ白な状態になりやすかったため、まず問題文の条件に丸をつける作業から一緒に進めました。",
+        "計算メモと解答欄が混ざって混乱していたため、ノートに縦線を引いて計算スペースを分ける方法を取り入れました。",
+        "どうメモを取ればよいか分からない様子でしたので、書くべき手順を番号付きで板書し、それを再現する練習を行いました。",
+        "スピードよりも「1問を丁寧な字と正しい手順で書くこと」を最優先にし、ノートのフォーム固めをじっくり行いました。"
+      ]
+    },
+    homework: {
+      1: [
+        "宿題に完璧に取り組めており、前回の内容もしっかり身についていたため、本日の単元へ非常にスムーズに入れました。",
+        "ご家庭での宿題と直しが大変丁寧に行われており、前回学んだ解き方が完全に定着していることを確認できました。",
+        "宿題を通じて前回のポイントがしっかり自分のものになっており、冒頭の確認問題もスラスラと全問正解でした。",
+        "家庭学習の習慣が素晴らしく、宿題で迷った箇所に自分で印をつけて質問できるよう準備してきてくれました。",
+        "前回お伝えしたルールを宿題でもそのまま実践してきてくれており、積み重ねの成果がはっきり表れていました。",
+        "宿題の完成度が非常に高く、前回の内容を土台として本日の応用的なステップまで余裕を持って進めました。",
+        "ご家庭で集中して宿題に取り組めたことがノートからもよく伝わり、頼もしいスタートを切ることができました。",
+        "日々の家庭学習の積み重ねがしっかり実を結んでおり、前回の単元を自信を持って使いこなせていました。"
+      ],
+      2: [
+        "宿題にしっかり取り組めており、前回の基本事項を確認したうえで順調に本日の学習へ入ることができました。",
+        "決められた宿題を最後までやり切ってきてくれており、良いリズムで授業をスタートできました。",
+        "家庭学習のペースがしっかり守れており、前回学んだ基本的な解き方を維持できていました。",
+        "宿題を忘れずにこなしてきてくれたおかげで、前回の続きからスムーズに指導を進めることができました。",
+        "前回の内容がよく頭に残っており、宿題での反復が生きていることを確認いたしました。",
+        "宿題の提出状況が良好で、間違えた問題を少し確認するだけで本日のメイン単元へ移ることができました。",
+        "ご家庭でもコツコツ頑張っている様子が伺え、基本問題については迷わず手が動くようになっていました。",
+        "前回のポイントを意識して宿題に取り組めており、順調な滑り出しで授業を進められました。"
+      ],
+      3: [
+        "宿題は一通りこなせていましたが、一部迷った問題が見られたため、冒頭で5分ほど復習してから本題へ進みました。",
+        "前回の内容は概ね定着していたものの、細かい手順を少し忘れかけている箇所があったため、最初におさらいを行いました。",
+        "宿題の基本問題はよくできていましたので、間違えていた応用問題だけ一緒に解き直してから本日の内容に入りました。",
+        "一通り宿題には取り組めていましたが、丸つけ後の直しがまだでしたので、間違い直しから授業をスタートしました。",
+        "前回の記憶が少し曖昧になっている部分もありましたので、最初に例題を1問振り返ることで感覚を取り戻せました。",
+        "宿題の中でうっかりミスがいくつか見られたため、注意点を再確認してから本日の演習へとつなげました。",
+        "大まかな流れは掴めていましたので、宿題で手が止まった箇所を重点的に補強してから先へ進めました。",
+        "前回の定着度は7〜8割ほどでしたので、抜けていたルールを整理し直したうえで本日の単元に入っています。"
+      ],
+      4: [
+        "宿題には手を付けてくれたものの、前回のやり方を忘れてしまっている箇所が多かったため、冒頭で基礎から復習しました。",
+        "「家だとやり方が分からなくなってしまった」とのことでしたので、宿題のつまずき箇所を一緒に解き直す時間を設けました。",
+        "前回のルールが少し混同してしまっていたため、新しい内容を急がず、まずは前回の定着を固め直してから進めました。",
+        "宿題の後半が空白になっていたため、どこで詰まったのかを一緒に確認し、ヒントを出しながら完成させました。",
+        "授業から日が空くと手順が抜けやすい様子でしたので、家庭学習で見返せる「手順まとめメモ」をノートに作成しました。",
+        "ノートを見ずに自己流で宿題を解いてミスが続いていたため、授業ノートを横に置いて宿題をする手順を伝えました。",
+        "前回の内容を思い出すのに少し時間がかかっていましたので、前半は復習演習にしっかり時間を割いて土台を整えました。",
+        "一人で解くには少し宿題の難易度が高かった様子でしたので、本日は確実に自力で解ける基本パターンの定着を優先しました。"
+      ],
+      5: [
+        "本日は宿題が未実施となっていましたので、まずは前回の重要問題を授業内で一緒に解いて穴埋めを行ってから進めました。",
+        "宿題を忘れてしまい前回の内容も抜けてしまっている状態でしたので、無理に先へ進まず基礎の反復を最優先に行いました。",
+        "家庭学習の時間が取れず前回の記憶が薄れていたため、一から手順を確認し直し、授業内で演習量を多めに確保しました。",
+        "宿題のテキストを忘れてしまったとのことでしたので、教室のプリントを使って前回の復習からしっかり手を動かしてもらいました。",
+        "家庭での復習が抜けると定着しづらくなるため、本日は「いつ・どのページをやるか」を本人と一緒に計画してメモしました。",
+        "前回の単元がまだ消化不良の状態でしたので、本日は基礎問題に立ち返り、自力で解ける感覚を取り戻すことに注力しました。",
+        "まずは「宿題をやり切って持ってくる」習慣を作るため、本日の最後には宿題の最初の1問を一緒に解いて送り出しました。",
+        "前回の抜けをそのままにせず、授業内で徹底的に復習を行ったことで、後半は正しい手順で手を動かせるようになっています。"
+      ]
+    }
+  };
+
+  Object.keys(extraAttitude).forEach((axis) => {
+    Object.keys(extraAttitude[axis]).forEach((lv) => {
+      attitudeBank[axis][lv].push(...extraAttitude[axis][lv]);
+    });
+  });
+
+  // 各単元カテゴリにも実践的なポイント文例を6パターンずつ追加（27カテゴリ×6＝162パターン追加）
+  Object.keys(categoryPointTemplates).forEach((cid) => {
+    const c = categoryPointTemplates[cid];
+    c.points.push(
+      { app: "rule", text: `{topic}では、感覚や暗記だけに頼らず「なぜその形・答えになるのか」の判断基準を明確にすることがポイントです。問題を解く前にまず着眼点を確認するようアドバイスいたしました。` },
+      { app: "visual", text: `{topic}の問題は、頭の中だけで考え込むよりも、問題文のキーワードや数値を視覚的に整理することが大切です。大事な条件に印や線を引きながら解き進める手順を一緒に確認しました。` },
+      { app: "step", text: `{topic}でミスを防ぐには、いきなり答えを出そうとせず手順を1ステップずつ分けて処理することが鉄則です。途中の過程を省略せずにノートへ書き残すようお伝えしています。` },
+      { app: "meaning", text: `{topic}の基本ルールをただ丸暗記するのではなく、すでに知っている基本単元や具体例と結びつけて理解することがポイントです。仕組みから納得して使えるよう解説いたしました。` },
+      { app: "visual", text: `{topic}の演習では、どこに注目すべきかの目印を問題用紙に直接書き込むことで迷いがなくなります。最初にチェックすべき箇所に丸をつける習慣づけを行いました。` },
+      { app: "step", text: `{topic}は解き方の「型」を一度身につければ安定して得点できる単元です。見本となる例題の手順をなぞりながら、同じ順序で思考を組み立てる練習を重ねました。` }
+    );
+  });
+
+  // 所感バンク（3軸×5段階＝15ノード）にも各18パターンずつ追加（15×18＝270パターン追加）
+  const extraImpression = {
+    understand: {
+      1: [
+        "{topic}の仕組みをすぐに掴み、標準問題から応用問題までほぼ自力で完答することができました。",
+        "理解のスピードが非常に速く、一度の説明で要点を見抜いて次々と正解を重ねていました。",
+        "基礎がしっかり固まっているため、少し条件が複雑な応用問題にも自信を持って対応できていました。",
+        "解法の筋道が明確に見えており、迷うことなくスラスラと最後まで解き切る頼もしい姿が見られました。",
+        "新しい知識の吸収がとてもスムーズで、テストレベルの演習問題まで余裕を持ってクリアできています。",
+        "「なぜそうなるか」の本質をすぐに理解できたため、ひねった出題にも柔軟に対応できていました。",
+        "最初から最後まで手が止まることなく、高い理解度を保ったまま本日の目標範囲を達成できました。",
+        "少し難しめのチャレンジ問題にも臆せず取り組み、自分の頭で考えて見事に正解を導き出せていました。",
+        "ポイントを押さえた無駄のない解き方ができており、実戦力が着実に身についていることを実感しました。",
+        "解説した内容を即座に自分の言葉や手順に落とし込み、応用演習まで完璧に仕上げることができました。",
+        "基本から発展へのステップアップが非常にスムーズで、本人も手応えを感じながら解き進めていました。",
+        "どの問題に対しても着眼点が的確で、終始安定した理解ぶりで演習をリードしてくれました。",
+        "単元の核心を素早く掴むことができ、時間内にハイレベルな問題までしっかり消化できています。",
+        "これまでに積み重ねてきた基礎知識と本日の内容がうまくつながり、深い理解へと到達できました。",
+        "初見の応用問題でも自分で糸口を見つけて解き切ることができ、大きな成長を感じる授業となりました。",
+        "説明したコツを1問目から完璧に使いこなし、終始スムーズなペースで完答を重ねていました。",
+        "思考の整理がとても上手で、複雑な条件の問題も自分の力でスッキリと解き明かすことができていました。",
+        "高いレベルで理解がまとまっており、テスト本番でもしっかり得点源にできる仕上がりです。"
+      ],
+      2: [
+        "{topic}の解き方の手順がしっかり頭に入り、後半は自分の力だけでスムーズに完答できていました。",
+        "基本の型を順調にマスターすることができ、類題演習では迷わずペンが進むようになっていました。",
+        "一つずつ手順を確認したことで理解が深まり、授業の後半はヒントなしでも正確に解けています。",
+        "伝えたアドバイスをすぐに実践でき、目標としていた基本〜標準問題を自力でしっかりクリアできました。",
+        "演習を重ねるにつれて解くリズムが良くなり、最後には自信を持って答えを出せるようになっていました。",
+        "大事なポイントを素直に吸収してくれたおかげで、つまずくことなく順調に本日のメニューを終えられました。",
+        "最初は丁寧に見本を確認しながら進め、後半には見本を見なくても自分の力で解き切れるようになっています。",
+        "基礎的なルールから着実に理解を固めることができ、安定した手応えで演習をまとめられました。",
+        "どこに注目すればよいかのコツを掴んだことで、後半の問題はスラスラと自分の手で正解を作れていました。",
+        "順調に理解が進み、授業終盤の確認問題も自分の力だけでしっかりと正解を導き出せています。",
+        "一つひとつのステップを納得しながら進めることができ、無理なく自然に解法が身についていました。",
+        "教わった手順を忠実に再現することで、後半の演習では迷う時間がぐっと減ってスムーズに解けていました。",
+        "基本的な問題から順番にクリアしていくことで自信がつき、最後まで良いペースで解き切ることができました。",
+        "本日の重要ポイントをしっかりと自分のものにし、着実に得点できる力を積み上げられています。",
+        "解説後の類題演習での反応がとても良く、自力で正しく手順を組み立てられるようになっていました。",
+        "焦らず順序通りに考えることで、標準レベルの問題まで自分の力でしっかりと完答できています。",
+        "授業内で扱ったパターンについてはすっかりコツを掴み、安心感を持って解き進められるようになりました。",
+        "基礎から標準までの流れがスムーズに整理され、実りある演習時間を過ごすことができました。"
+      ],
+      3: [
+        "最初は{topic}の構造理解に悩む場面も多かったですが、最終的にはよく解けるようになりました。",
+        "前半は少し手順に迷って手が止まる場面もありましたが、印をつけて整理してからは自力で解けるようになりました。",
+        "序盤は使い分けに戸惑う様子が見られたものの、コツを掴んだ後半は見違えるようにスムーズに手が動いていました。",
+        "最初は難しく感じて苦戦する場面もありましたが、1問ずつ一緒に確認するうちに最後は自分の力で完答できました。",
+        "途中まではどのルールを使うか迷う場面もありましたが、整理の仕方が分かってからは自信を持って正解できています。",
+        "最初は条件の読み取りに苦労していましたが、図やメモを書くことで後半は自力で式や答えを組み立てられました。",
+        "前半の演習ではいくつか疑問点が出ましたが、そこを解消してからは自分の力でスラスラと解き進められています。",
+        "最初は少し複雑に感じて戸惑っていたものの、ステップを分けて練習したことで終盤にはしっかり形にできました。",
+        "序盤は前後の単元と混同してしまう場面もありましたが、違いを整理した後は迷わず正確に判断できるようになりました。",
+        "最初はどこから手を付けるか迷っていましたが、「まずここに印をつける」と決めてからは自力で解き切れています。",
+        "前半は試行錯誤しながらの取り組みでしたが、粘り強く考えた結果、授業の最後には納得して解けるようになりました。",
+        "最初は少しハードルが高く見えた問題も、基本の手順に分解したことで後半は自分の力でクリアできています。",
+        "途中少し悩む時間帯はありましたが、投げ出さずに取り組んだことで最終的にはしっかりコツを掴んで終えられました。",
+        "最初は抽象的でイメージしにくそうでしたが、具体例で確認してからはスッキリ納得して解けるようになりました。",
+        "前半のつまずきをバネにして後半にしっかり巻き返し、最後は自分の力で正解を導き出すことができました。",
+        "最初は手が止まりがちでしたが、1つずつルールを当てはめる感覚を掴んでからは順調に正解を重ねられました。",
+        "悩んだ分だけ「わかった！」という納得感も大きかったようで、終盤には明るい表情で解き切ることができていました。",
+        "最初は戸惑いが見られた{topic}も、授業の終わりには自分の手で最後まで解き切る力が身についています。"
+      ],
+      4: [
+        "一人だとまだ途中で迷ってしまう場面もありましたが、ヒントを出しながら一緒に整理することで最後まで解き切ることができました。",
+        "最初からすべて自力で解くのは少し難しそうでしたので、「最初の1行目」を一緒に確認し、後半の処理を自分の手で進めてもらいました。",
+        "{topic}の応用的な部分では手が止まる場面もありましたが、図や印を一緒に書き込むことで納得して答えまでたどり着けました。",
+        "まだ手順の定着に少し波がある状態でしたので、隣で1ステップずつ確認の声をかけながら完答まで伴走いたしました。",
+        "一度に複数の条件を処理しようとすると混乱しやすかったため、手順を2段階に小分けして一緒にクリアしていきました。",
+        "ヒントを出すと「あ、そうか！」と自分で気づいて手を動かせる状態ですので、あともう一歩で自力完答できる段階です。",
+        "まだ少し自信なさげにペンを進める場面もありましたが、途中経過を肯定しながら進めることで最後まで書き切れました。",
+        "見通しを立てる部分に少し苦戦していましたが、着眼点をガイドするとその後の計算や処理はしっかり自分の力でできました。",
+        "一人きりだと考え込んでしまいやすい問題も、対話形式で順番を整理することで自分の手で正解を作ることができています。",
+        "まだ少し迷いが残る箇所はありましたが、ノートの例題と見比べながら1問ずつ丁寧に解き進めることができました。",
+        " сложных条件の問題では講師が最初の糸口を示し、残りのステップを本人の力で解き切る形で演習を重ねました。",
+        "完全な独力解答までにはもう少し練習が必要ですが、ヒントを元に自分で考えて答えを出す力はしっかり育っています。",
+        "途中で手が止まった際も、答えをすぐ教えるのではなく考えるヒントを出し、本人の力でゴールまでたどり着いてもらいました。",
+        "まだ手順を思い出すのに少し時間がかかりますが、一緒に確認しながらであれば正確に最後まで解き切ることができています。",
+        "難しめの問題にも諦めずに食らいつき、講師のサポートを活かしながら1問ずつ着実にクリアすることができました。",
+        "最初の着眼点さえ揃えば自分で手を動かせる状態ですので、見分け方の最初のステップを重点的に一緒に練習しました。",
+        "一人だと少し不安そうな場面もありましたが、隣で手順を確認しながら進めることで安心感を持って解き終えられました。",
+        "まずは「一緒に解けば必ずできる」という感覚を掴んでもらうことができ、次回の自力演習へつながる土台ができました。"
+      ],
+      5: [
+        "{topic}はつまずきやすい単元で理解に少し時間がかかりましたので、本日は無理に先へ進まず基本問題1パターンに絞ってじっくり反復しました。",
+        "複数のルールが重なると混乱しやすい様子でしたので、まずは一番大切な基礎の型だけを徹底的に練習して自信をつけました。",
+        "全体的に難しく感じて手が止まる場面が多かったため、一度前のステップに戻り、土台となる基本事項から丁寧に整理し直しました。",
+        "たくさんの問題を浅く解くよりも基礎の納得感が最優先と判断し、例題を講師と一緒に何度もなぞって基本手順を固めました。",
+        "最初はどこから手を付けてよいか分からない状態でしたが、覚えるルールを1つに絞ったことで、最後の問題は自分の手で解けました。",
+        "まだ基礎の定着に時間が必要な段階ですので、焦らずスモールステップで「確実にできる問題」を1問ずつ増やしていきました。",
+        "頭の中が整理しきれない様子が見られましたので、本日は手順を紙に大きく書き出し、それを見ながら確実に解く練習を行いました。",
+        "苦戦する場面が多い回となりましたが、最後まで投げ出さずに基本問題と向き合い、最初の一歩を一緒に踏み出すことができました。",
+        "一度で全部を完璧にするのは負荷が高い単元ですので、本日はまず「基本の形を見分けられること」にゴールを絞って指導しました。",
+        "迷う場面が多かった分、どこでつまずいているかの原因がはっきり見えましたので、次回も続けて基礎から丁寧にフォローいたします。",
+        "難しい応用はいったん脇に置き、テストで絶対に落とせない基礎問題だけを繰り返し練習して手応えを作りました。",
+        "最初は不安そうな表情も見られましたが、一番やさしい問題から順番にクリアしていくことで、最後は少し安心した様子でした。",
+        "ルールを思い出すのにまだ時間がかかりますが、見本を見ながらであれば自分の手で正しい形を作るところまで到達できています。",
+        "消化不良のまま進めないよう、本日は範囲を最小限に絞ってマンツーマンで1行ずつ手を取るように確認いたしました。",
+        "粘り強く基礎の反復に取り組んでくれたおかげで、授業の最後には「基本的な流れ」を本人なりに掴むことができました。",
+        "まずは苦手意識を和らげることを第一に考え、できた部分を一つずつ認めながら基礎の土台作りを行いました。",
+        "定着までにはもうしばらく反復が必要ですが、焦らず基本に立ち返って練習すれば必ず伸びる単元ですのでじっくり支えてまいります。",
+        "本日の練習で基礎の足がかりは作れましたので、次回もまずは同じレベルの基本問題の確認から丁寧にスタートいたします。"
+      ]
+    },
+    accuracy: {
+      1: [
+        "見直しや確かめの意識も非常に高く、細かいミスなく正確な解答を続けることができていました。",
+        "途中経過の確認が丁寧で、うっかりミスを自分の目で防ぎながらノーミスで仕上げられていました。",
+        "細部まで注意が行き届いており、符号や語順・表記などの細かい部分まで完璧に合わせられていました。",
+        "解き終えた後に自分で点検する習慣が身についており、抜群の安定感で演習をクリアできました。",
+        "ひっかけ問題や紛らわしい条件にも惑わされず、根拠を持って正確に答えを選び取れていました。",
+        "1問ごとの処理が非常に丁寧で、スピードだけでなく正確性も高いレベルで両立できていました。",
+        "自分の解答に対するチェックが厳密で、ケアレスミスによる失点を完全にゼロに抑えられていました。",
+        "最初から最後まで集中して正確に手を動かし、全問正解に近い素晴らしい出来栄えでした。",
+        "注意すべきポイントを自分で意識しながら解けており、ミスのない完成度の高い答案が作れていました。",
+        "見直しの手順がしっかり定着しているため、難しい問題でも取りこぼしなく確実に正解できています。",
+        "細かいルールや条件を見落とさずに処理できており、テスト本番でもそのまま通用する正確さでした。",
+        "丁寧な作業と確かな見直しが噛み合い、終始安定した正答率をキープすることができました。",
+        "計算や書き換えの精度が非常に高く、自信を持って次のステップへ進める状態です。",
+        "うっかりミスが出やすい箇所も自分で事前に警戒して解くことができており、見事な正確さでした。",
+        "答えを出した後に「条件と合っているか」を確かめる余裕があり、質の高い演習ができています。",
+        "正確性にこだわって1問ずつ丁寧に仕上げる姿勢が徹底されており、大変頼もしい内容でした。",
+        "基礎から応用までミスのない安定した処理ができ、本人も大きな達成感を得られていました。",
+        "細かな表記や符号まで一切妥協せず、正確に書き切る力がしっかりと身についています。"
+      ],
+      2: [
+        "全体的に安定して正確に解くことができており、基本問題の取りこぼしなく進められました。",
+        "落ち着いた処理ができていたため細かいミスが少なく、高い正答率で演習を終えられました。",
+        "伝えた注意点をしっかり意識して解いたことで、うっかりミスを抑えて着実に正解を重ねられました。",
+        "ポイントを押さえた丁寧な解答ぶりで、大きな崩れなく安定した精度で解き進められていました。",
+        "基礎的な処理がしっかり身についており、一つひとつの問題をスムーズかつ正確に行えていました。",
+        "集中して丁寧に手を動かしていた分、細かい部分まで正確な解答ができていました。",
+        "要所のチェックを怠らずに進められたため、全体を通してミスの少ない良好な仕上がりでした。",
+        "基本ルールを正確に当てはめることができており、安心感を持って見ていられる演習ぶりでした。",
+        "焦らず自分のペースで処理したことで、計算や書き換えの精度がしっかり保たれていました。",
+        "注意した箇所をすぐに意識して解くことができ、後半はノーミスで連続正解できていました。",
+        "大きな勘違いやルール抜けはなく、標準的な問題を着実に合わせる力が身についています。",
+        "途中経過を丁寧に書いていたおかげで、細かいミスに陥ることなく正確にゴールまでたどり着けました。",
+        "見直しの声かけにも素直に反応し、安定した正答率で本日の課題をクリアできています。",
+        "一問一問を雑にせず丁寧に処理できており、着実な得点力につながっていると感じます。",
+        "基本的な確認事項をしっかり守りながら解けたことで、ミスを最小限に抑えることができました。",
+        "解答の精度が回を追うごとに安定してきており、基礎固めの成果がしっかり出ています。",
+        "落ち着いて条件を確認しながら解き進め、予定していた問題を順調に正解できていました。",
+        "終盤まで集中が切れなかったこともあり、最後まで正確な処理を維持することができました。"
+      ],
+      3: [
+        "途中で細かいミスが出る場面もありましたが、見直しの声をかけるとすぐに自分で気づいて正しく修正できていました。",
+        "最初は少しうっかりミスが見られたものの、気をつけるポイントを意識してからは自分で直しながら正確に解けていました。",
+        "解き進める中で自分の間違いに途中でハッと気づき、解説前に自力で書き直せる場面が増えてきています。",
+        "1回目は細かい部分で惜しいミスがありましたが、解き直しでは原因を理解して自分の手で一発で正解できました。",
+        "印や途中式を書くようになってからはミスが目に見えて減り、自分で正確さをコントロールできるようになっていました。",
+        "惜しいミスをそのままにせず、「なぜ間違えたか」を確認して次の問題ですぐに改善できていた点が良かったです。",
+        "「どこで間違えたと思う？」と尋ねると自分でミス箇所を発見できており、自己修正する力が育っています。",
+        "前半に出たミスのパターンを後半ではしっかり意識して防ぐことができ、練習の中で精度を高められました。",
+        "うっかりミスに気づいた後の修正がとても素早く、同じ間違いを2度繰り返さない集中力がありました。",
+        "最初は符号や細かい語尾の抜けがありましたが、指差し確認を取り入れてからは正確に合わせられるようになりました。",
+        "間違い直しを通して自分の弱点パターンを自覚でき、授業終盤にはミスなく解き切ることができています。",
+        "少し惜しい間違いはあったものの、考え方の根本は合っているため、見直し一声で自力で正答に直せていました。",
+        "自分で検算・見直しをして間違いを見つけた場面があり、ミスを防ぐ意識が着実に高まっています。",
+        "一度間違えた問題をその場で解き直した際には、ポイントを完璧に守って正確に正解できていました。",
+        "途中経過を書き残していたおかげで、ミスした箇所を自分で遡ってすぐに見つけ出すことができていました。",
+        "細かなミスを一つずつ潰していくことで、後半の演習では見違えるように正答率が上がっていました。",
+        "「ここを気をつければ大丈夫」というポイントが本人の中で明確になり、自分で気をつけて解けるようになっています。",
+        "ミスを恐れずに手を動かし、間違えた箇所から学んでその日のうちに修正しきることができました。"
+      ],
+      4: [
+        "考え方や大筋は合っているものの、最後の最後で符号や表記・読み違いなどのうっかりミスが散見されましたので、見直しの手順を確認しました。",
+        "「わかっているのに惜しいミス」で落としてしまう場面がいくつかあったため、解き終えた後に必ずチェックする箇所を絞って伝えました。",
+        "焦って次の問題へ行こうとすると細かい部分の抜けが出やすいため、1問ごとに指差し確認をするルールを取り入れて練習しました。",
+        "理解自体はできているのですが、暗算や目読みに頼った箇所でケアレスミスが出ていたため、手を動かして書き残すよう軌道修正しました。",
+        "問題文の条件の読み飛ばしが少し見られたため、問題文のキーワードに必ず丸をつけてから解く習慣づけを行いました。",
+        "解き方の方向性はバッチリ合っていますので、あとは細かいミスを防ぐ丁寧さがつけば一気に得点につながる状態です。",
+        "途中のステップまでは完璧なのに最後の書き写しや単位・語尾で惜しいミスがあったため、最後の1秒まで気を抜かないよう声をかけました。",
+        "「どこでミスしやすいか」の傾向ははっきりしていますので、テスト本番で同じ失点をしないようチェックリストをノートに作りました。",
+        "スピードを意識すると少し雑になってミスが増える傾向が見られたため、まずは「100%の正確さ」を優先するペース配分を確認しました。",
+        "本人も「あ、わかってたのに！」と悔しがる惜しいミスがいくつかありましたので、見直しで防ぐ具体的な手順を一緒に実践しました。",
+        "ケアレスミスが出た問題をそのままにせず、なぜそのミスが起きたかを一緒に分析してその場で類題を解き直しました。",
+        "複数のことに同時に気をつけようとすると片方が抜けやすいため、書き終えた後に1項目ずつ順番に見直す方法を伝えました。",
+        "実力はあるのにうっかりミスで点を落とすのは非常にもったいないため、途中経過を省略せずに書くことを強く意識づけました。",
+        "後半少し疲れが出たタイミングで細かいミスが重なったため、疲れている時こそ印をつけて機械的にチェックする大切さを伝えました。",
+        "大枠の理解は順調ですので、今後は「わかる」を「確実に丸になる」へ変えるための見直しトレーニングを重ねてまいります。",
+        "数字や文字の書き方が少し小さくて自分で読み間違える場面があったため、大きくはっきりと書いてミスを防ぐよう指導しました。",
+        "1問解くごとに3秒だけ見直す習慣を取り入れたところ、後半はうっかりミスをしっかり減らすことができました。",
+        "惜しいミスを減らすだけで得点力が大きく跳ね上がりますので、次回も丁寧な確認作業を一緒に徹底してまいります。"
+      ],
+      5: [
+        "似たルールや前後の単元とやり方が混同してしまいミスが重なる場面があったため、本日は1問ごとにルールを指差し確認しながら慎重に進めました。",
+        "焦りからか当てずっぽうな処理になってミスが増えていたため、一度ペースを落とし、見本と照らし合わせながら1行ずつ正確に書く練習に切り替えました。",
+        "複数の手順が絡むと途中でルールが抜けてしまいやすかったため、手順を番号付きのメモにして横に置き、1ステップずつチェックしながら解いてもらいました。",
+        "自己流のやり方でミスが続いていたため、本日は問題数を絞ってでも「正しい手順で1問を完璧に合わせる」ことを徹底いたしました。",
+        "基礎的なルール（符号や語順・単位など）の混同が見受けられたため、その場で基本表を作って見比べながら頭の中を整理しました。",
+        "ミスが出た原因を一つずつ一緒に紐解き、感覚ではなく確かなルールに従って解くフォーム固めを重点的に行いました。",
+        "「なぜ間違えたか」を飛ばして次へ進もうとする場面があったため、1問ごとに立ち止まって正しい手順を口頭で確認しながら進めました。",
+        "頭の中だけで処理しようとして混乱していたため、考える手順をすべて紙の上に書き出して視覚化する練習をマンツーマンで行いました。",
+        "同じパターンのミスが繰り返されていたため、誤った癖が定着しないようその場で集中的に正しい型を反復練習いたしました。",
+        "焦って解くとどうしてもルールが抜けてしまうため、「まず深呼吸して条件に丸をつける」という最初のルーティンから一緒に整えました。",
+        "一度に多くのことを意識するのは負担が大きそうでしたので、「今日絶対に守るルール1つ」だけに絞って確実に合わせる練習を行いました。",
+        "見本を横に置いて1行ずつ対応させながら書くことで、授業の最後にはミスなく正しい形で解き切ることができています。",
+        "ミスが続くと自信を失いやすいため、基本問題に戻って「正しく手順を踏めば必ず丸になる」という感覚を取り戻してもらいました。",
+        "どこでルールが混ざっているかは本日の演習で明確になりましたので、次回もまずは基本ルールの整理から丁寧にスタートいたします。",
+        "感覚頼みの解き方から脱却できるよう、根拠に線を引いて1ステップずつ進める練習を根気強く重ねました。",
+        "本日は量よりも質を重視し、間違えた問題を自分の手で完璧に再現できるまでじっくりと解き直しを行いました。",
+        "ルールを表に整理して目に見える形にしたことで、終盤には混同せずに正しい手順を選べるようになってきています。",
+        "基礎の型が固まればミスは必ず減っていきますので、次回も焦らず丁寧な手順確認を続けてまいります。"
+      ]
+    },
+    closing: {
+      1: [
+        "基礎から標準レベルはしっかり身についていますので、次回はこの調子でさらなる応用・発展問題へも挑戦の幅を広げていければと思います。",
+        "大変順調に力が伸びておりますので、今後はテストの得点源にできるよう実戦的な応用演習へとステップアップしてまいります。",
+        "理解の土台がしっかり固まってきましたので、より思考力を問う発展問題にもどんどんチャレンジして自信を深めていければと思います。",
+        "現在の良い学習リズムを維持しながら、入試やテスト本番でも武器になる高い実戦力を一緒に磨いてまいります。",
+        "基本の型はバッチリ使いこなせていますので、次回は複数の単元が融合した総合問題にも取り組んでいければと思います。",
+        "この調子で応用力をさらに伸ばし、どんな出題パターンにも余裕を持って対応できるようサポートしてまいります。",
+        "高い吸収力で順調に進んでおりますので、次回も一歩先のレベルの問題に触れながらさらに実力を引き上げてまいります。",
+        "自力で応用まで解き切る力が育っていますので、今後は時間配分も意識した実戦トレーニングを取り入れていければと思います。",
+        "現在の前向きな姿勢と確かな理解力を活かし、さらなる高得点を目指して引き続き伴走してまいります。",
+        "基礎の完成度が非常に高いため、今後は初見の難問にも粘り強くアプローチする応用力を養ってまいります。",
+        "この頼もしい成長ペースを大切にしながら、テスト本番で満点を狙えるよう引き続き質の高い演習を重ねてまいります。",
+        "単元の本質をよく理解できていますので、次回も発展的な課題を通して考える楽しさと得点力を伸ばしていければと思います。",
+        "大変良い仕上がりですので、自信を持って次の単元および応用演習へと進んでまいりましょう。",
+        "現在の好調を維持しつつ、細部の記述や応用問題でも取りこぼしのない盤石な力を一緒に作ってまいります。",
+        "自分の頭で考えて応用を利かせる力がしっかりついてきていますので、今後もさらなるレベルアップを支えてまいります。",
+        "この調子で実戦経験を積み重ね、どんなテストでも安定して高得点を取れる力を定着させていければと思います。",
+        "順調なステップアップができておりますので、次回もより実践的な問題に楽しみながら挑戦してまいります。",
+        "基礎・標準は完全にクリアできていますので、引き続きさらなる高みを目指してサポートしてまいります。"
+      ],
+      2: [
+        "この調子で類題をたくさん解いて身に付けていければと思います。",
+        "本日掴んだ解き方のコツが時間が経ってもすぐ引き出せるよう、引き続き類題演習を重ねてしっかり定着させていければと思います。",
+        "やり方はしっかり理解できていますので、あとは反復練習を通じて「考えなくても自然に手が動く」レベルまで仕上げてまいります。",
+        "今回できた感覚を忘れないうちに問題数をこなし、テスト本番でも迷わず解ける確かな力として定着させていければと思います。",
+        "引き続きバリエーションの違う類題にたくさん触れ、安定した得点力へとつなげてまいります。",
+        "この良い流れのまま反復演習を積み重ね、スピードと正確性の両方をさらに高めていければと思います。",
+        "授業内で掴んだ手応えを確かな自信に変えられるよう、次回も類題演習を交えながら着実に力を伸ばしてまいります。",
+        "基本の手順はしっかり頭に入りましたので、あとは練習量を重ねてどんな聞かれ方をしても解けるよう仕上げてまいります。",
+        "「わかった」を「いつでも一人でできる」に定着させるため、引き続き実践的な問題演習を重ねていければと思います。",
+        "本日の演習で良いリズムが掴めましたので、この感覚を維持しながらさらに問題数をこなして習熟度を高めてまいります。",
+        "解き方の型は順調に身についてきておりますので、反復を通じてさらなる安定感へとつなげてまいります。",
+        "この調子でコツコツと演習を積み重ね、テスト本番でも落ち着いて実力を発揮できるようサポートしてまいります。",
+        "一度掴んだコツを完全に自分のものにできるよう、次回も確認演習を取り入れながら着実に進めてまいります。",
+        "順調に解ける問題が増えてきておりますので、このまま類題練習を重ねて得意単元にしていければと思います。",
+        "現在の前向きな取り組みを続けながら、反復練習によって解答のスピードと精度をさらに磨いてまいります。",
+        "基礎の理解がしっかりできましたので、ここからは問題演習をたくさん積んで実戦力を養ってまいります。",
+        "本日できるようになったことを着実に積み上げ、自信を持ってテストに臨めるよう引き続き伴走してまいります。",
+        "このペースで演習を重ねていけば確実に得点源にできますので、引き続き丁寧にサポートしてまいります。"
+      ],
+      3: [
+        "本番のテストでも、まずは本日実践した「印や図・途中経過を書いて整理する習慣」をそのまま発揮できるよう定着させていければと思います。",
+        "頭の中だけで処理せず手を動かして整理する習慣が点数アップに直結しますので、今後もこの解き方を徹底してまいります。",
+        "本日お伝えした見分け方の手順を毎回の演習でルーティン化し、うっかりミスをゼロに近づけていければと思います。",
+        "「まず最初に印をつける」という一工夫で正確さが大きく変わりますので、家庭学習でもこの手順を意識して続けていければと思います。",
+        "丸暗記ではなく意味や手順から筋道立てて考える習慣を続け、どんな問題にも応用が利く力を育ててまいります。",
+        "丁寧なノート作りと見直しの手順をこのまま習慣にし、分かっている問題を確実に得点できるようサポートしてまいります。",
+        "本日確認した「解く前の印つけと整理」を毎回の当たり前の習慣にできるよう、次回以降も声をかけて定着を図ってまいります。",
+        "正しい手順を踏んで解くフォームが固まれば正答率は一気に安定しますので、引き続き解き方のプロセスを大切にしてまいります。",
+        "暗算や感覚に頼らず、目に見える形で条件を整理する習慣をこれからも一緒に積み重ねていければと思います。",
+        "「見直しまでが1問」という意識をさらに定着させ、惜しいミスによる失点を防げるよう引き続きサポートしてまいります。",
+        "本日練習したノートの使い方と整理の手順を継続し、テスト本番でも迷わず手が動く状態を作ってまいります。",
+        "一つひとつの手順を丁寧に確認しながら進める姿勢を伸ばし、確かな得点力へとつなげていければと思います。",
+        "図や印を活用して考える良さを本人も実感できていましたので、この習慣が完全に身につくまで伴走してまいります。",
+        "焦らず基本の手順通りに手を動かす習慣を徹底し、ケアレスミスを未然に防ぐ力を養ってまいります。",
+        "「なぜそうなるか」の根拠を確認しながら解く習慣を続け、揺るぎない基礎力を一緒に作ってまいります。",
+        "本日のように途中経過を丁寧に残す解き方を続ければ必ず伸びますので、今後もフォームの定着を支えてまいります。",
+        "問題文の条件に丸をつける一手間を習慣にし、読み飛ばしやうっかりミスを確実に減らしていければと思います。",
+        "正しい型で解く習慣をこのまま根付かせ、安定した実力を発揮できるよう引き続き指導してまいります。"
+      ],
+      4: [
+        "授業内で掴んだ感覚を忘れないよう、まずはご家庭での宿題で本日の手順を意識して反復し、次回の授業冒頭でもう一度定着を確認いたします。",
+        "「授業では解けたけれど家で一人だと迷う」ということがないよう、本日のノートを見返しながら宿題に取り組むサイクルを一緒に作ってまいります。",
+        "まだ少し記憶が揺らぎやすい部分がありますので、宿題での解き直しと次回の確認テストをセットにして着実に自分のものにしていければと思います。",
+        "一度で完璧にしようと焦らず、本日の宿題と次回の復習を通じて一歩ずつ確実に定着を図ってまいります。",
+        "ご家庭でも迷わず宿題に取り組めるようノートに手順をまとめてありますので、それを見ながら反復して身につけていければと思います。",
+        "次回もまず本日の類題を1〜2問復習してから先へ進み、抜け漏れのないよう丁寧に積み重ねてまいります。",
+        "時間が経つと少し手順が抜けやすい単元ですので、家庭学習での反復と次回の再確認でしっかり記憶に定着させてまいります。",
+        "本日の授業ノートがそのままお手本になるよう整理してありますので、宿題の際に開いて見比べながら取り組んでいただければと思います。",
+        "授業と宿題の連動で「一人で解ける」実感を作れるよう、次回の冒頭でも本日のポイントをもう一度チェックいたします。",
+        "まだ定着の途上ですので、宿題で間違えた問題は無理に一人で悩まず、印をつけて次回一緒に解決していければと思います。",
+        "忘却を防ぐには数日以内の解き直しが一番効果的ですので、宿題を通じて本日の感覚をしっかりつなぎ止めてまいります。",
+        "次回も本日の範囲の復習からスタートし、完全に自分の力で解けるようになったことを確認してから次のステップへ進みます。",
+        "家庭学習での取り組み方も含めて丁寧にフォローし、少しずつ自力で解ける問題を増やしていければと思います。",
+        "一度習った内容を確実に定着させられるよう、反復のタイミングを工夫しながら引き続きサポートしてまいります。",
+        "本日の宿題は授業で解いた問題とまったく同じパターンの類題を出しておりますので、ノートを見ながら挑戦してみていただければと思います。",
+        "焦らず「授業で理解➔宿題で反復➔次回確認」のサイクルを回し、着実なステップアップにつなげてまいります。",
+        "まだ少し迷いが出やすい箇所は次回も重ねてフォローいたしますので、安心して宿題に取り組んでいただければと思います。",
+        "ご家庭での復習と教室での確認を両輪にして、一つひとつの単元を確実に自分のものにしていければと思います。"
+      ],
+      5: [
+        "まずは焦らず基本問題に立ち返り、「自分の力で解けた！」という成功体験と自信を一つずつ積み重ねられるよう丁寧に伴走してまいります。",
+        "無理に難しい問題を詰め込むよりも、基礎の土台をじっくり固めることが一番の近道ですので、歩幅を合わせて粘り強くサポートしてまいります。",
+        "苦手意識を少しずつ減らせるよう、次回もスモールステップで「確実にできること」を1つずつ増やしていければと思います。",
+        "まだ時間はかかりますが、着眼点を整理すれば必ず解ける力がありますので、焦らず基礎の反復からじっくりと支えてまいります。",
+        "分からない箇所を一つずつ丁寧に解消し、安心して問題に向き合えるよう引き続き寄り添って指導してまいります。",
+        "基礎のルールが整理できれば一気に視界が開けますので、次回も基本パターンの定着を最優先にサポートしてまいります。",
+        "お子様のペースにしっかり寄り添い、消化不良を起こさないよう基礎から一つひとつ丁寧に積み上げてまいります。",
+        "まずは「この基本パターンなら絶対大丈夫」という得意な形を1つ作れるよう、次回も反復練習を重ねてまいります。",
+        "つまずきをそのままにせず、前のステップまで遡って土台を整えながら、着実に前へ進めるよう伴走いたします。",
+        "急にすべてを求めず、今日できた小さな前進を大切にしながら、一歩ずつ自信を育てていければと思います。",
+        "基礎の型さえ身につけば必ず解けるようになりますので、焦らず根気強く基本の反復をサポートしてまいります。",
+        "難しい言葉や複雑な手順はできるだけかみ砕き、本人が納得して手を動かせる形で引き続き指導してまいります。",
+        "まだ不安が残る単元ですので、次回も同じ基本問題をもう一度一緒に解くところから安心してスタートいたします。",
+        "一つずつ「わかる・できる」の感覚を増やし、前向きな気持ちで学習に取り組めるよう全力で支えてまいります。",
+        "基礎の取りこぼしをなくすことが今後の伸びにつながりますので、現在は土台固めにしっかり時間をかけてまいります。",
+        "小さな疑問もその場で解消できる安心な環境を作り、粘り強く基礎力の向上をサポートしてまいります。",
+        "一歩ずつでも確実に前へ進めておりますので、引き続きお子様の歩幅に合わせて丁寧に指導してまいります。",
+        "まずは基本問題を自力で完答できる喜びを一緒に味わいながら、着実な成長へとつなげていければと思います。"
+      ]
+    }
+  };
+
+  Object.keys(extraImpression).forEach((axis) => {
+    Object.keys(extraImpression[axis]).forEach((lv) => {
+      impressionBank[axis][lv].push(...extraImpression[axis][lv]);
+    });
+  });
+
+  return {
+    attitudeBank,
+    categoryPointTemplates,
+    impressionBank
+  };
+}
+
+/* =========================================================
+   4. ストレージ管理（文例バンク＆★お気に入りピン留め）
+   ========================================================= */
+function loadBankDB() {
+  const def = buildDefaultBank();
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_CUSTOM_BANK);
+    if (!raw) return def;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return def;
+    return {
+      attitudeBank: Object.assign({}, def.attitudeBank, parsed.attitudeBank || {}),
+      categoryPointTemplates: Object.assign({}, def.categoryPointTemplates, parsed.categoryPointTemplates || {}),
+      impressionBank: Object.assign({}, def.impressionBank, parsed.impressionBank || {})
+    };
+  } catch (e) {
+    return def;
+  }
+}
+
+function saveBankDB() {
+  try {
+    localStorage.setItem(STORAGE_KEY_CUSTOM_BANK, JSON.stringify(bankDB));
+  } catch (e) { /* ignore */ }
+}
+
+function loadFavorites() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_FAVS);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveFavorites(list) {
+  try {
+    localStorage.setItem(STORAGE_KEY_FAVS, JSON.stringify(list));
+  } catch (e) { /* ignore */ }
+}
+
+let bankDB = loadBankDB();
+let favList = loadFavorites();
+
+function toggleFavorite(textTemplate) {
+  const idx = favList.indexOf(textTemplate);
+  if (idx >= 0) favList.splice(idx, 1);
+  else favList.unshift(textTemplate);
+  saveFavorites(favList);
+}
+
+/* 登録されている総文例数のカウント */
+function countTotalTemplates() {
+  let count = 0;
+  Object.values(bankDB.attitudeBank).forEach((levels) => {
+    Object.values(levels).forEach((arr) => { count += arr.length; });
+  });
+  Object.values(bankDB.categoryPointTemplates).forEach((c) => {
+    count += (c.points || []).length;
+  });
+  Object.values(bankDB.impressionBank).forEach((levels) => {
+    Object.values(levels).forEach((arr) => { count += arr.length; });
+  });
+  // 単元ごとの動的展開バリエーションを含む実効文例数も算出
+  return { baseCount: count, expandedCount: count * 6 };
+}
+
+/* =========================================================
+   5. アプリ状態（初期状態はすべて未選択！）
+   ========================================================= */
+const state = {
+  grade: "all",
+  subject: "英語",
+  cat: "en_infinitive",
+  // 各セクションのモード ("select" | "free")
+  attMode: "select",
+  ptMode: "select",
+  impMode: "select",
+  // お子様の様子：4軸の選択レベル (null または 1..5)
+  attLevels: { focus: null, question: null, note: null, homework: null },
+  attPageOffset: 0,
+  selectedAttSentences: [],
+  // 授業のポイント：アプローチフィルタと選択文
+  ptApproach: "all",
+  ptPageOffset: 0,
+  selectedPtSentence: "",
+  // 所感：3軸の選択レベル (null または 1..5)
+  impLevels: { understand: null, accuracy: null, closing: null },
+  impPageOffset: 0,
+  selectedImpSentences: [],
+
+  showAllMajors: false,
+  hasOutput: false,
+  outEdited: false,
+  copied: false,
+  recentNames: [],
+  recentUnits: loadRecentUnits(),
+
+  // 編集タブ用
+  editorScope: "attitude", // "attitude" | "point" | "impression"
+  editorAxis: "focus",
+  editorLevel: 2,
+  editorCat: "en_infinitive"
+};
+
+function loadRecentUnits() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_UNITS);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.slice(0, 6) : [];
+  } catch (e) {
+    return [];
+  }
+}
+function saveRecentUnits(list) {
+  try {
+    localStorage.setItem(STORAGE_KEY_UNITS, JSON.stringify(list.slice(0, 6)));
+  } catch (e) { /* ignore */ }
+}
+function rememberItem(list, val, maxCount) {
+  const v = (val || "").trim();
+  if (!v) return;
+  const idx = list.indexOf(v);
+  if (idx >= 0) list.splice(idx, 1);
+  list.unshift(v);
+  if (list.length > maxCount) list.length = maxCount;
+}
+
+const $ = (id) => document.getElementById(id);
+
+let toastTimer = null;
+function showToast(msg) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.hidden = false;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.hidden = true; }, 2200);
+}
+
+/* =========================================================
+   6. 単元名・プレースホルダー {topic} の自然な動的埋め込み＆語尾チェンジャー
+   ========================================================= */
+function cleanClause(s) {
+  return (s || "").trim().replace(/[。．.！!、，,\s]+$/, "");
+}
+
+function getCurrentTopicLabel() {
+  const maj = cleanClause($("unit-major").value);
+  const min = cleanClause($("unit-minor").value);
+  if (min) return min;
+  if (maj) return maj;
+  return `${state.subject}の学習`;
+}
+
+function expandTemplate(tpl) {
+  const topic = getCurrentTopicLabel();
+  return (tpl || "").replace(/\{topic\}/g, topic);
+}
+
+function buildUnitTitlePhrase(majorRaw, minorRaw) {
+  const maj = cleanClause(majorRaw);
+  const min = cleanClause(minorRaw);
+  if (maj && min) {
+    if (min.startsWith(maj) || min.includes(maj)) return min;
+    return `${maj}（${min}）`;
+  }
+  return maj || min || "本日の単元";
+}
+
+function resolveActiveCategory() {
+  const s = state.subject;
+  const maj = ($("unit-major").value || "").trim();
+  const min = ($("unit-minor").value || "").trim();
+  const text = `${maj} ${min}`;
+
+  const exactTree = CURRICULUM_TREE.find((item) => item.s === s && item.major === maj);
+  if (exactTree) return exactTree.cat;
+
+  if (s === "英語") {
+    if (/(不定詞|動名詞)/.test(text)) return "en_infinitive";
+    if (/(単語|熟語|スペル|発音)/.test(text)) return "en_vocab";
+    if (/(長文|読解|スラッシュ)/.test(text)) return "en_read";
+    if (/(英作文|並び替え)/.test(text)) return "en_write";
+    if (/(分詞|関係代名詞|比較|仮定法|間接疑問)/.test(text)) return "en_clause";
+    if (/(過去|進行形|現在完了|受動態|三単現)/.test(text)) return "en_tense";
+    return "en_infinitive";
+  }
+  if (s === "数学" || s === "算数") {
+    if (/(証明|合同)/.test(text) && s === "数学") return "ma_proof";
+    if (/(確率|場合の数|データ|箱ひげ)/.test(text)) return "ma_prob";
+    if (/(関数|グラフ|比例|変域|放物線|微積)/.test(text)) return "ma_func";
+    if (/(図形|面積|体積|角度|円周角|三平方|相似)/.test(text)) return "ma_geom";
+    if (/(文章題|利用|速さ|割合|比)/.test(text)) return "ma_word";
+    return "ma_calc";
+  }
+  if (s === "国語" || s === "その他") {
+    if (/(漢字|語彙|部首|ことわざ)/.test(text)) return "ja_kanji";
+    if (/(古文|漢文)/.test(text)) return "ja_classic";
+    if (/(文法|品詞|活用|敬語)/.test(text)) return "ja_grammar";
+    if (/(記述|要約|作文)/.test(text)) return "ja_desc";
+    if (/(物語|小説|心情)/.test(text)) return "ja_story";
+    return "ja_logic";
+  }
+  if (s === "理科") {
+    if (/(電流|回路|オーム|磁界)/.test(text)) return "sc_elec";
+    if (/(水溶液|気体|化学|イオン|中和)/.test(text)) return "sc_chem";
+    if (/(植物|動物|人体|細胞|遺伝)/.test(text)) return "sc_bio";
+    if (/(火山|地震|地層|天気|天体)/.test(text)) return "sc_earth";
+    return "sc_phys";
+  }
+  if (s === "社会") {
+    if (/(雨温図|統計|地形図)/.test(text)) return "so_data";
+    if (/(歴史|時代|幕府|改革)/.test(text)) return "so_hist";
+    if (/(公民|憲法|政治|経済)/.test(text)) return "so_civ";
+    if (/(記述|史料)/.test(text)) return "so_desc";
+    return "so_geo";
+  }
+  return "en_infinitive";
+}
+
+/* 語尾（文末）かぶり自動検知＆ワンタップ語尾散らしエンジン */
+const ENDING_VARIATIONS = [
+  {
+    pattern: /ていました。$/,
+    alts: ["ていました。", "ています。", "ている様子が見られました。", "てくれたのが印象的でした。"]
+  },
+  {
+    pattern: /できました。$/,
+    alts: ["できました。", "できています。", "できておりました。", "できるようになりました。"]
+  },
+  {
+    pattern: /見られました。$/,
+    alts: ["見られました。", "見受けられました。", "光っていました。", "伝わってきました。"]
+  },
+  {
+    pattern: /良かったです。$/,
+    alts: ["良かったです。", "素晴らしかったです。", "頼もしかったです。", "印象的でした。"]
+  },
+  {
+    pattern: /アドバイスいたしました。$/,
+    alts: ["アドバイスいたしました。", "お伝えしています。", "一緒に確認しました。", "指導いたしました。"]
+  },
+  {
+    pattern: /確認しました。$/,
+    alts: ["確認しました。", "整理いたしました。", "練習を重ねました。", "アドバイスしております。"]
+  },
+  {
+    pattern: /ようになりました。$/,
+    alts: ["ようになりました。", "ようになっています。", "ようになっておりました。", "力を掴めています。"]
+  },
+  {
+    pattern: /いければと思います。$/,
+    alts: ["いければと思います。", "まいります。", "いきたいと思います。", "サポートしてまいります。"]
+  }
+];
+
+function extractSentenceEndingKey(sentence) {
+  const s = sentence.trim();
+  const m = s.match(/(ていました|できました|見られました|良かったです|素晴らしかったです|アドバイスいたしました|確認しました|ようになりました|いければと思います|まいります)。$/);
+  return m ? m[1] : null;
+}
+
+function hasDuplicateEndings(text) {
+  const sentences = text.split(/(?<=。)\s*/).map((s) => s.trim()).filter(Boolean);
+  const seen = {};
+  for (const s of sentences) {
+    const k = extractSentenceEndingKey(s);
+    if (k) {
+      seen[k] = (seen[k] || 0) + 1;
+      if (seen[k] >= 2) return k;
+    }
+  }
+  return null;
+}
+
+function diversifySentenceEndings(text, seedOffset = 1) {
+  const lines = text.split("\n");
+  const usedCounts = {};
+  return lines.map((line) => {
+    if (!line.includes("。")) return line;
+    const parts = line.split(/(?<=。)/).filter(Boolean);
+    const converted = parts.map((sent) => {
+      for (const rule of ENDING_VARIATIONS) {
+        if (rule.pattern.test(sent)) {
+          const key = rule.pattern.source;
+          const cnt = usedCounts[key] || 0;
+          usedCounts[key] = cnt + 1;
+          if (cnt > 0 || seedOffset > 1) {
+            const alt = rule.alts[(cnt + seedOffset) % rule.alts.length];
+            return sent.replace(rule.pattern, alt);
+          }
+        }
+      }
+      return sent;
+    });
+    return converted.join("");
+  }).join("\n");
+}
+
+/* =========================================================
+   7. 数直線ゲージ＆最終文例セレクターのUI描画
+   ========================================================= */
+function renderAlwaysSelectedPills(containerId, items, getSelectedId, onSelect, small = false) {
+  const wrap = $(containerId);
+  wrap.textContent = "";
+  items.forEach((item) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = small ? "pill sm" : "pill";
+    const id = typeof item === "string" ? item : item.id;
+    const label = typeof item === "string" ? item : item.label;
+    btn.textContent = label;
+    btn.setAttribute("aria-pressed", String(getSelectedId() === id));
+    btn.addEventListener("click", () => {
+      onSelect(id);
+      Array.from(wrap.children).forEach((c, idx) => {
+        const cid = typeof items[idx] === "string" ? items[idx] : items[idx].id;
+        c.setAttribute("aria-pressed", String(getSelectedId() === cid));
+      });
+      markStale();
+    });
+    wrap.appendChild(btn);
+  });
+}
+
+function renderNumberLineGauges(containerId, gaugeDefs, levelStateObj, onLevelChange) {
+  const container = $(containerId);
+  container.textContent = "";
+
+  gaugeDefs.forEach((g) => {
+    const block = document.createElement("div");
+    block.className = "gauge-block";
+
+    const head = document.createElement("div");
+    head.className = "gauge-head";
+    const titleSpan = document.createElement("span");
+    titleSpan.className = "gauge-title";
+    titleSpan.textContent = g.title;
+
+    const endsDiv = document.createElement("div");
+    endsDiv.className = "gauge-Ends";
+    const posSpan = document.createElement("span");
+    posSpan.className = "pos-label";
+    posSpan.textContent = "◀ 1: ポジティブ";
+    const negSpan = document.createElement("span");
+    negSpan.className = "neg-label";
+    negSpan.textContent = "5: 要フォロー ▶";
+    endsDiv.append(posSpan, negSpan);
+
+    head.append(titleSpan, endsDiv);
+
+    const track = document.createElement("div");
+    track.className = "number-line";
+    track.setAttribute("role", "group");
+    track.setAttribute("aria-label", g.title);
+
+    g.levels.forEach((lvObj) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "nl-node";
+      btn.setAttribute("data-lv", String(lvObj.lv));
+      const isSelected = levelStateObj[g.axisId] === lvObj.lv;
+      btn.setAttribute("aria-pressed", String(isSelected));
+
+      const stepBadge = document.createElement("span");
+      stepBadge.className = "nl-step";
+      stepBadge.textContent = `${lvObj.lv}`;
+
+      const labelSpan = document.createElement("span");
+      labelSpan.textContent = lvObj.short;
+
+      btn.append(stepBadge, labelSpan);
+      btn.addEventListener("click", () => {
+        // 同じメモリをもう一度押したら未選択(null)に戻す
+        levelStateObj[g.axisId] = levelStateObj[g.axisId] === lvObj.lv ? null : lvObj.lv;
+        onLevelChange(g.axisId, levelStateObj[g.axisId]);
+      });
+      track.appendChild(btn);
+    });
+
+    block.append(head, track);
+    container.appendChild(block);
+  });
+}
+
+/* ① お子様の様子：選択中のゲージ段階から最終文例候補リストを描画 */
+function renderAttitudeCandidates() {
+  const wrap = $("att-candidates-wrap");
+  const listEl = $("att-candidate-list");
+  listEl.textContent = "";
+
+  const activeAxes = ATTITUDE_GAUGES.filter((g) => state.attLevels[g.axisId] !== null);
+  if (!activeAxes.length) {
+    wrap.hidden = true;
+    return;
+  }
+  wrap.hidden = false;
+
+  activeAxes.forEach((g) => {
+    const lv = state.attLevels[g.axisId];
+    const rawList = (bankDB.attitudeBank[g.axisId] && bankDB.attitudeBank[g.axisId][lv]) || [];
+    if (!rawList.length) return;
+
+    // ★お気に入りピン留めされているものを先頭に並べ、ページオフセットで3件ずつ表示
+    const sorted = [...rawList].sort((a, b) => (favList.includes(b) ? 1 : 0) - (favList.includes(a) ? 1 : 0));
+    const pageCount = 3;
+    const start = (state.attPageOffset * pageCount) % sorted.length;
+    const picked = [];
+    for (let i = 0; i < Math.min(pageCount, sorted.length); i++) {
+      picked.push(sorted[(start + i) % sorted.length]);
+    }
+
+    picked.forEach((tpl) => {
+      const expanded = expandTemplate(tpl);
+      const isSelected = state.selectedAttSentences.includes(expanded);
+      const isFav = favList.includes(tpl);
+
+      const row = document.createElement("div");
+      row.className = "cand-row";
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "cand-btn";
+      btn.setAttribute("aria-pressed", String(isSelected));
+
+      const chk = document.createElement("span");
+      chk.className = "cand-check";
+      chk.textContent = "✓";
+
+      const bodyWrap = document.createElement("span");
+      const tag = document.createElement("span");
+      tag.className = "cand-axis-tag";
+      tag.textContent = `${g.title.replace(/^[①②③④]\s*/, "")} Lv.${lv}`;
+      bodyWrap.append(tag, document.createTextNode(expanded));
+
+      btn.append(chk, bodyWrap);
+      btn.addEventListener("click", () => {
+        const idx = state.selectedAttSentences.indexOf(expanded);
+        if (idx >= 0) state.selectedAttSentences.splice(idx, 1);
+        else state.selectedAttSentences.push(expanded);
+        setError("err-attitude", null);
+        renderAttitudeCandidates();
+        updateSectionPreviews();
+        markStale();
+      });
+
+      const favBtn = document.createElement("button");
+      favBtn.type = "button";
+      favBtn.className = "fav-btn";
+      favBtn.setAttribute("aria-pressed", String(isFav));
+      favBtn.setAttribute("aria-label", "お気に入りピン留め");
+      favBtn.textContent = "★";
+      favBtn.addEventListener("click", () => {
+        toggleFavorite(tpl);
+        renderAttitudeCandidates();
+      });
+
+      row.append(btn, favBtn);
+      listEl.appendChild(row);
+    });
+  });
+}
+
+/* ② 授業のポイント：単元別の最終文例候補リストを描画 */
+function renderPointCandidates() {
+  renderAlwaysSelectedPills("pt-approach-pills", APPROACH_FILTERS, () => state.ptApproach, (ap) => {
+    state.ptApproach = ap;
+    state.ptPageOffset = 0;
+    renderPointCandidates();
+  }, true);
+
+  const listEl = $("pt-candidate-list");
+  listEl.textContent = "";
+  const prof = bankDB.categoryPointTemplates[state.cat] || bankDB.categoryPointTemplates.en_infinitive;
+  let pool = prof.points || [];
+  if (state.ptApproach !== "all") {
+    const filtered = pool.filter((p) => p.app === state.ptApproach);
+    if (filtered.length) pool = filtered;
+  }
+
+  // バリエーション切替オフセットで語尾を散らすことも可能
+  const sorted = [...pool].sort((a, b) => (favList.includes(b.text) ? 1 : 0) - (favList.includes(a.text) ? 1 : 0));
+
+  sorted.forEach((pObj) => {
+    let expanded = expandTemplate(pObj.text);
+    if (state.ptPageOffset > 0) {
+      expanded = diversifySentenceEndings(expanded, state.ptPageOffset);
+    }
+    const isSelected = state.selectedPtSentence === expanded;
+    const isFav = favList.includes(pObj.text);
+
+    const row = document.createElement("div");
+    row.className = "cand-row";
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "cand-btn";
+    btn.setAttribute("aria-pressed", String(isSelected));
+
+    const chk = document.createElement("span");
+    chk.className = "cand-check";
+    chk.textContent = "✓";
+
+    const bodyWrap = document.createElement("span");
+    bodyWrap.textContent = expanded;
+
+    btn.append(chk, bodyWrap);
+    btn.addEventListener("click", () => {
+      state.selectedPtSentence = state.selectedPtSentence === expanded ? "" : expanded;
+      setError("err-advice", null);
+      renderPointCandidates();
+      updateSectionPreviews();
+      markStale();
+    });
+
+    const favBtn = document.createElement("button");
+    favBtn.type = "button";
+    favBtn.className = "fav-btn";
+    favBtn.setAttribute("aria-pressed", String(isFav));
+    favBtn.setAttribute("aria-label", "お気に入りピン留め");
+    favBtn.textContent = "★";
+    favBtn.addEventListener("click", () => {
+      toggleFavorite(pObj.text);
+      renderPointCandidates();
+    });
+
+    row.append(btn, favBtn);
+    listEl.appendChild(row);
+  });
+}
+
+/* ③ 所感：選択中の3軸ゲージ段階から最終文例候補リストを描画 */
+function renderImpressionCandidates() {
+  const wrap = $("imp-candidates-wrap");
+  const listEl = $("imp-candidate-list");
+  listEl.textContent = "";
+
+  const activeAxes = IMPRESSION_GAUGES.filter((g) => state.impLevels[g.axisId] !== null);
+  if (!activeAxes.length) {
+    wrap.hidden = true;
+    return;
+  }
+  wrap.hidden = false;
+
+  activeAxes.forEach((g) => {
+    const lv = state.impLevels[g.axisId];
+    const rawList = (bankDB.impressionBank[g.axisId] && bankDB.impressionBank[g.axisId][lv]) || [];
+    if (!rawList.length) return;
+
+    const sorted = [...rawList].sort((a, b) => (favList.includes(b) ? 1 : 0) - (favList.includes(a) ? 1 : 0));
+    const pageCount = 3;
+    const start = (state.impPageOffset * pageCount) % sorted.length;
+    const picked = [];
+    for (let i = 0; i < Math.min(pageCount, sorted.length); i++) {
+      picked.push(sorted[(start + i) % sorted.length]);
+    }
+
+    picked.forEach((tpl) => {
+      const expanded = expandTemplate(tpl);
+      const isSelected = state.selectedImpSentences.includes(expanded);
+      const isFav = favList.includes(tpl);
+
+      const row = document.createElement("div");
+      row.className = "cand-row";
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "cand-btn";
+      btn.setAttribute("aria-pressed", String(isSelected));
+
+      const chk = document.createElement("span");
+      chk.className = "cand-check";
+      chk.textContent = "✓";
+
+      const bodyWrap = document.createElement("span");
+      const tag = document.createElement("span");
+      tag.className = "cand-axis-tag";
+      tag.textContent = `${g.title.replace(/^[①②③]\s*/, "")} Lv.${lv}`;
+      bodyWrap.append(tag, document.createTextNode(expanded));
+
+      btn.append(chk, bodyWrap);
+      btn.addEventListener("click", () => {
+        const idx = state.selectedImpSentences.indexOf(expanded);
+        if (idx >= 0) state.selectedImpSentences.splice(idx, 1);
+        else state.selectedImpSentences.push(expanded);
+        setError("err-impression", null);
+        renderImpressionCandidates();
+        updateSectionPreviews();
+        markStale();
+      });
+
+      const favBtn = document.createElement("button");
+      favBtn.type = "button";
+      favBtn.className = "fav-btn";
+      favBtn.setAttribute("aria-pressed", String(isFav));
+      favBtn.setAttribute("aria-label", "お気に入りピン留め");
+      favBtn.textContent = "★";
+      favBtn.addEventListener("click", () => {
+        toggleFavorite(tpl);
+        renderImpressionCandidates();
+      });
+
+      row.append(btn, favBtn);
+      listEl.appendChild(row);
+    });
+  });
+}
+
+/* 各セクションのテキスト取得とプレビュー更新 */
+function getAttitudeFinalText() {
+  if (state.attMode === "free") return $("attitude-free-text").value.trim();
+  return state.selectedAttSentences.join("");
+}
+
+function getPointFinalText() {
+  if (state.ptMode === "free") return $("point-free-text").value.trim();
+  return state.selectedPtSentence.trim();
+}
+
+function getImpressionFinalText() {
+  if (state.impMode === "free") return $("impression-free-text").value.trim();
+  return state.selectedImpSentences.join("");
+}
+
+function updateSectionPreviews() {
+  const attText = getAttitudeFinalText();
+  $("preview-attitude-text").textContent = attText || "（未選択：上の数直線ゲージから段階をタップして文例を選ぶか、「完全自由記述」で入力してください）";
+  $("preview-attitude").classList.toggle("empty", !attText);
+  $("btn-edit-att-inline").hidden = !attText || state.attMode === "free";
+
+  const ptText = getPointFinalText();
+  $("preview-point-text").textContent = ptText || "（未選択：上の最終文例から1つ選ぶか、「完全自由記述」で入力してください）";
+  $("preview-point").classList.toggle("empty", !ptText);
+  $("btn-edit-pt-inline").hidden = !ptText || state.ptMode === "free";
+
+  const impText = getImpressionFinalText();
+  $("preview-impression-text").textContent = impText || "（未選択：上の数直線ゲージから段階をタップして文例を選ぶか、「完全自由記述」で入力してください）";
+  $("preview-impression").classList.toggle("empty", !impText);
+  $("btn-edit-imp-inline").hidden = !impText || state.impMode === "free";
+}
+
+/* モード切替（文例から選ぶ ⇄ 完全自由記述） */
+function setSectionMode(sec, mode) {
+  if (sec === "att") {
+    if (mode === "free" && !$("attitude-free-text").value.trim() && state.selectedAttSentences.length) {
+      $("attitude-free-text").value = state.selectedAttSentences.join("");
+    }
+    state.attMode = mode;
+    $("mode-att-select").setAttribute("aria-pressed", String(mode === "select"));
+    $("mode-att-free").setAttribute("aria-pressed", String(mode === "free"));
+    $("att-select-pane").hidden = mode !== "select";
+    $("att-free-pane").hidden = mode !== "free";
+  } else if (sec === "pt") {
+    if (mode === "free" && !$("point-free-text").value.trim() && state.selectedPtSentence) {
+      $("point-free-text").value = state.selectedPtSentence;
+    }
+    state.ptMode = mode;
+    $("mode-pt-select").setAttribute("aria-pressed", String(mode === "select"));
+    $("mode-pt-free").setAttribute("aria-pressed", String(mode === "free"));
+    $("pt-select-pane").hidden = mode !== "select";
+    $("pt-free-pane").hidden = mode !== "free";
+  } else if (sec === "imp") {
+    if (mode === "free" && !$("impression-free-text").value.trim() && state.selectedImpSentences.length) {
+      $("impression-free-text").value = state.selectedImpSentences.join("");
+    }
+    state.impMode = mode;
+    $("mode-imp-select").setAttribute("aria-pressed", String(mode === "select"));
+    $("mode-imp-free").setAttribute("aria-pressed", String(mode === "free"));
+    $("imp-select-pane").hidden = mode !== "select";
+    $("imp-free-pane").hidden = mode !== "free";
+  }
+  updateSectionPreviews();
+  markStale();
+}
+
+$("mode-att-select").addEventListener("click", () => setSectionMode("att", "select"));
+$("mode-att-free").addEventListener("click", () => setSectionMode("att", "free"));
+$("btn-edit-att-inline").addEventListener("click", () => {
+  $("attitude-free-text").value = state.selectedAttSentences.join("");
+  setSectionMode("att", "free");
+  $("attitude-free-text").focus();
+});
+
+$("mode-pt-select").addEventListener("click", () => setSectionMode("pt", "select"));
+$("mode-pt-free").addEventListener("click", () => setSectionMode("pt", "free"));
+$("btn-edit-pt-inline").addEventListener("click", () => {
+  $("point-free-text").value = state.selectedPtSentence;
+  setSectionMode("pt", "free");
+  $("point-free-text").focus();
+});
+
+$("mode-imp-select").addEventListener("click", () => setSectionMode("imp", "select"));
+$("mode-imp-free").addEventListener("click", () => setSectionMode("imp", "free"));
+$("btn-edit-imp-inline").addEventListener("click", () => {
+  $("impression-free-text").value = state.selectedImpSentences.join("");
+  setSectionMode("imp", "free");
+  $("impression-free-text").focus();
+});
+
+$("btn-shuffle-att").addEventListener("click", () => {
+  state.attPageOffset += 1;
+  renderAttitudeCandidates();
+});
+$("btn-shuffle-pt").addEventListener("click", () => {
+  state.ptPageOffset += 1;
+  renderPointCandidates();
+});
+$("btn-shuffle-imp").addEventListener("click", () => {
+  state.impPageOffset += 1;
+  renderImpressionCandidates();
+});
+
+/* =========================================================
+   8. 単元チップ＆サジェストと全体同期
+   ========================================================= */
+function getMatchingTrees() {
+  const s = state.subject === "その他" ? "国語" : state.subject;
+  const g = state.grade;
+  let trees = CURRICULUM_TREE.filter((t) => t.s === s && (g === "all" || t.g.includes(g)));
+  if (!trees.length) trees = CURRICULUM_TREE.filter((t) => t.s === s);
+  return trees;
+}
+
+function renderMajorAndMinorChips() {
+  const trees = getMatchingTrees();
+  const majorWrap = $("major-chips");
+  majorWrap.textContent = "";
+
+  const currentMajor = $("unit-major").value.trim();
+  const limit = state.showAllMajors ? trees.length : 10;
+  $("btn-more-majors").hidden = trees.length <= 10;
+  $("btn-more-majors").textContent = state.showAllMajors ? "折りたたむ" : `全${trees.length}単元を表示`;
+
+  trees.slice(0, limit).forEach((t) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip" + (currentMajor === t.major ? " active" : "");
+    b.textContent = t.major;
+    b.addEventListener("click", () => {
+      $("unit-major").value = t.major;
+      $("unit-minor").value = "";
+      setError("err-unit-major", null, $("unit-major"));
+      renderMinorChipsForMajor(t);
+      syncAllDynamicViews();
+      markStale();
+      renderMajorAndMinorChips();
+    });
+    majorWrap.appendChild(b);
+  });
+
+  const activeTree = trees.find((t) => t.major === currentMajor) || trees[0];
+  renderMinorChipsForMajor(activeTree);
+}
+
+function renderMinorChipsForMajor(tree) {
+  const minorWrap = $("minor-chips");
+  minorWrap.textContent = "";
+  if (!tree || !tree.minors || !tree.minors.length) {
+    $("minor-picker-title").textContent = "具体内容（任意）";
+    return;
+  }
+  $("minor-picker-title").textContent = `「${tree.major}」の具体内容（再タップで解除可）`;
+  const currentMinor = $("unit-minor").value.trim();
+
+  tree.minors.forEach((m) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip" + (currentMinor === m ? " active" : "");
+    b.textContent = m;
+    b.addEventListener("click", () => {
+      if ($("unit-minor").value.trim() === m) {
+        $("unit-minor").value = "";
+      } else {
+        $("unit-minor").value = m;
+        if (!$("unit-major").value.trim()) {
+          $("unit-major").value = tree.major;
+          setError("err-unit-major", null, $("unit-major"));
+        }
+      }
+      syncAllDynamicViews();
+      renderMinorChipsForMajor(tree);
+      markStale();
+    });
+    minorWrap.appendChild(b);
+  });
+}
+
+function syncAllDynamicViews() {
+  state.cat = resolveActiveCategory();
+  const prof = bankDB.categoryPointTemplates[state.cat] || bankDB.categoryPointTemplates.en_infinitive;
+  const counts = countTotalTemplates();
+  $("bank-count-badge").textContent = `文例バンク：基本${counts.baseCount}種（単元展開${counts.expandedCount}+通り）`;
+  $("active-cat-badge").textContent = `単元連動：${prof.name}`;
+
+  function onAttLevelChange() {
+    state.attPageOffset = 0;
+    renderNumberLineGauges("att-gauges-container", ATTITUDE_GAUGES, state.attLevels, onAttLevelChange);
+    renderAttitudeCandidates();
+  }
+  renderNumberLineGauges("att-gauges-container", ATTITUDE_GAUGES, state.attLevels, onAttLevelChange);
+  renderAttitudeCandidates();
+
+  renderPointCandidates();
+
+  function onImpLevelChange() {
+    state.impPageOffset = 0;
+    renderNumberLineGauges("imp-gauges-container", IMPRESSION_GAUGES, state.impLevels, onImpLevelChange);
+    renderImpressionCandidates();
+  }
+  renderNumberLineGauges("imp-gauges-container", IMPRESSION_GAUGES, state.impLevels, onImpLevelChange);
+  renderImpressionCandidates();
+
+  updateSectionPreviews();
+}
+
+function renderStaticControls() {
+  renderAlwaysSelectedPills("grade-pills", GRADES, () => state.grade, (gid) => {
+    state.grade = gid;
+    if (["e13", "e4", "e5", "e6"].includes(gid) && state.subject === "数学") {
+      state.subject = "算数";
+      renderStaticControls();
+    } else if (["j1", "j2", "j3", "h1", "h2", "h3"].includes(gid) && state.subject === "算数") {
+      state.subject = "数学";
+      renderStaticControls();
+    }
+    renderMajorAndMinorChips();
+    syncAllDynamicViews();
+  }, true);
+
+  renderAlwaysSelectedPills("subject-pills", SUBJECTS, () => state.subject, (sid) => {
+    state.subject = sid;
+    $("custom-subject-wrap").hidden = sid !== "その他";
+    $("unit-major").value = "";
+    $("unit-minor").value = "";
+    state.selectedPtSentence = "";
+    setError("err-subject", null);
+    renderMajorAndMinorChips();
+    syncAllDynamicViews();
+    renderHomeworkChips();
+  });
+
+  renderHomeworkChips();
+}
+
+function renderHomeworkChips() {
+  const wrap = $("homework-chips");
+  wrap.textContent = "";
+  const hwBySubj = {
+    "英語": ["ワークp.80リピート、81リピート", "英単語ノート練習1ページ", "本文の音読5回と復習", "プリント1枚"],
+    "数学": ["ワークp.〜リピート", "プリント1枚", "本日のまちがい直し", "計算演習ノート1ページ"],
+    "国語": ["ワークp.〜リピート", "漢字練習ノート1ページ", "本日の読解問題の解き直し", "プリント1枚"],
+    "算数": ["ワークp.〜リピート", "計算ドリル1ページ", "プリント1枚", "本日のまちがい直し"],
+    "理科": ["ワークp.〜リピート", "重要用語の一問一答プリント", "本日の計算・実験問題の解き直し"],
+    "社会": ["ワークp.〜リピート", "重要用語の漢字練習・一問一答", "白地図・年表の復習"]
+  };
+  const examples = hwBySubj[state.subject] || hwBySubj["英語"];
+  const lab = document.createElement("span");
+  lab.className = "chips-label";
+  lab.textContent = "定型タップ挿入:";
+  wrap.appendChild(lab);
+  examples.forEach((ex) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = ex;
+    b.addEventListener("click", () => {
+      const target = $("homework");
+      target.value = target.value.trim() ? `${target.value.trim()}、${ex}` : ex;
+      markStale();
+    });
+    wrap.appendChild(b);
+  });
+}
+
+/* 予測変換サジェスト */
+const fold = (str) => (str || "").normalize("NFKC").toLowerCase();
+
+function setupMajorSuggest() {
+  const input = $("unit-major");
+  const box = $("suggest-major");
+  const hide = () => { box.hidden = true; box.textContent = ""; };
+  const show = () => {
+    const tokens = fold(input.value).split(/\s+/).filter(Boolean);
+    const pool = CURRICULUM_TREE.filter((t) => {
+      if (!tokens.length) return t.s === state.subject;
+      const hay = fold(`${t.s} ${t.major} ${t.minors.join(" ")}`);
+      return tokens.every((tk) => hay.includes(tk));
+    });
+    pool.sort((a, b) => (b.s === state.subject ? 1 : 0) - (a.s === state.subject ? 1 : 0));
+    const hits = pool.slice(0, 8);
+    box.textContent = "";
+    if (!hits.length) { hide(); return; }
+
+    hits.forEach((t) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      const s1 = document.createElement("span");
+      s1.textContent = t.major;
+      const s2 = document.createElement("span");
+      s2.className = "suggest-meta";
+      s2.textContent = t.s;
+      b.append(s1, s2);
+      b.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        input.value = t.major;
+        $("unit-minor").value = "";
+        setError("err-unit-major", null, input);
+        renderMinorChipsForMajor(t);
+        syncAllDynamicViews();
+        markStale();
+        hide();
+      });
+      box.appendChild(b);
+    });
+    box.hidden = false;
+  };
+  input.addEventListener("input", show);
+  input.addEventListener("focus", show);
+  input.addEventListener("blur", () => setTimeout(hide, 140));
+}
+
+function setupMinorSuggest() {
+  const input = $("unit-minor");
+  const box = $("suggest-minor");
+  const hide = () => { box.hidden = true; box.textContent = ""; };
+  const show = () => {
+    const tokens = fold(input.value).split(/\s+/).filter(Boolean);
+    const currentMajor = $("unit-major").value.trim();
+    const candidates = [];
+    CURRICULUM_TREE.forEach((t) => {
+      if (t.s !== state.subject && state.subject !== "その他") return;
+      t.minors.forEach((m) => {
+        const hay = fold(`${t.major} ${m}`);
+        if (!tokens.length || tokens.every((tk) => hay.includes(tk))) {
+          candidates.push({ major: t.major, minor: m, priority: t.major === currentMajor ? 2 : 1 });
+        }
+      });
+    });
+    candidates.sort((a, b) => b.priority - a.priority);
+    const hits = candidates.filter((c) => c.minor !== input.value.trim()).slice(0, 10);
+    box.textContent = "";
+    if (!hits.length) { hide(); return; }
+
+    hits.forEach((c) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      const s1 = document.createElement("span");
+      s1.textContent = c.minor;
+      const s2 = document.createElement("span");
+      s2.className = "suggest-meta";
+      s2.textContent = c.major;
+      b.append(s1, s2);
+      b.addEventListener("pointerdown", (e) => {
+        e.preventDefault();
+        input.value = c.minor;
+        if (!$("unit-major").value.trim()) {
+          $("unit-major").value = c.major;
+          setError("err-unit-major", null, $("unit-major"));
+        }
+        syncAllDynamicViews();
+        markStale();
+        hide();
+      });
+      box.appendChild(b);
+    });
+    box.hidden = false;
+  };
+  input.addEventListener("input", show);
+  input.addEventListener("focus", show);
+  input.addEventListener("blur", () => setTimeout(hide, 140));
+}
+
+/* =========================================================
+   9. 報告書テキスト組み立て＆バリデーション
+   ========================================================= */
+function fitWithin500Chars(text) {
+  if (text.length <= MAX_REPORT_CHARS) return text;
+  let s = text;
+  const trims = [
+    ["指導させていただきました。", "指導いたしました。"],
+    ["アドバイスいたしました。", "伝えました。"],
+    ["身に付けていければと思います。", "定着させてまいります。"]
+  ];
+  for (const [from, to] of trims) {
+    if (s.length <= MAX_REPORT_CHARS) break;
+    s = s.replace(from, to);
+  }
+  if (s.length > MAX_REPORT_CHARS) {
+    s = s.slice(0, MAX_REPORT_CHARS - 1).replace(/[、。]?$/, "。");
+  }
+  return s;
+}
+
+function buildReportText() {
+  const name = $("student-name").value.trim();
+  const honorific = $("student-honorific").value;
+  const subject = state.subject === "その他" ? ($("custom-subject").value.trim() || "個別指導") : state.subject;
+  const unitPhrase = buildUnitTitlePhrase($("unit-major").value, $("unit-minor").value);
+
+  const attText = getAttitudeFinalText();
+  const ptText = getPointFinalText();
+  const impText = getImpressionFinalText();
+  const hw = cleanClause($("homework").value);
+
+  const blocks = [];
+  if (name) {
+    blocks.push(`生徒名：${name} ${honorific}の報告書`);
+  }
+  blocks.push(`本日は${subject}の${unitPhrase}について指導させていただきました。\n以下授業報告です。`);
+  if (attText) {
+    blocks.push(`お子様の様子：\n${attText}`);
+  }
+  if (ptText) {
+    blocks.push(`授業のポイント：\n${ptText}`);
+  }
+  if (impText) {
+    blocks.push(`所感：\n${impText}`);
+  }
+  if (hw) {
+    blocks.push(`宿題：\n${hw}`);
+  }
+  return fitWithin500Chars(blocks.join("\n\n"));
+}
+
+function setError(errId, msg, inputEl) {
+  const el = $(errId);
+  if (el) el.textContent = msg || "";
+  if (inputEl) {
+    if (msg) inputEl.setAttribute("aria-invalid", "true");
+    else inputEl.removeAttribute("aria-invalid");
+  }
+}
+
+function validateForm() {
+  const problems = [];
+  const majEl = $("unit-major");
+
+  if (state.subject === "その他" && !$("custom-subject").value.trim()) {
+    setError("err-subject", "教科名を入力してください。", $("custom-subject"));
+    problems.push({ el: $("custom-subject"), msg: "教科名が未入力です" });
+  } else {
+    setError("err-subject", null, $("custom-subject"));
+  }
+
+  if (!majEl.value.trim() && !$("unit-minor").value.trim()) {
+    setError("err-unit-major", "単元を選択または入力してください。", majEl);
+    problems.push({ el: majEl, msg: "本日の単元が未選択です" });
+  } else {
+    setError("err-unit-major", null, majEl);
+  }
+
+  if (!getAttitudeFinalText()) {
+    setError("err-attitude", "「お子様の様子」のゲージから文例を選ぶか、完全自由記述で入力してください。");
+    problems.push({ el: $("mode-att-select"), msg: "「お子様の様子」が未選択です" });
+  } else {
+    setError("err-attitude", null);
+  }
+
+  if (!getPointFinalText()) {
+    setError("err-advice", "「授業のポイント」の文例を1つ選ぶか、完全自由記述で入力してください。");
+    problems.push({ el: $("mode-pt-select"), msg: "「授業のポイント」が未選択です" });
+  } else {
+    setError("err-advice", null);
+  }
+
+  if (!getImpressionFinalText()) {
+    setError("err-impression", "「所感」のゲージから文例を選ぶか、完全自由記述で入力してください。");
+    problems.push({ el: $("mode-imp-select"), msg: "「所感」が未選択です" });
+  } else {
+    setError("err-impression", null);
+  }
+
+  const sum = $("summary");
+  if (!problems.length) {
+    sum.hidden = true;
+    sum.textContent = "";
+  } else {
+    sum.textContent = `未選択・未入力の項目があります（${problems.length}件）`;
+    const ul = document.createElement("ul");
+    problems.forEach((p) => {
+      const li = document.createElement("li");
+      li.textContent = p.msg;
+      ul.appendChild(li);
+    });
+    sum.appendChild(ul);
+    sum.hidden = false;
+  }
+  return problems;
+}
+
+function validateFormSilent() {
+  const hasUnit = Boolean($("unit-major").value.trim() || $("unit-minor").value.trim());
+  return !(hasUnit && getAttitudeFinalText() && getPointFinalText() && getImpressionFinalText());
+}
+
+/* =========================================================
+   10. 文例バンク確認・編集ページ（VIEW 2）
+   ========================================================= */
+const EDITOR_SCOPES = [
+  { id: "attitude", label: "① お子様の様子バンク（4軸×5段階）" },
+  { id: "point", label: "② 授業のポイントバンク（単元別）" },
+  { id: "impression", label: "③ 所感バンク（3軸×5段階）" }
+];
+
+function renderEditorView() {
+  const counts = countTotalTemplates();
+  $("editor-main-title").textContent = `文例バンクの確認・編集（基本${counts.baseCount}文例／単元展開${counts.expandedCount}+通り）`;
+
+  renderAlwaysSelectedPills("editor-scope-pills", EDITOR_SCOPES, () => state.editorScope, (sc) => {
+    state.editorScope = sc;
+    if (sc === "attitude") state.editorAxis = "focus";
+    if (sc === "impression") state.editorAxis = "understand";
+    renderEditorSubfilters();
+    renderEditorContentArea();
+  }, true);
+
+  renderEditorSubfilters();
+  renderEditorContentArea();
+}
+
+function renderEditorSubfilters() {
+  const wrap = $("editor-subfilter-wrap");
+  wrap.textContent = "";
+
+  if (state.editorScope === "attitude" || state.editorScope === "impression") {
+    const gauges = state.editorScope === "attitude" ? ATTITUDE_GAUGES : IMPRESSION_GAUGES;
+    const l1 = document.createElement("span");
+    l1.className = "section-label";
+    l1.textContent = "2. ゲージ軸と段階（Lv.1 ポジティブ ➔ Lv.5 要フォロー）を選択";
+    wrap.appendChild(l1);
+
+    const axisPills = document.createElement("div");
+    axisPills.className = "pills";
+    axisPills.id = "editor-axis-pills";
+    wrap.appendChild(axisPills);
+
+    renderAlwaysSelectedPills("editor-axis-pills", gauges.map((g) => ({ id: g.axisId, label: g.title })), () => state.editorAxis, (ax) => {
+      state.editorAxis = ax;
+      renderEditorContentArea();
+    }, true);
+
+    const activeGauge = gauges.find((g) => g.axisId === state.editorAxis) || gauges[0];
+    const lvPills = document.createElement("div");
+    lvPills.className = "pills";
+    lvPills.id = "editor-lv-pills";
+    lvPills.style.marginTop = "6px";
+    wrap.appendChild(lvPills);
+
+    renderAlwaysSelectedPills("editor-lv-pills", activeGauge.levels.map((l) => ({ id: String(l.lv), label: `Lv.${l.lv}: ${l.short}` })), () => String(state.editorLevel), (lvStr) => {
+      state.editorLevel = Number(lvStr);
+      renderEditorContentArea();
+    }, true);
+    return;
+  }
+
+  // point
+  const l1 = document.createElement("span");
+  l1.className = "section-label";
+  l1.textContent = "2. 単元カテゴリを選択";
+  wrap.appendChild(l1);
+
+  const catPills = document.createElement("div");
+  catPills.className = "pills";
+  catPills.id = "editor-cat-pills";
+  wrap.appendChild(catPills);
+
+  const catItems = Object.entries(bankDB.categoryPointTemplates).map(([cid, obj]) => ({
+    id: cid,
+    label: obj.name
+  }));
+  renderAlwaysSelectedPills("editor-cat-pills", catItems, () => state.editorCat, (cid) => {
+    state.editorCat = cid;
+    renderEditorContentArea();
+  }, true);
+}
+
+function renderEditorContentArea() {
+  const area = $("editor-content-area");
+  area.textContent = "";
+
+  if (state.editorScope === "attitude" || state.editorScope === "impression") {
+    const bankObj = state.editorScope === "attitude" ? bankDB.attitudeBank : bankDB.impressionBank;
+    const listRef = bankObj[state.editorAxis][state.editorLevel];
+    const group = document.createElement("div");
+    group.className = "editor-group";
+    const h = document.createElement("div");
+    h.className = "card-title";
+    h.style.fontSize = ".92rem";
+    h.textContent = `登録文例一覧（${listRef.length}件） ※ {topic} には選択した単元名が自動で入ります`;
+    group.appendChild(h);
+
+    listRef.forEach((txt, idx) => {
+      const row = document.createElement("div");
+      row.className = "editor-item";
+      const head = document.createElement("div");
+      head.className = "editor-item-head";
+      const sp = document.createElement("span");
+      sp.textContent = `文例 #${idx + 1}`;
+      const del = document.createElement("button");
+      del.type = "button";
+      del.className = "del-btn";
+      del.textContent = "削除";
+      del.addEventListener("click", () => {
+        listRef.splice(idx, 1);
+        saveBankDB();
+        renderEditorView();
+      });
+      head.append(sp, del);
+
+      const ta = document.createElement("textarea");
+      ta.value = txt;
+      ta.addEventListener("input", () => {
+        listRef[idx] = ta.value;
+        saveBankDB();
+      });
+      row.append(head, ta);
+      group.appendChild(row);
+    });
+
+    const addBtn = document.createElement("button");
+    addBtn.type = "button";
+    addBtn.className = "add-row-btn";
+    addBtn.textContent = "＋ この段階に新しい文例を追加";
+    addBtn.addEventListener("click", () => {
+      listRef.push("新しい文例を入力してください（{topic}と書くと単元名に置き換わります）。");
+      saveBankDB();
+      renderEditorView();
+      showToast("文例を追加しました");
+    });
+    group.appendChild(addBtn);
+    area.appendChild(group);
+    return;
+  }
+
+  // point
+  const prof = bankDB.categoryPointTemplates[state.editorCat];
+  if (!prof) return;
+  const listRef = prof.points;
+  const group = document.createElement("div");
+  group.className = "editor-group";
+  const h = document.createElement("div");
+  h.className = "card-title";
+  h.style.fontSize = ".92rem";
+  h.textContent = `【${prof.name}】授業のポイント文例（${listRef.length}件）`;
+  group.appendChild(h);
+
+  listRef.forEach((pObj, idx) => {
+    const row = document.createElement("div");
+    row.className = "editor-item";
+    const head = document.createElement("div");
+    head.className = "editor-item-head";
+    const sp = document.createElement("span");
+    sp.textContent = `ポイント文例 #${idx + 1}`;
+    const del = document.createElement("button");
+    del.type = "button";
+    del.className = "del-btn";
+    del.textContent = "削除";
+    del.addEventListener("click", () => {
+      listRef.splice(idx, 1);
+      saveBankDB();
+      renderEditorView();
+    });
+    head.append(sp, del);
+
+    const ta = document.createElement("textarea");
+    ta.value = pObj.text;
+    ta.addEventListener("input", () => {
+      pObj.text = ta.value;
+      saveBankDB();
+    });
+    row.append(head, ta);
+    group.appendChild(row);
+  });
+
+  const addBtn = document.createElement("button");
+  addBtn.type = "button";
+  addBtn.className = "add-row-btn";
+  addBtn.textContent = "＋ この単元に新しいポイント文例を追加";
+  addBtn.addEventListener("click", () => {
+    listRef.push({ app: "rule", text: "{topic}では〜がポイントです。〜ようアドバイスいたしました。" });
+    saveBankDB();
+    renderEditorView();
+    showToast("ポイント文例を追加しました");
+  });
+  group.appendChild(addBtn);
+  area.appendChild(group);
+}
+
+/* =========================================================
+   11. 出力メーター・語尾チェック・イベントハンドラ
+   ========================================================= */
+function updateOutCount() {
+  const text = $("output-text").value;
+  const len = text.length;
+  const countEl = $("out-count");
+  const fillEl = $("meter-fill");
+  const trimBtn = $("btn-trim-500");
+
+  countEl.textContent = `${len} / ${MAX_REPORT_CHARS}文字`;
+  const pct = Math.min(100, Math.round((len / MAX_REPORT_CHARS) * 100));
+  fillEl.style.width = `${pct}%`;
+
+  countEl.classList.remove("warn", "over");
+  fillEl.classList.remove("warn", "over");
+  if (len > MAX_REPORT_CHARS) {
+    countEl.classList.add("over");
+    fillEl.classList.add("over");
+    trimBtn.hidden = false;
+  } else if (len >= 450) {
+    countEl.classList.add("warn");
+    fillEl.classList.add("warn");
+    trimBtn.hidden = true;
+  } else {
+    trimBtn.hidden = true;
+  }
+
+  const dupKey = hasDuplicateEndings(text);
+  const notice = $("ending-notice");
+  if (dupKey) {
+    notice.hidden = false;
+    $("ending-notice-text").textContent = `「〜${dupKey}。」の文末が複数回重なっています。`;
+  } else {
+    notice.hidden = true;
+  }
+}
+
+function renderRecentChips() {
+  const nameBox = $("recent-names");
+  nameBox.textContent = "";
+  nameBox.hidden = state.recentNames.length === 0;
+  if (state.recentNames.length) {
+    const lab = document.createElement("span");
+    lab.className = "chips-label";
+    lab.textContent = "最近の生徒:";
+    nameBox.appendChild(lab);
+    state.recentNames.forEach((n) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      b.textContent = n;
+      b.addEventListener("click", () => {
+        $("student-name").value = n;
+        markStale();
+      });
+      nameBox.appendChild(b);
+    });
+  }
+
+  const unitBox = $("recent-units");
+  unitBox.textContent = "";
+  unitBox.hidden = state.recentUnits.length === 0;
+  if (state.recentUnits.length) {
+    const lab = document.createElement("span");
+    lab.className = "chips-label";
+    lab.textContent = "最近の単元:";
+    unitBox.appendChild(lab);
+    state.recentUnits.forEach((uStr) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      b.textContent = uStr;
+      b.addEventListener("click", () => {
+        const [maj, min] = uStr.split("｜");
+        $("unit-major").value = maj || "";
+        $("unit-minor").value = min || "";
+        setError("err-unit-major", null, $("unit-major"));
+        renderMajorAndMinorChips();
+        syncAllDynamicViews();
+        markStale();
+      });
+      unitBox.appendChild(b);
+    });
+  }
+}
+
+let modalCallback = null;
+function askConfirm(message, onOk) {
+  $("modal-msg").textContent = message;
+  modalCallback = onOk;
+  $("modal-backdrop").hidden = false;
+  $("modal-ok").focus();
+}
+function closeModal() {
+  $("modal-backdrop").hidden = true;
+  modalCallback = null;
+}
+$("modal-cancel").addEventListener("click", closeModal);
+$("modal-ok").addEventListener("click", () => {
+  const fn = modalCallback;
+  closeModal();
+  if (fn) fn();
+});
+$("modal-backdrop").addEventListener("click", (e) => {
+  if (e.target === $("modal-backdrop")) closeModal();
+});
+
+function markStale() {
+  if (!state.hasOutput) return;
+  if (!state.outEdited && !validateFormSilent()) {
+    $("output-text").value = buildReportText();
+    updateOutCount();
+  }
+}
+
+function executeGenerate() {
+  let text = buildReportText();
+  // 生成時に同じ文末が重なっていれば自動で語尾を散らす
+  if (hasDuplicateEndings(text)) {
+    text = diversifySentenceEndings(text, 1);
+  }
+  $("output-text").value = text;
+  updateOutCount();
+  state.hasOutput = true;
+  state.outEdited = false;
+  state.copied = false;
+  $("btn-copy").disabled = false;
+  $("btn-next").disabled = false;
+  $("btn-generate").textContent = "報告書を再作成する";
+
+  rememberItem(state.recentNames, $("student-name").value, 5);
+  const unitPair = [$("unit-major").value.trim(), $("unit-minor").value.trim()].filter(Boolean).join("｜");
+  rememberItem(state.recentUnits, unitPair, 6);
+  saveRecentUnits(state.recentUnits);
+  renderRecentChips();
+
+  $("output-text").scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+function onGenerateClick() {
+  const problems = validateForm();
+  if (problems.length) {
+    problems[0].el.focus();
+    problems[0].el.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+  if (state.hasOutput && state.outEdited) {
+    askConfirm("手直しした文章が上書きされます。よろしいですか？", executeGenerate);
+    return;
+  }
+  executeGenerate();
+}
+
+let diversifySeed = 1;
+function runDiversifyOnOutput() {
+  if (!$("output-text").value.trim()) return;
+  diversifySeed += 1;
+  $("output-text").value = diversifySentenceEndings($("output-text").value, diversifySeed);
+  updateOutCount();
+  showToast("文末の語尾を別パターンに散らしました");
+}
+
+$("btn-diversify-endings").addEventListener("click", runDiversifyOnOutput);
+$("btn-fix-ending-now").addEventListener("click", runDiversifyOnOutput);
+
+async function copyTextToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    try { await navigator.clipboard.writeText(text); return true; } catch (e) { /* fallback */ }
+  }
+  try {
+    const out = $("output-text");
+    out.readOnly = true;
+    out.focus();
+    out.select();
+    out.setSelectionRange(0, text.length + 1);
+    const ok = document.execCommand("copy");
+    window.getSelection().removeAllRanges();
+    out.blur();
+    out.readOnly = false;
+    return ok;
+  } catch (e) {
+    return false;
+  }
+}
+
+let copyTimer = null;
+async function onCopyClick() {
+  const out = $("output-text");
+  const btn = $("btn-copy");
+  if (!out.value || btn.disabled) return;
+  const ok = await copyTextToClipboard(out.value);
+  clearTimeout(copyTimer);
+  btn.classList.remove("done", "fail");
+  if (ok) {
+    state.copied = true;
+    btn.textContent = "コピーしました ✓";
+    btn.classList.add("done");
+    $("copy-status").textContent = "コピーしました";
+  } else {
+    btn.textContent = "コピー失敗（本文を長押しして選択してください）";
+    btn.classList.add("fail");
+    $("copy-status").textContent = "コピーに失敗しました";
+  }
+  copyTimer = setTimeout(() => {
+    btn.textContent = "テキストをコピー";
+    btn.classList.remove("done", "fail");
+    $("copy-status").textContent = "";
+  }, 2400);
+}
+
+function clearStudentSelections() {
+  state.attLevels = { focus: null, question: null, note: null, homework: null };
+  state.impLevels = { understand: null, accuracy: null, closing: null };
+  state.selectedAttSentences = [];
+  state.selectedPtSentence = "";
+  state.selectedImpSentences = [];
+  state.attMode = "select";
+  state.ptMode = "select";
+  state.impMode = "select";
+
+  $("student-name").value = "";
+  $("attitude-free-text").value = "";
+  $("point-free-text").value = "";
+  $("impression-free-text").value = "";
+  $("homework").value = "";
+  $("output-text").value = "";
+  updateOutCount();
+
+  setSectionMode("att", "select");
+  setSectionMode("pt", "select");
+  setSectionMode("imp", "select");
+
+  state.hasOutput = false;
+  state.outEdited = false;
+  state.copied = false;
+  $("btn-copy").disabled = true;
+  $("btn-next").disabled = true;
+  $("btn-generate").textContent = "報告書を作成する";
+
+  ["err-subject", "err-unit-major", "err-attitude", "err-advice", "err-impression"].forEach((id) => setError(id, null));
+  $("summary").hidden = true;
+  syncAllDynamicViews();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function onNextStudentClick() {
+  if (state.hasOutput && !state.copied) {
+    askConfirm("現在の報告書がまだコピーされていません。次の生徒の入力へ進みますか？", clearStudentSelections);
+    return;
+  }
+  clearStudentSelections();
+}
+
+function onResetAllClick() {
+  const doReset = () => {
+    $("unit-major").value = "";
+    $("unit-minor").value = "";
+    $("custom-subject").value = "";
+    state.grade = "all";
+    state.subject = "英語";
+    $("custom-subject-wrap").hidden = true;
+    renderStaticControls();
+    renderMajorAndMinorChips();
+    clearStudentSelections();
+  };
+  if (
+    $("student-name").value ||
+    $("unit-major").value ||
+    getAttitudeFinalText() ||
+    getPointFinalText() ||
+    getImpressionFinalText() ||
+    $("output-text").value
+  ) {
+    askConfirm("すべての選択状態と入力内容を消去し、未選択状態に戻します。よろしいですか？", doReset);
+  } else {
+    doReset();
+  }
+}
+
+/* タブ切替 */
+function switchTab(target) {
+  const isGen = target === "generator";
+  $("tab-generator").setAttribute("aria-selected", String(isGen));
+  $("tab-editor").setAttribute("aria-selected", String(!isGen));
+  $("view-generator").hidden = !isGen;
+  $("view-editor").hidden = isGen;
+  if (!isGen) {
+    state.editorCat = state.cat;
+    renderEditorView();
+  } else {
+    syncAllDynamicViews();
+  }
+}
+
+$("tab-generator").addEventListener("click", () => switchTab("generator"));
+$("tab-editor").addEventListener("click", () => switchTab("editor"));
+
+/* JSON書き出し・読み込み・初期化 */
+$("btn-export-config").addEventListener("click", () => {
+  const d = new Date();
+  const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}`;
+  const fileName = `report_app_bank_${ymd}.json`;
+  const jsonStr = JSON.stringify(bankDB, null, 2);
+  const blob = new Blob([jsonStr], { type: "application/json" });
+  const file = new File([blob], fileName, { type: "application/json" });
+
+  if (window.location.protocol === "file:" && navigator.canShare && navigator.canShare({ files: [file] })) {
+    navigator.share({ files: [file], title: fileName }).catch(() => {});
+    return;
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast("文例バンクJSONを保存しました");
+});
+
+$("btn-import-config").addEventListener("click", () => {
+  $("file-import-config").click();
+});
+
+$("file-import-config").addEventListener("change", (e) => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(String(reader.result));
+      const def = buildDefaultBank();
+      bankDB = {
+        attitudeBank: Object.assign({}, def.attitudeBank, parsed.attitudeBank || {}),
+        categoryPointTemplates: Object.assign({}, def.categoryPointTemplates, parsed.categoryPointTemplates || {}),
+        impressionBank: Object.assign({}, def.impressionBank, parsed.impressionBank || {})
+      };
+      saveBankDB();
+      renderEditorView();
+      syncAllDynamicViews();
+      showToast("文例バンクを読み込みました");
+    } catch (err) {
+      showToast("JSONの読み込みに失敗しました");
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+});
+
+$("btn-reset-config").addEventListener("click", () => {
+  askConfirm("編集・追加した文例バンクを初期状態に戻します。よろしいですか？", () => {
+    bankDB = buildDefaultBank();
+    saveBankDB();
+    renderEditorView();
+    syncAllDynamicViews();
+    showToast("初期設定に戻しました");
+  });
+});
+
+/* 初期化 */
+renderStaticControls();
+renderMajorAndMinorChips();
+syncAllDynamicViews();
+setupMajorSuggest();
+setupMinorSuggest();
+renderRecentChips();
+
+$("btn-more-majors").addEventListener("click", () => {
+  state.showAllMajors = !state.showAllMajors;
+  renderMajorAndMinorChips();
+});
+
+$("btn-trim-500").addEventListener("click", () => {
+  $("output-text").value = fitWithin500Chars($("output-text").value);
+  updateOutCount();
+});
+
+$("btn-generate").addEventListener("click", onGenerateClick);
+$("btn-copy").addEventListener("click", onCopyClick);
+$("btn-next").addEventListener("click", onNextStudentClick);
+$("btn-reset").addEventListener("click", onResetAllClick);
+
+$("form").addEventListener("input", (e) => {
+  const t = e.target;
+  if (t.id === "attitude-free-text") setError("err-attitude", null);
+  if (t.id === "point-free-text") setError("err-advice", null);
+  if (t.id === "impression-free-text") setError("err-impression", null);
+  if (t.id === "unit-major" || t.id === "unit-minor") {
+    setError("err-unit-major", null, $("unit-major"));
+    renderMajorAndMinorChips();
+    syncAllDynamicViews();
+  }
+  updateSectionPreviews();
+  markStale();
+});
+
+$("output-text").addEventListener("input", () => {
+  state.outEdited = true;
+  state.copied = false;
+  updateOutCount();
+});
+</script>
+</body>
+</html>
