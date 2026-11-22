@@ -639,7 +639,7 @@
   }
   .live-preview-box textarea {
     margin-top: 2px;
-    min-height: 84px;
+    min-height: 150px;
     background: var(--card);
     border: 1.5px solid var(--line);
     border-radius: 7px;
@@ -1114,7 +1114,193 @@
     margin-bottom: 12px;
   }
   #output-text {
-    min-height: 310px;
+    min-height: 440px;
+  }
+  #preview-point-text {
+    min-height: 180px;
+  }
+  @media (max-width: 768px) {
+    .live-preview-box textarea {
+      min-height: 180px;
+    }
+    #preview-point-text {
+      min-height: 210px;
+    }
+    #output-text {
+      min-height: 540px;
+    }
+  }
+
+
+  /* =========================================================
+     授業の様子：3カテゴリ・キーワードチップ選択UI
+     ========================================================= */
+  .att-chip-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .att-chip-group {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .att-chip-group.grp-good { border-left: 4px solid var(--ok); }
+  .att-chip-group.grp-issue { border-left: 4px solid var(--warn); }
+  .att-chip-group.grp-unit { border-left: 4px solid var(--accent); }
+  .att-chip-group-title {
+    font-size: .8rem;
+    font-weight: 800;
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .att-chip-group.grp-good .att-chip-group-title { color: var(--ok); }
+  .att-chip-group.grp-issue .att-chip-group-title { color: var(--warn); }
+  .att-chip-group.grp-unit .att-chip-group-title { color: var(--accent); }
+  .att-kw-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .att-kw-chip {
+    font: inherit;
+    font-size: .78rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1.5px solid var(--line);
+    background: var(--field-bg);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background .12s, border-color .12s, color .12s;
+    line-height: 1.3;
+  }
+  .att-kw-chip:hover { border-color: var(--accent); }
+  .att-chip-group.grp-good .att-kw-chip[aria-pressed="true"] {
+    background: var(--ok-soft);
+    border-color: var(--ok);
+    color: var(--ok);
+    font-weight: 800;
+  }
+  .att-chip-group.grp-issue .att-kw-chip[aria-pressed="true"] {
+    background: var(--warn-soft);
+    border-color: var(--warn);
+    color: var(--warn);
+    font-weight: 800;
+  }
+  .att-chip-group.grp-unit .att-kw-chip[aria-pressed="true"] {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 800;
+  }
+  .att-unit-subhead {
+    font-size: .74rem;
+    font-weight: 700;
+    color: var(--muted);
+    margin: 6px 0 4px;
+  }
+  .att-unit-subhead:first-of-type { margin-top: 0; }
+  .att-selected-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--field-bg);
+    border: 1px dashed var(--line);
+    align-items: center;
+  }
+  .att-selected-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 3px 6px 3px 9px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+  }
+  .att-selected-pill button {
+    font: inherit;
+    font-size: .7rem;
+    font-weight: 700;
+    border: 0;
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 2px 6px;
+    cursor: pointer;
+    line-height: 1.2;
+  }
+  .att-kw-chip.has-picked {
+    border-style: solid;
+    font-weight: 700;
+  }
+  .att-kw-chip .kw-cnt {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    margin-left: 4px;
+    border-radius: 999px;
+    font-size: .68rem;
+    font-weight: 800;
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  .att-chip-group.grp-good .att-kw-chip .kw-cnt { background: var(--ok); color: #fff; }
+  .att-chip-group.grp-issue .att-kw-chip .kw-cnt { background: var(--warn); color: #fff; }
+  .att-cand-panel {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--card);
+    border: 1.5px solid var(--accent);
+  }
+  .att-cand-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: .8rem;
+    font-weight: 800;
+    color: var(--accent);
+    flex-wrap: wrap;
+  }
+  .att-cand-subgroup {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--line);
+  }
+  .att-cand-subgroup:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .att-cand-subgroup-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    margin-bottom: 6px;
+    font-size: .78rem;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .att-selected-pill button:hover {
+    background: var(--accent);
+    color: var(--accent-ink);
   }
 
 </style>
@@ -1207,7 +1393,7 @@
              ========================================== -->
         <div class="step-box" id="step-box-att">
           <div class="step-title">
-            <span><span class="step-num">1</span>授業の様子<span class="sub-hint">（その日伝えたい2項目を選択推奨）</span><span class="sub-hint" id="att-subj-hint"></span></span>
+            <span><span class="step-num">1</span>授業の様子<span class="sub-hint">（キーワードから2項目を選択推奨）</span><span class="sub-hint" id="att-subj-hint"></span></span>
           </div>
 
           <div id="att-select-pane">
@@ -1226,8 +1412,8 @@
             <div class="live-preview-head">
               <label class="live-preview-label" for="preview-attitude-text">【授業の様子 出力内容】</label>
             </div>
-            <div class="edit-recommend-banner" id="att-edit-banner">✏️ ①〜④から2項目を選択したあと、具体的な様子や内容の追記、文脈がおかしい箇所の修正をしてください！</div>
-            <textarea id="preview-attitude-text" rows="3" placeholder="上の①〜④から2項目を選択したあと、ここで具体的な様子や内容の追記・修正をしてください"></textarea>
+            <div class="edit-recommend-banner" id="att-edit-banner">✏️ 上のキーワードから2項目を選択したあと、具体的な様子や内容の追記・修正をしてください！</div>
+            <textarea id="preview-attitude-text" rows="3" placeholder="上のキーワードから2項目を選択したあと、ここで具体的な様子や内容の追記・修正をしてください"></textarea>
           </div>
           <div class="meta"><span class="field-error" id="err-attitude"></span></div>
         </div>
@@ -1240,15 +1426,11 @@
             <span><span class="step-num">2</span>本日のポイント<span class="sub-hint">（手書き入力・100文字以上推奨）</span></span>
           </div>
 
-          <div style="margin-bottom:8px;padding:8px 11px;border-radius:8px;background:var(--card);border:1px solid var(--line);font-size:.8rem;line-height:1.5;color:var(--ink);">
-            💡 その日伝えた中で最も重要なこと、テストで点を取るために必ず覚えておいてほしいことを『<strong>本人に改めて授業するつもりで</strong>』書きます。
-          </div>
-
           <div class="live-preview-box empty" id="preview-point" style="margin-top:0">
             <div class="live-preview-head">
               <label class="live-preview-label" for="preview-point-text">【本日のポイント 入力欄】</label>
             </div>
-            <div class="edit-recommend-banner" id="pt-edit-banner">⚠️ 100文字以上推奨：本日の授業で最も重要だったポイントを入力してください</div>
+            <div class="edit-recommend-banner" id="pt-edit-banner">💡 その日伝えた中で最も重要なこと、テストで点を取るために必ず覚えておいてほしいことを『<strong>本人に改めて授業するつもりで</strong>』書きます（100文字以上推奨）。</div>
             <textarea id="preview-point-text" rows="4" placeholder="例：一次関数で「交点の座標を求めよ」という問題を見たら、瞬時に「連立方程式を使う」と見通しを立てましょう。連立方程式を使う理由は、交点が「どちらの直線の式に入れても計算が合う特別な点」だからです。2つの式に同時に当てはまるxとyを見つけるため、連立方程式で求めます。"></textarea>
           </div>
           <div class="meta"><span class="field-error" id="err-advice"></span></div>
@@ -1999,6 +2181,8 @@ const state = {
   ptPageOffset: 0,
 
   // 軸ごとのスロット管理（各軸で複数の文例をチェックして組み合わせ可能！）
+  activeAttFilterIds: [],
+  selectedAttChips: [],
   attSlots: {
     focus: [],
     question: [],
@@ -2486,20 +2670,935 @@ function renderInteractiveAxisGauges(
   });
 }
 
+const ATTITUDE_KEYWORD_CHIPS = {
+  "good": [
+    {
+      "id": "g_focus",
+      "label": "最後まで集中",
+      "variations": [
+        "授業の始めから終わりまで集中を切らさず、問題に取り組むことができていました。",
+        "説明を聞く時間と演習の切り替えがスムーズで、終始集中して学習を進めました。"
+      ]
+    },
+    {
+      "id": "g_question",
+      "label": "自分から質問",
+      "variations": [
+        "分からない箇所をそのままにせず、自分から質問して確認する姿勢が見られました。",
+        "どこで迷ったのかを自分の言葉で伝えて質問できており、疑問点をその場で解消できました。"
+      ]
+    },
+    {
+      "id": "g_note",
+      "label": "ノートが丁寧",
+      "variations": [
+        "途中式や要点を省かずに丁寧にノートへ書き残しながら、演習を進められていました。",
+        "解説のポイントをノートに整理してまとめており、後の問題演習でも見返しながら活用できていました。"
+      ]
+    },
+    {
+      "id": "g_persist",
+      "label": "粘り強く考えた",
+      "variations": [
+        "難しい問題にぶつかってもすぐに諦めず、自分の力で考えて答えを出そうとする姿勢が見られました。",
+        "ヒントをもとに筋道を立て直し、最後まで粘り強く解き切ることができていました。"
+      ]
+    },
+    {
+      "id": "g_advanced",
+      "label": "応用まで自力",
+      "variations": [
+        "基本問題だけでなく、少しひねりのある問題まで自分の力で正確に解き進められました。",
+        "条件が複雑な問題でも手順を守って整理し、ヒントなしで正解までたどり着けていました。"
+      ]
+    },
+    {
+      "id": "g_after_exp",
+      "label": "解説後に自力正解",
+      "variations": [
+        "最初は迷う場面もありましたが、解説を聞いてやり方を整理したあとは自力で正解できました。",
+        "1周目で間違えた問題も、ポイントを確認したあとの類題では自分の力で解き切れました。"
+      ]
+    },
+    {
+      "id": "g_self_check",
+      "label": "ミスを自分で発見",
+      "variations": [
+        "解き終えたあとに自分で見直しを行い、細かい書き間違いや計算ミスに気づいて直せていました。",
+        "答えが合わなかった際も、途中の過程を自分で辿って間違えた箇所を見つけられました。"
+      ]
+    },
+    {
+      "id": "g_pace",
+      "label": "テンポよく進められた",
+      "variations": [
+        "手順に迷う場面が少なく、テンポよく問題演習を進められていました。",
+        "スピードと正確さのバランスが良く、時間内に多くの問題を丁寧に解き進められました。"
+      ]
+    },
+    {
+      "id": "g_absorb",
+      "label": "アドバイスをすぐ実践",
+      "variations": [
+        "解説でお伝えした手順や注意点をすぐに取り入れ、次の問題から実践できていました。",
+        "解き方のコツを伝えるとすぐに試して手を動かしており、演習の中でしっかり活かせました。"
+      ]
+    },
+    {
+      "id": "g_new_unit",
+      "label": "初見・予習に対応",
+      "variations": [
+        "初めて触れる単元でしたが、説明を聞いて要領を掴み、正答を導き出せていました。",
+        "新しい知識が多い内容でしたが、一つひとつの性質に向き合って学習を進められました。"
+      ]
+    },
+    {
+      "id": "g_logic_oral",
+      "label": "理屈から理解・口頭でも説明",
+      "variations": [
+        "単なる丸暗記に頼らず、なぜその形になるのかという理屈を確認しながら整理できていました。",
+        "「なぜそうなるのか」を口頭で確認した際も自分の言葉で説明できており、根拠を持って理解できています。"
+      ]
+    },
+    {
+      "id": "g_steady",
+      "label": "地道にコツコツ取り組めた",
+      "variations": [
+        "暗記や基本事項の整理など、地道な学習にも前向きに取り組む姿勢が見られました。",
+        "一つひとつの解説を丁寧に確認しながら、着実に演習を進めることができていました。"
+      ]
+    }
+  ],
+  "issue": [
+    {
+      "id": "i_focus",
+      "label": "途中で集中切れ気味",
+      "variations": [
+        "演習の途中で集中が緩む場面が見られましたので、区切りをつけながら最後まで取り組みました。",
+        "後半にかけて手が止まりがちな場面があったため、こまめに声をかけて進めました。"
+      ]
+    },
+    {
+      "id": "i_think_ok",
+      "label": "分かったつもりになりがち",
+      "variations": [
+        "解説を聞いて納得したつもりで進みやすい場面がありましたので、その場で類題を自力で解いてもらい定着を確かめました。",
+        "説明中は頷いていましたが一人で解くと手が止まったため、理由を問いかけながら理解度を確認して進めました。"
+      ]
+    },
+    {
+      "id": "i_careless",
+      "label": "ケアレスミス・過程での見落とし",
+      "variations": [
+        "手順自体はしっかり追えていましたが、答えを出す過程で見落としや細かいミスがいくつか見られました。",
+        "考え方の土台はできていますが、問題文の条件を読み飛ばして失点する場面があったため、印をつけて確認するよう指導しました。"
+      ]
+    },
+    {
+      "id": "i_in_head",
+      "label": "頭の中だけで処理・急ぎがち",
+      "variations": [
+        "頭の中だけで処理を進めてしまい、途中の確認が抜けてミスにつながる場面が見受けられました。",
+        "早く終わらせようとして途中式を省きがちでしたので、余白を使って1行ずつ書き残すようにしたところ、ミスが減りました。"
+      ]
+    },
+    {
+      "id": "i_mix_rules",
+      "label": "類題・複数ルールの混同",
+      "variations": [
+        "基本の例題は解けていましたが、少し問われ方が変わると手が止まる場面が見られました。",
+        "複数のルールが混在してくると、それぞれの使い分けで混同してしまう傾向が見受けられました。"
+      ]
+    },
+    {
+      "id": "i_step_miss",
+      "label": "手順が途中で抜ける",
+      "variations": [
+        "解説直後は解けていましたが、次の問題に移ると途中の手順が抜けやすい様子でしたので、順を追って確認しました。",
+        "解き方の途中で次に何をすればよいか迷う場面が見られたため、手順をステップごとに整理しながら進めました。"
+      ]
+    },
+    {
+      "id": "i_rule_recheck",
+      "label": "基本ルールを再確認",
+      "variations": [
+        "前提となる基本ルールや用語で曖昧になっている箇所が見受けられたため、基礎に立ち返って確認しました。",
+        "基本の型に少し混同が見られましたので、一度ルールをノートに整理してから問題演習へ入りました。"
+      ]
+    },
+    {
+      "id": "i_repeat",
+      "label": "反復練習が必要",
+      "variations": [
+        "一緒に確認しながらであれば解けるようになりましたが、一人で最初から最後まで解き切るにはまだ反復が必要な段階です。",
+        "理解の筋道は掴めてきていますが、自力で確実に再現するにはもう少し練習を重ねて定着させたい状態です。"
+      ]
+    },
+    {
+      "id": "i_no_review",
+      "label": "見直し・解き直しを飛ばしがち",
+      "variations": [
+        "解き終えたあとに見直しをせず次に進みやすい傾向が見られましたので、答えを出したあとに条件と照らし合わせるよう促しました。",
+        "間違えた問題の直しで答えを写して終わりにしやすい場面がありましたので、解説を閉じて自力で解き直すようにしました。"
+      ]
+    },
+    {
+      "id": "i_from_base",
+      "label": "基礎から一緒に進めた",
+      "variations": [
+        "一人で解き進めるにはまだ負担が大きい様子でしたので、一番やさしい基本問題に絞って一緒に手を動かしました。",
+        "一度に多くのパターンを扱うと混乱しやすいため、本日は最も基本となる1つの型に絞って確認しました。"
+      ]
+    }
+  ]
+};
+
+const UNIT_TOPIC_CHIP_BANKS = {
+  // 1. 整数の計算・筆算・約数倍数・単位（単元別出し分け対応）
+  m_hissan: [
+    {
+      id: "m_hissan",
+      label: "位取り・筆算",
+      variations: [
+        "位を縦に揃えて筆算を書き、くり上がりやくり下がりの処理も正確にできていました。",
+        "ノートに筆算用の広いスペースを取り、大きな字で丁寧に計算を進められていました。",
+        "計算自体は合っていましたが、書く位置（桁）がずれて答えを間違える場面があったため、位を揃える書き方を確認しました。",
+        "筆算の途中で手が止まる場面が見られたため、途中の式の書き方を確認しつつ進めていただきました。",
+        "計算結果が元の数と比べて不自然な大きさになっていないか、答えを出したあとで見直すようにしました。"
+      ]
+    }
+  ],
+  m_yakusu_order: [
+    {
+      id: "m_yakusu_order",
+      label: "約数・倍数・計算の順序",
+      variations: [
+        "カッコやかけ算・わり算の優先順位を守り、途中式を1行ずつ書きながら正確に計算できていました。",
+        "約数や公倍数を抜け漏れなく見つけられており、練習問題もスムーズに進められました。",
+        "計算の順序を取り違えてしまう場面があったため、先に計算する箇所へ下線を引いてから解くようにしました。",
+        "約数を探すときに一部を見落としてしまう場面があったため、抜け漏れなく見つける方法を確認しました。",
+        "最小公倍数と最大公約数の求め方が混ざる場面があったため、2つの違いを整理してから演習を進めました。"
+      ]
+    }
+  ],
+  m_unit_time: [
+    {
+      id: "m_unit_time",
+      label: "単位換算・時間",
+      variations: [
+        "単位の関係を正しく理解しており、時間の計算や単位の換算も正確に解けていました。",
+        "時刻や時間の計算で時間と分の処理に迷う場面がありましたが、分けて考える手順を確認するとスムーズに正解を出せました。",
+        "時間の計算で60分＝1時間のくり上がり・くり下がりに迷う場面があったため、仕組みを整理しながら練習しました。",
+        "長さや重さの単位換算でうまく変換できない場面があったため、1m＝100cmなどの基本関係を整理した上で解いていただきました。",
+        "はかりの目盛りの読み取りで1目盛りの大きさを読み違える場面があったため、最初に目盛りの単位を確認するよう指導しました。"
+      ]
+    }
+  ],
+
+  // 2. 小数・分数の計算（足し引き・かけ算・わり算の誤爆防止のため細分化）
+  m_dec_addsub: [
+    {
+      id: "m_dec_addsub",
+      label: "小数の筆算・小数点（たし算・ひき算）",
+      variations: [
+        "小数点の位置を丁寧に揃え、小数の計算を正確に解き進められていました。",
+        "桁数が違う小数のたし算・ひき算で右端に揃えてしまう場面があったため、小数点の位置を揃えて計算する手順を確認しました。"
+      ]
+    }
+  ],
+  m_dec_mul: [
+    {
+      id: "m_dec_mul",
+      label: "小数の筆算・小数点（かけ算）",
+      variations: [
+        "小数点の位置を丁寧に揃え、小数の計算を正確に解き進められていました。",
+        "小数のかけ算で積の小数点の位置や末尾の0の処理に迷う場面があったため、ルールを確認しながら進めました。"
+      ]
+    }
+  ],
+  m_dec_div: [
+    {
+      id: "m_dec_div",
+      label: "小数の筆算・小数点（わり算）",
+      variations: [
+        "小数点の位置を丁寧に揃え、小数の計算を正確に解き進められていました。",
+        "分数を小数に直す手順や小数点の移動もスムーズに使いこなせていました。",
+        "小数のわり算で割られる数の小数点を動かし忘れるミスが見られたため、小数点の移動手順を確認しながら練習しました。",
+        "小数のわり算であまりの小数点の位置を取り違える場面があったため、元の位置から下ろすルールを再確認しました。"
+      ]
+    }
+  ],
+  m_dec_base: [
+    {
+      id: "m_dec_base",
+      label: "小数のしくみ・小数点",
+      variations: [
+        "小数点の位置を丁寧に揃え、小数の計算を正確に解き進められていました。",
+        "分数を小数に直す手順や小数点の移動もスムーズに使いこなせていました。"
+      ]
+    }
+  ],
+  m_frac: [
+    {
+      id: "m_frac",
+      label: "分数の通分・約分・乗除",
+      variations: [
+        "通分や計算途中の約分を丁寧に行い、分数の計算を正確に解き進められていました。",
+        "帯分数を仮分数に直してから計算できており、ミスなく完答できていました。",
+        "約分と掛け算を一度に行おうとしてミスが出る場面があったため、1行ずつ丁寧に式を書く手順を確認しました。",
+        "掛け算の約分と足し算の通分が混ざる場面が見られたため、計算ごとのやり方の違いを改めて整理しました。",
+        "計算は合っていても最後の約分を忘れる場面が見られたため、答えが出たあとに約分できるか見直すよう声をかけながら進めました。"
+      ]
+    }
+  ],
+
+  // 3. 正負の数・文字式・展開・因数分解・平方根
+  m_sign_dist: [
+    {
+      id: "m_sign_dist",
+      label: "正負の符号・分配法則",
+      variations: [
+        "負の数が混ざる計算やカッコの分配法則でも、符号を間違えることなく正確に整理できていました。",
+        "多項式の計算において、同じ文字を含む同類項を見つけて丁寧にまとめることができていました。",
+        "カッコの前のマイナスを後ろの項に掛け忘れる場面が見られたため、符号の変化を1行ずつ書いて確認しました。",
+        "マイナスのついた計算で符号ミスが出たため、頭の中だけで進めず途中式を書き残すようにしたところ、ミスが減りました。",
+        "途中式を縦に揃えて書くようにしたところ、計算の途中で符号を間違えた際も自分で気づいて直せるようになりました。"
+      ]
+    }
+  ],
+  m_formula_root: [
+    {
+      id: "m_formula_root",
+      label: "公式の適用・式変形",
+      variations: [
+        "基本的な乗法公式や因数分解の公式が定着しており、演習をスムーズに進められていました。",
+        "式の形を見て適切な変形手順を選び、平方根の計算や有理化も正確に解けていました。",
+        "因数分解で最初に共通因数をくくり出し忘れる場面があったため、手順の順番を整理してから取り組みました。",
+        "平方根のたし算・ひき算とかけ算・わり算のルールが混ざる場面が見られたため、それぞれの計算方法の違いを整理しました。",
+        "まとまりを1つの文字に置き換える計算で手が止まったため、式の見方を一緒に確認しました。"
+      ]
+    }
+  ],
+
+  // 4. 方程式の計算（一次・連立・二次）
+  m_eq_calc: [
+    {
+      id: "m_eq_move",
+      label: "移項・分母払い・カッコ処理",
+      variations: [
+        "移項時の符号変化や分母を払う計算も、符号を間違えることなく正確に解けていました。",
+        "途中式を1行ずつ丁寧に書くことができており、良いペースで計算を進められました。",
+        "移項の符号変え忘れや分母を払う際の掛け忘れが見られたため、1行ずつ確認しながら進めました。",
+        "カッコが含まれる式で処理が混乱する場面がありましたが、まずカッコを外して整理すると正しく解けました。",
+        "式の計算と方程式の移項を混同して符号を変えてしまう場面があったため、2つの違いを整理して取り組みました。"
+      ]
+    },
+    {
+      id: "m_eq_solve",
+      label: "解法の使い分け・確かめ",
+      variations: [
+        "式の形に合わせて適切な解き方を選び、途中式を整理しながら正確に解き進められていました。",
+        "連立方程式の係数を揃える計算から代入まで筋道立てて進めており、正確に答えを出せていました。",
+        "連立方程式の引き算で下の式の符号を変え忘れるミスが見られたため、符号を意識して書き換えるようにしたところ、ミスが減りました。",
+        "代入法で式を当てはめる際にカッコをつけ忘れる場面があったため、カッコをつけて代入する形を確認すると正しく解けました。",
+        "計算途中でミスが出る場面があったため、出た解を元の式へ代入して確かめるようにしたところ、自分で間違いに気づけました。"
+      ]
+    }
+  ],
+
+  // 5. 文章題・割合・速さ・比
+  m_word: [
+    {
+      id: "m_word_fig",
+      label: "図表での条件整理",
+      variations: [
+        "問題文の数値や関係を図や表に書き出し、筋道を立てて式を立てられていました。",
+        "問題文にある重要な条件を自力で拾い上げ、図と照らし合わせながら式を組み立てられていました。",
+        "文章題で式を立てる糸口を見つけるのに苦戦していたため、図を書いて関係性を整理すると立式できるようになりました。",
+        "問題文の情報を頭の中だけで整理しようとして手が止まったため、分かっている数値を表に書き出しながら進めました。",
+        "どちらに数値を足せば等式が成り立つかで迷う場面が見られたため、大小関係を図で整理した上で解いていただきました。"
+      ]
+    },
+    {
+      id: "m_word_unit",
+      label: "立式と単位の統一",
+      variations: [
+        "単位を揃えてから式を立てることができており、速さや割合の問題も正確に答えを出せていました。",
+        "割合のもとにする量とくらべられる量を正しく見分け、正確に計算を進められていました。",
+        "時間や長さの単位を揃えずに立式してしまう場面があったため、問題文の単位を最初に確認するよう声をかけながら進めました。",
+        "割合や比の文章題で何算を使うか迷う場面が見られたため、問題文の言葉と式の対応を整理しながら取り組みました。",
+        "方程式の解が出たあとに問題の条件に合うか確かめる点が抜けていたため、答えの単位や条件を見直すよう確認しました。"
+      ]
+    }
+  ],
+
+  // 6. 関数・グラフ（比例・反比例・一次関数・二次関数）
+  m_func: [
+    {
+      id: "m_func_eq",
+      label: "式の決定・代入計算",
+      variations: [
+        "基本式に与えられた座標や値を代入し、比例定数や切片を正確に求められていました。",
+        "傾きや通る点の座標から式を求める問題も、途中式を整理しながら自力で解き切れました。",
+        "直線上にある点の座標を求める際、xとyの代入で迷う場面がありましたが、基本式に当てはめる形を確認すると解けるようになりました。",
+        "変化の割合を求める演習で、xが負の方向へ変化する際の増加量計算に符号ミスが見受けられました。",
+        "立式までは自力でできていましたが、代入後の計算でミスが出たため、途中式を省略せずに書くようにしたところ正解できるようになりました。"
+      ]
+    },
+    {
+      id: "m_func_graph",
+      label: "グラフの作図・読み取り",
+      variations: [
+        "式から通る点の座標を正確に読み取り、見やすいグラフを丁寧に描くことができていました。",
+        "グラフの傾きや切片、放物線の特徴を正しく読み取り、式を求める問題までスムーズに進められました。",
+        "横軸と縦軸の数値を対応させて点を打つところで戸惑いが見られたため、表の数値と軸を1つずつ確認しながら進めました。",
+        "式とグラフを結びつけて考える場面で手が止まったため、求めた座標をグラフへ書き込みながら整理すると理解が進みました。",
+        "分数の傾きや双曲線の点の取り方でずれる場面があったため、通る整数の座標を書き出した上で描いていただきました。"
+      ]
+    },
+    {
+      id: "m_func_cond",
+      label: "変域・交点などの条件処理",
+      variations: [
+        "変域や2直線の交点といった条件も、グラフの略図を使って正確に処理できていました。",
+        "座標平面上の三角形の面積を求める問題も、辺の長さを座標から正しく読み取って解けていました。",
+        "変域の大小や0をまたぐ場合の扱いで迷う場面が見られたため、簡単なグラフを描いて整理すると正しく答えを出せました。",
+        "2直線の交点や文字を含むグラフの応用問題に苦戦していたため、条件を式に置き換える流れを一緒に整理しました。",
+        "動点や水槽のグラフで区間ごとの式の切り替えに迷う場面があったため、境目となる点を確認しながら解き進めました。"
+      ]
+    }
+  ],
+
+  // 7〜10. 算数・数学（暫定版・今後精査予定）
+  m_geom_calc: [
+    {
+      id: "m_geom_ang",
+      label: "角度計算・補助線",
+      variations: [
+        "分かっている角度や長さを図へ書き込み、平行線の性質や外角を使って正確に角度を求められていました。",
+        "補助線を引く位置を見つけるのに苦戦する場面があったため、着目する図形を一緒に確認しながら進めました。"
+      ]
+    },
+    {
+      id: "m_geom_area",
+      label: "面積・体積・三平方の公式適用",
+      variations: [
+        "底面と高さの関係や直角三角形の辺の比を正しく捉え、公式に当てはめて正確に計算できていました。",
+        "錐体の「×1/3」や三角形の「÷2」が抜ける場面が見られたため、式を書いてから代入するよう確認しました。"
+      ]
+    }
+  ],
+  m_geom_draw: [
+    {
+      id: "m_geom_draw",
+      label: "作図・図形の移動・対称",
+      variations: [
+        "垂直二等分線や角の二等分線の使い分けを正しく判断し、コンパスを使って丁寧に作図できていました。",
+        "対称の軸や回転の中心に対する頂点の対応で迷う場面があったため、1点ずつ確認しながら描きました。"
+      ]
+    }
+  ],
+  m_proof: [
+    {
+      id: "m_proof",
+      label: "合同・相似の証明",
+      variations: [
+        "仮定や図に隠れた条件を図へ書き込み、対応順にも注意を払いながら証明を組み立てられていました。",
+        "根拠は掴めていましたが記述の順番や対応順で迷う場面があったため、証明の形に沿って一緒に整理しました。"
+      ]
+    }
+  ],
+  m_data_hs: [
+    {
+      id: "m_data_hs",
+      label: "確率・データ・高校数学",
+      variations: [
+        "樹形図や表を使って漏れなく場合を数え上げ、確率や代表値も正確に求められていました。",
+        "定義や条件を確認した上で、場合分けや式変形を筋道立てて進められていました。",
+        "頭の中だけで数えて漏れが出たり、場合分けの境界で迷う場面があったため、図表に書き出して整理しました。"
+      ]
+    }
+  ],
+
+  // 英語（暫定版・今後精査予定）
+  en_vocab: [
+    {
+      id: "en_vocab",
+      label: "単語・熟語・綴りと意味",
+      variations: [
+        "発音と意味を結びつけながら、英単語や熟語の綴りを丁寧に確認して進められました。",
+        "似た綴りや前置詞の使い分けで迷う場面があったため、声に出しながら整理して取り組みました。"
+      ]
+    }
+  ],
+  en_grammar: [
+    {
+      id: "en_grammar_order",
+      label: "語順・文の組み立て",
+      variations: [
+        "主語と動詞の語順を意識して、肯定文や疑問文・否定文を正確に組み立てられていました。",
+        "日本語の語順に引っ張られて語順が崩れる場面があったため、文の型を確認しながら解き進めました。"
+      ]
+    },
+    {
+      id: "en_grammar_verb",
+      label: "動詞の変化・文法ルールの使い分け",
+      variations: [
+        "主語や時制に合わせた動詞の形を正しく判断し、書き換え問題もスムーズに解けていました。",
+        "複数の文法ルールが混ざると動詞の形で混同が見られたため、見分け方を整理しながら確認しました。"
+      ]
+    }
+  ],
+  en_reading: [
+    {
+      id: "en_reading",
+      label: "長文読解・根拠の特定",
+      variations: [
+        "文の切れ目を意識して丁寧に読み進め、本文中の根拠を押さえながら設問に答えられていました。",
+        "長い文で主語と動詞の関係を見失う場面があったため、修飾のまとまりを区切りながら一緒に読み解きました。"
+      ]
+    }
+  ],
+  en_writing: [
+    {
+      id: "en_writing",
+      label: "並び替え・英作文",
+      variations: [
+        "まず主語と動詞の骨格を決めてから語句を組み立てており、正確な英文を書けていました。",
+        "冠詞や複数形のs、時制の一致で抜けが見られたため、書き終えたあとに見直す点を確認しました。"
+      ]
+    }
+  ],
+
+  // 国語（暫定版・今後精査予定）
+  ja_kanji: [
+    {
+      id: "ja_kanji",
+      label: "漢字・語彙・慣用句",
+      variations: [
+        "とめ・はねや送り仮名に注意して丁寧に漢字を書き、語句の意味も文脈に合わせて判断できていました。",
+        "似た漢字や同音異義語で迷う場面があったため、言葉の意味と結びつけて確認しました。"
+      ]
+    }
+  ],
+  ja_reading: [
+    {
+      id: "ja_reading",
+      label: "文章読解・記述・抜き出し",
+      variations: [
+        "本文中の指示語や接続語を手がかりに、根拠となる箇所を押さえて設問に答えられていました。",
+        "自分の印象で答えてしまう場面が見られたため、本文の表現に線を引いて根拠を確認しながら進めました。"
+      ]
+    }
+  ],
+  ja_grammar_classic: [
+    {
+      id: "ja_grammar_classic",
+      label: "文法・古文・漢文",
+      variations: [
+        "品詞や活用、古文・漢文の基本ルールを一つずつ確認しながら正確に解き進められていました。",
+        "主語の省略や活用形の判別で迷う場面があったため、前後のつながりを整理しながら一緒に確認しました。"
+      ]
+    }
+  ],
+
+  // 理科（暫定版・今後精査予定）
+  sc_phys_elec: [
+    {
+      id: "sc_phys_elec",
+      label: "物理・電気の作図と公式計算",
+      variations: [
+        "図や回路図に数値を書き込み、単位を揃えて公式に当てはめながら正確に計算できていました。",
+        "単位の換算や力の向き・作図の手順で迷う場面があったため、図に整理しながら一緒に確認しました。"
+      ]
+    }
+  ],
+  sc_chem: [
+    {
+      id: "sc_chem",
+      label: "化学の実験・反応式・計算",
+      variations: [
+        "実験の操作手順や化学反応式、質量の比を正しく整理し、計算問題も正確に解けていました。",
+        "気体の性質や反応式の係数合わせで迷う場面があったため、基本のルールを確認しながら進めました。"
+      ]
+    }
+  ],
+  sc_bio_earth: [
+    {
+      id: "sc_bio_earth",
+      label: "生物・地学の用語と図表読み取り",
+      variations: [
+        "図やグラフ・天気図から必要な情報を読み取り、用語の意味と仕組みを結びつけて整理できていました。",
+        "似た用語の区別や地層・天体の位置関係で迷う場面があったため、図を使ってイメージを確認しました。"
+      ]
+    }
+  ],
+
+  // 社会（暫定版・今後精査予定）
+  so_geo: [
+    {
+      id: "so_geo",
+      label: "地理の特色と資料読み取り",
+      variations: [
+        "地図や雨温図・統計グラフの特徴を読み取り、地域の気候や産業と結びつけて答えられていました。",
+        "地域ごとの特色や資料の読み取りで迷う場面があったため、地図帳やグラフの特徴を一緒に整理しました。"
+      ]
+    }
+  ],
+  so_his: [
+    {
+      id: "so_his",
+      label: "歴史の流れ・因果関係の整理",
+      variations: [
+        "出来事の順番や背景となる流れを捉え、人物名や重要語句を正確に整理できていました。",
+        "時代ごとの出来事が前後して混ざる場面があったため、原因と結果のつながりを整理しながら確認しました。"
+      ]
+    }
+  ],
+  so_civ: [
+    {
+      id: "so_civ",
+      label: "公民のしくみ・理由記述",
+      variations: [
+        "政治や経済のしくみを対比しながら整理し、資料を用いた理由記述にも筋道立てて取り組めていました。",
+        "似た制度や機関の役割で混同が見られたため、違いを表に整理しながら確認しました。"
+      ]
+    }
+  ]
+};
+
+function getTopicBankKeysForCat(cat) {
+  // 1. 整数の計算・筆算・約数倍数・単位（単元別厳密マッピング）
+  if (["u_001", "u_002", "u_003", "u_004", "u_005", "u_006", "u_007"].includes(cat)) return ["m_hissan"];
+  if (["u_008", "u_017", "u_018", "u_019"].includes(cat)) return ["m_yakusu_order"];
+  if (["u_009", "u_010", "u_011", "u_012"].includes(cat)) return ["m_unit_time"];
+
+  // 2. 小数・分数の計算（単元別厳密マッピング：足し引き・かけ算・わり算を分離）
+  if (cat === "u_013") return ["m_dec_base"];
+  if (cat === "u_014") return ["m_dec_addsub"];
+  if (cat === "u_015") return ["m_dec_mul"];
+  if (cat === "u_016") return ["m_dec_div"];
+  if (["u_020", "u_021", "u_022", "u_023"].includes(cat)) return ["m_frac"];
+
+  // 3. 正負の数・文字式・展開・因数分解・平方根
+  if (["u_030", "u_046", "u_047", "u_048", "u_049", "u_050", "u_051", "u_062", "u_063"].includes(cat)) return ["m_sign_dist"];
+  if (["u_075", "u_076", "u_077", "u_084"].includes(cat)) return ["m_formula_root"];
+
+  // 4. 方程式の計算
+  if (["u_053", "u_065", "u_078", "u_094"].includes(cat)) return ["m_eq_calc"];
+
+  // 5. 文章題・割合・速さ・比
+  if (["u_024", "u_025", "u_026", "u_027", "u_028", "u_052", "u_054", "u_064", "u_066", "u_079", "u_244"].includes(cat)) return ["m_word"];
+
+  // 6. 関数・グラフ
+  if (["u_031", "u_032", "u_055", "u_056", "u_067", "u_068", "u_080", "u_086", "u_087"].includes(cat)) return ["m_func"];
+
+  // 7. 平面・空間図形の計量
+  if (["u_029", "u_033", "u_035", "u_036", "u_037", "u_038", "u_039", "u_040", "u_041", "u_058", "u_060", "u_069", "u_070", "u_081", "u_082", "u_083", "u_092"].includes(cat)) return ["m_geom_calc"];
+
+  // 8. 作図・図形の移動・対称
+  if (["u_034", "u_042", "u_043", "u_057", "u_059"].includes(cat)) return ["m_geom_draw"];
+
+  // 9. 合同・相似の証明
+  if (["u_071", "u_072"].includes(cat)) return ["m_proof"];
+
+  // 10. データ・確率・高校数学
+  if (["u_044", "u_045", "u_061", "u_073", "u_074", "u_085", "u_088", "u_089", "u_090", "u_091", "u_093", "u_095", "u_096", "u_097", "u_098", "u_099", "u_100", "u_101", "u_102", "u_241", "u_242", "u_243"].includes(cat)) return ["m_data_hs"];
+
+  // 英語
+  if (["u_103", "u_104", "u_105", "u_106"].includes(cat)) return ["en_vocab"];
+  if (["u_142", "u_245"].includes(cat)) return ["en_reading"];
+  if (["u_143", "u_144"].includes(cat)) return ["en_writing"];
+  if (cat >= "u_107" && cat <= "u_141") return ["en_grammar"];
+
+  // 国語
+  if (["u_145", "u_146", "u_147", "u_148", "u_149"].includes(cat)) return ["ja_kanji"];
+  if (["u_150", "u_151", "u_152", "u_153", "u_154", "u_155", "u_156", "u_157", "u_158", "u_246"].includes(cat)) return ["ja_reading"];
+  if (["u_159", "u_160", "u_161", "u_162", "u_163"].includes(cat)) return ["ja_grammar_classic"];
+
+  // 理科
+  if (["u_164", "u_165", "u_166", "u_167", "u_168", "u_169", "u_170", "u_171", "u_172", "u_173"].includes(cat)) return ["sc_phys_elec"];
+  if (["u_174", "u_175", "u_176", "u_177", "u_178", "u_179", "u_180", "u_181", "u_182", "u_183"].includes(cat)) return ["sc_chem"];
+  if (["u_184", "u_185", "u_186", "u_187", "u_188", "u_189", "u_190", "u_191", "u_192", "u_193", "u_194", "u_195", "u_196", "u_197", "u_198", "u_247"].includes(cat)) return ["sc_bio_earth"];
+
+  // 社会
+  if (["u_199", "u_200", "u_201", "u_202", "u_203", "u_204", "u_205", "u_206", "u_207", "u_208", "u_209", "u_210", "u_211", "u_212", "u_213", "u_214"].includes(cat)) return ["so_geo"];
+  if (["u_215", "u_216", "u_217", "u_218", "u_219", "u_220", "u_221", "u_222", "u_223", "u_224", "u_225", "u_226", "u_227", "u_228", "u_229"].includes(cat)) return ["so_his"];
+  if (["u_230", "u_231", "u_232", "u_233", "u_234", "u_235", "u_236", "u_237", "u_238", "u_239", "u_240"].includes(cat)) return ["so_civ"];
+
+  return ["m_hissan"];
+}
+
+function getUnitRelatedChipsForSelectedUnits() {
+  const selectedTrees = getSelectedMajorTrees();
+  if (!selectedTrees.length) return [];
+
+  return selectedTrees.map((tObj) => {
+    const cat = tObj.cat;
+    const major = tObj.major;
+    const bankKeys = getTopicBankKeysForCat(cat);
+    const chips = [];
+    bankKeys.forEach((bk) => {
+      (UNIT_TOPIC_CHIP_BANKS[bk] || []).forEach((ch) => {
+        chips.push({
+          id: `u_${cat}_${ch.id}`,
+          label: ch.label,
+          unitLabel: major,
+          cat,
+          variations: ch.variations
+        });
+      });
+    });
+    return { cat, major, chips };
+  });
+}
+
+function getAllAttitudeChipDefs() {
+  const map = {};
+  ATTITUDE_KEYWORD_CHIPS.good.forEach((c) => { map[c.id] = { ...c, group: "good", groupLabel: "良かったこと" }; });
+  ATTITUDE_KEYWORD_CHIPS.issue.forEach((c) => { map[c.id] = { ...c, group: "issue", groupLabel: "課題・フォロー" }; });
+  getUnitRelatedChipsForSelectedUnits().forEach((ub) => {
+    ub.chips.forEach((c) => { map[c.id] = { ...c, group: "unit", groupLabel: `単元と関連（${ub.major}）` }; });
+  });
+  return map;
+}
+
 function renderAttitudeCandidates() {
   const wrap = $("att-candidates-wrap");
   if (wrap) wrap.hidden = true;
-  const subjKey = getSubjKey(state.subject);
-  const subjGaugeProf = SUBJECT_GAUGE_PROFILES[subjKey];
-  renderInteractiveAxisGauges(
-    "att-gauges-container",
-    subjGaugeProf.attitude,
-    state.attRanks,
-    state.attSlots,
-    state.attAxisOffset,
-    getFilteredAttitudeTemplates,
-    "err-attitude"
-  );
+  const container = $("att-gauges-container");
+  if (!container) return;
+  container.textContent = "";
+
+  if (!Array.isArray(state.selectedAttChips)) {
+    state.selectedAttChips = [];
+  }
+  if (!Array.isArray(state.activeAttFilterIds)) {
+    state.activeAttFilterIds = [];
+  }
+
+  const allDefs = getAllAttitudeChipDefs();
+  state.activeAttFilterIds = state.activeAttFilterIds.filter((id) => Boolean(allDefs[id]));
+
+  const groupsWrap = document.createElement("div");
+  groupsWrap.className = "att-chip-groups";
+
+  const makeFilterChipBtn = (chipObj) => {
+    const isActive = state.activeAttFilterIds.includes(chipObj.id);
+    const pickedCount = state.selectedAttChips.filter((x) => x.chipId === chipObj.id).length;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "att-kw-chip" + (pickedCount > 0 ? " has-picked" : "");
+    btn.setAttribute("aria-pressed", String(isActive));
+    btn.textContent = (isActive ? "✓ " : "") + chipObj.label;
+
+    if (pickedCount > 0) {
+      const cnt = document.createElement("span");
+      cnt.className = "kw-cnt";
+      cnt.textContent = String(pickedCount);
+      btn.appendChild(cnt);
+    }
+
+    btn.addEventListener("click", () => {
+      const idx = state.activeAttFilterIds.indexOf(chipObj.id);
+      if (idx >= 0) {
+        state.activeAttFilterIds.splice(idx, 1);
+      } else {
+        state.activeAttFilterIds.push(chipObj.id);
+      }
+      renderAttitudeCandidates();
+    });
+    return btn;
+  };
+
+  // 1. 良かったこと
+  const grpGood = document.createElement("div");
+  grpGood.className = "att-chip-group grp-good";
+  const tGood = document.createElement("div");
+  tGood.className = "att-chip-group-title";
+  tGood.textContent = "◎ 良かったこと（複数タップで候補をまとめて表示）";
+  const cGood = document.createElement("div");
+  cGood.className = "att-kw-chips";
+  ATTITUDE_KEYWORD_CHIPS.good.forEach((ch) => cGood.appendChild(makeFilterChipBtn(ch)));
+  grpGood.append(tGood, cGood);
+  groupsWrap.appendChild(grpGood);
+
+  // 2. 課題・フォロー
+  const grpIssue = document.createElement("div");
+  grpIssue.className = "att-chip-group grp-issue";
+  const tIssue = document.createElement("div");
+  tIssue.className = "att-chip-group-title";
+  tIssue.textContent = "△ 課題・フォロー（複数タップで候補をまとめて表示）";
+  const cIssue = document.createElement("div");
+  cIssue.className = "att-kw-chips";
+  ATTITUDE_KEYWORD_CHIPS.issue.forEach((ch) => cIssue.appendChild(makeFilterChipBtn(ch)));
+  grpIssue.append(tIssue, cIssue);
+  groupsWrap.appendChild(grpIssue);
+
+  // 3. 単元と関連
+  const grpUnit = document.createElement("div");
+  grpUnit.className = "att-chip-group grp-unit";
+  const tUnit = document.createElement("div");
+  tUnit.className = "att-chip-group-title";
+  tUnit.textContent = "📘 単元と関連（生徒の理解・演習状況／複数タップ可）";
+  grpUnit.appendChild(tUnit);
+
+  const unitBlocks = getUnitRelatedChipsForSelectedUnits();
+  if (!unitBlocks.length) {
+    const emptyHint = document.createElement("div");
+    emptyHint.className = "chips-label";
+    emptyHint.textContent = "上で指導単元を選択すると、その単元に対応したキーワードが表示されます。";
+    grpUnit.appendChild(emptyHint);
+  } else {
+    unitBlocks.forEach((ub) => {
+      const subH = document.createElement("div");
+      subH.className = "att-unit-subhead";
+      subH.textContent = `【${ub.major}】`;
+      grpUnit.appendChild(subH);
+      const cUnit = document.createElement("div");
+      cUnit.className = "att-kw-chips";
+      ub.chips.forEach((ch) => cUnit.appendChild(makeFilterChipBtn(ch)));
+      grpUnit.appendChild(cUnit);
+    });
+  }
+  groupsWrap.appendChild(grpUnit);
+  container.appendChild(groupsWrap);
+
+  // 絞り込んだ全キーワードの候補をまとめて一覧表示
+  if (state.activeAttFilterIds.length > 0) {
+    const activeDefs = state.activeAttFilterIds.map((id) => allDefs[id]).filter(Boolean);
+    const totalCands = activeDefs.reduce((sum, d) => sum + d.variations.length, 0);
+
+    const panel = document.createElement("div");
+    panel.className = "att-cand-panel";
+
+    const pHead = document.createElement("div");
+    pHead.className = "att-cand-panel-head";
+    const pTitle = document.createElement("span");
+    pTitle.textContent = `▼ 絞り込み中の文例候補（${activeDefs.length}キーワード・全${totalCands}件・タップで選択）`;
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "toggle-btn";
+    closeBtn.textContent = "絞り込みをすべて閉じる";
+    closeBtn.addEventListener("click", () => {
+      state.activeAttFilterIds = [];
+      renderAttitudeCandidates();
+    });
+    pHead.append(pTitle, closeBtn);
+    panel.appendChild(pHead);
+
+    activeDefs.forEach((activeDef) => {
+      const subGroup = document.createElement("div");
+      subGroup.className = "att-cand-subgroup";
+
+      const subHead = document.createElement("div");
+      subHead.className = "att-cand-subgroup-head";
+      const subTitle = document.createElement("span");
+      subTitle.textContent = activeDef.unitLabel
+        ? `■ 【${activeDef.unitLabel}】${activeDef.label}`
+        : `■ ${activeDef.label}`;
+      const subClose = document.createElement("button");
+      subClose.type = "button";
+      subClose.className = "toggle-btn";
+      subClose.style.fontSize = ".7rem";
+      subClose.style.padding = "2px 7px";
+      subClose.textContent = "× 閉じる";
+      subClose.addEventListener("click", () => {
+        state.activeAttFilterIds = state.activeAttFilterIds.filter((id) => id !== activeDef.id);
+        renderAttitudeCandidates();
+      });
+      subHead.append(subTitle, subClose);
+
+      const listEl = document.createElement("div");
+      listEl.className = "candidate-list";
+
+      activeDef.variations.forEach((tplText) => {
+        const isPicked = state.selectedAttChips.some((x) => x.text === tplText);
+        const row = document.createElement("div");
+        row.className = "cand-row";
+        row.style.gridTemplateColumns = "1fr";
+
+        const cBtn = document.createElement("button");
+        cBtn.type = "button";
+        cBtn.className = "cand-btn";
+        cBtn.setAttribute("aria-pressed", String(isPicked));
+
+        const chk = document.createElement("span");
+        chk.className = "cand-check";
+        chk.textContent = "✓";
+
+        const txtSpan = document.createElement("span");
+        txtSpan.textContent = tplText;
+
+        cBtn.append(chk, txtSpan);
+        cBtn.addEventListener("click", () => {
+          const idx = state.selectedAttChips.findIndex((x) => x.text === tplText);
+          if (idx >= 0) {
+            state.selectedAttChips.splice(idx, 1);
+          } else {
+            state.selectedAttChips.push({
+              chipId: activeDef.id,
+              label: activeDef.label,
+              group: activeDef.group,
+              unitLabel: activeDef.unitLabel || null,
+              cat: activeDef.cat || null,
+              text: tplText
+            });
+          }
+          if (state.selectedAttChips.length > 0) setError("err-attitude", null);
+          renderAttitudeCandidates();
+          syncAttitudeBoxFromSelection();
+          updateSectionPreviews();
+          markStale();
+          saveCurrentStudentSlot();
+        });
+
+        row.appendChild(cBtn);
+        listEl.appendChild(row);
+      });
+
+      subGroup.append(subHead, listEl);
+      panel.appendChild(subGroup);
+    });
+
+    container.appendChild(panel);
+  }
+
+  // 選択中チップ一覧バー（ワンタップ解除可能）
+  if (state.selectedAttChips.length > 0) {
+    const selBar = document.createElement("div");
+    selBar.className = "att-selected-bar";
+    const selLab = document.createElement("span");
+    selLab.className = "chips-label";
+    selLab.style.margin = "0";
+    selLab.textContent = `選択中（${state.selectedAttChips.length}項目）:`;
+    selBar.appendChild(selLab);
+
+    state.selectedAttChips.forEach((item, idx) => {
+      const pill = document.createElement("span");
+      pill.className = "att-selected-pill";
+      const lbl = document.createElement("span");
+      lbl.textContent = item.unitLabel ? `[${item.unitLabel}] ${item.label}` : item.label;
+      pill.appendChild(lbl);
+
+      const rmBtn = document.createElement("button");
+      rmBtn.type = "button";
+      rmBtn.setAttribute("aria-label", `${item.label}を解除`);
+      rmBtn.textContent = "×";
+      rmBtn.addEventListener("click", () => {
+        state.selectedAttChips.splice(idx, 1);
+        renderAttitudeCandidates();
+        syncAttitudeBoxFromSelection();
+        updateSectionPreviews();
+        markStale();
+        saveCurrentStudentSlot();
+      });
+      pill.appendChild(rmBtn);
+      selBar.appendChild(pill);
+    });
+    container.appendChild(selBar);
+  }
 }
 
 /* ② 授業のポイント：選択された単元・具体内容（複数選択可）に厳密一致する候補のみを表示（別要素の混入ゼロ＆複数選択可） */
@@ -2545,12 +3644,8 @@ function dedupeTopicInParagraph(sentences) {
 }
 
 function buildAttitudeFromSelections() {
-  return dedupeTopicInParagraph([
-    state.attSlots.focus,
-    state.attSlots.question,
-    state.attSlots.work,
-    state.attSlots.understand
-  ]);
+  if (!Array.isArray(state.selectedAttChips)) return "";
+  return state.selectedAttChips.map((item) => item.text).filter(Boolean).join("");
 }
 
 function buildPointFromSelections() {
@@ -2643,10 +3738,7 @@ function updateStepNavAndLiveOutput() {
 }
 
 function getSelectedAttitudeAxisCount() {
-  return ["focus", "question", "work", "understand"].reduce(
-    (sum, ax) => sum + (Array.isArray(state.attSlots[ax]) ? state.attSlots[ax].length : 0),
-    0
-  );
+  return Array.isArray(state.selectedAttChips) ? state.selectedAttChips.length : 0;
 }
 
 function updateAttitudePreviewBox(text, isEdited) {
@@ -2659,7 +3751,7 @@ function updateAttitudePreviewBox(text, isEdited) {
   box.classList.toggle("edited", Boolean(text && isEdited && !notRecommendedCount));
 
   if (!text || itemCount === 0) {
-    ban.textContent = "⚠️ 選択項目が0項目です：①〜④からその日伝えたい2項目を選択し、具体的な様子や内容の追記・修正をしてください！";
+    ban.textContent = "⚠️ 選択項目が0項目です：上のキーワードから2項目を選択し、具体的な様子や内容の追記・修正をしてください！";
   } else if (itemCount === 1) {
     ban.textContent = "⚠️ 現在1項目のみ選択中です（2項目の選択を推奨）：1項目だと短すぎるため、もう1項目選択するか具体的な様子を追記してください！";
   } else if (itemCount >= 3) {
@@ -2694,9 +3786,9 @@ function updatePointPreviewBox(text) {
   box.classList.toggle("empty", len === 0);
   box.classList.toggle("edited", len >= 100);
   if (len === 0) {
-    ban.textContent = "⚠️ 100文字以上推奨：本日の授業で最も重要だったポイントを入力してください";
+    ban.innerHTML = "💡 その日伝えた中で最も重要なこと、テストで点を取るために必ず覚えておいてほしいことを『<strong>本人に改めて授業するつもりで</strong>』書きます（100文字以上推奨）。";
   } else if (len < 100) {
-    ban.textContent = `⚠️ 現在 ${len} 文字です（100文字以上推奨・あと${100 - len}文字）：授業の追体験ができるよう具体的に書き足してください`;
+    ban.innerHTML = `⚠️ 現在 ${len} 文字（100文字以上推奨・あと${100 - len}文字）：『<strong>本人に改めて授業するつもりで</strong>』具体的に書き足してください。`;
   } else {
     ban.textContent = `✓ ${len}文字入力済み`;
   }
@@ -2797,6 +3889,7 @@ function renderMajorAndMinorChips() {
         const removedWork = collectUnitSpecificTexts(bankDB.unitWorkBank);
         const removedUnd = collectUnitSpecificTexts(bankDB.unitUnderstandBank);
         const removedClos = collectUnitSpecificTexts(bankDB.unitClosingBank);
+        state.selectedAttChips = (state.selectedAttChips || []).filter((item) => item.cat !== t.cat);
         state.attSlots.work = (state.attSlots.work || []).filter((s) => !removedWork.has(s));
         state.attSlots.understand = (state.attSlots.understand || []).filter((s) => !removedUnd.has(s));
         state.impSlots.closing = (state.impSlots.closing || []).filter((s) => !removedClos.has(s));
@@ -2865,7 +3958,9 @@ function renderStaticControls() {
     $("hw-material").value = "";
     state.attRanks = { focus: null, question: null, work: null, understand: null };
     state.impRanks = { closing: null };
-    state.attSlots = { focus: [], question: [], work: [], understand: [] };
+    state.selectedAttChips = [];
+    state.selectedAttChips = [];
+  state.attSlots = { focus: [], question: [], work: [], understand: [] };
     state.selectedPtSentences = [];
     state.impSlots = { closing: [] };
     setError("err-subject", null);
@@ -3592,7 +4687,7 @@ async function onCopyClick() {
 /* =========================================================
    複数生徒の入力・切り替え管理（前の生徒に戻って再編集可能）
    ========================================================= */
-const SESSION_KEY_STUDENTS = "report_app_multi_students_v48";
+const SESSION_KEY_STUDENTS = "report_app_multi_students_v52";
 
 function createStudentSlot(inheritFrom = null) {
   return {
@@ -3612,6 +4707,7 @@ function createStudentSlot(inheritFrom = null) {
     attAxisOffset: { focus: 0, question: 0, work: 0, understand: 0 },
     impAxisOffset: { closing: 0 },
     ptPageOffset: 0,
+    selectedAttChips: [],
     attSlots: { focus: [], question: [], work: [], understand: [] },
     selectedPtSentences: [],
     impSlots: { closing: [] },
@@ -3646,6 +4742,7 @@ function saveCurrentStudentSlot() {
   slot.attAxisOffset = JSON.parse(JSON.stringify(state.attAxisOffset));
   slot.impAxisOffset = JSON.parse(JSON.stringify(state.impAxisOffset));
   slot.ptPageOffset = state.ptPageOffset;
+  slot.selectedAttChips = JSON.parse(JSON.stringify(state.selectedAttChips || []));
   slot.attSlots = JSON.parse(JSON.stringify(state.attSlots));
   slot.selectedPtSentences = [...state.selectedPtSentences];
   slot.impSlots = JSON.parse(JSON.stringify(state.impSlots));
@@ -3727,6 +4824,7 @@ function loadStudentSlot(idx) {
   state.attAxisOffset = JSON.parse(JSON.stringify(slot.attAxisOffset || { focus: 0, question: 0, work: 0, understand: 0 }));
   state.impAxisOffset = JSON.parse(JSON.stringify(slot.impAxisOffset || { closing: 0 }));
   state.ptPageOffset = slot.ptPageOffset || 0;
+  state.selectedAttChips = JSON.parse(JSON.stringify(slot.selectedAttChips || []));
   state.attSlots = JSON.parse(JSON.stringify(slot.attSlots || { focus: [], question: [], work: [], understand: [] }));
   state.selectedPtSentences = [...(slot.selectedPtSentences || [])];
   state.impSlots = JSON.parse(JSON.stringify(slot.impSlots || { closing: [] }));
@@ -3769,6 +4867,7 @@ function clearStudentSelections() {
   state.impRanks = { closing: null };
   state.attAxisOffset = { focus: 0, question: 0, work: 0, understand: 0 };
   state.impAxisOffset = { closing: 0 };
+  state.selectedAttChips = [];
   state.attSlots = { focus: [], question: [], work: [], understand: [] };
   state.selectedPtSentences = [];
   state.impSlots = { closing: [] };
