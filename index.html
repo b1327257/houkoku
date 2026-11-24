@@ -617,17 +617,19 @@
     color: var(--ink);
   }
   .edit-recommend-banner {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: .78rem;
-    font-weight: 700;
-    padding: 5px 9px;
+    display: block;
+    font-size: .79rem;
+    font-weight: 600;
+    line-height: 1.55;
+    padding: 6px 10px;
     border-radius: 6px;
     margin-bottom: 6px;
     background: var(--card);
     color: var(--warn);
     border: 1px solid var(--warn);
+  }
+  .edit-recommend-banner strong {
+    font-weight: 800;
   }
   .live-preview-box.edited .edit-recommend-banner {
     color: var(--ok);
@@ -750,20 +752,23 @@
   .chip {
     font: inherit;
     font-size: .77rem;
+    font-weight: 600;
     color: var(--ink);
     background: var(--field-bg);
-    border: 1px solid var(--line);
+    border: 1.5px solid var(--line);
     border-radius: 999px;
-    padding: 3px 10px;
-    min-height: 28px;
+    padding: 4px 11px;
+    min-height: 30px;
     cursor: pointer;
     text-align: left;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
-  .chip:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .chip:hover { border-color: var(--accent); }
   .chip.active {
     border-color: var(--accent);
-    background: var(--accent-soft);
-    font-weight: 700;
+    background: var(--accent);
+    color: var(--accent-ink);
   }
   .chip.skill-chip {
     border-color: var(--pos2);
@@ -777,10 +782,24 @@
 
   .unit-picker-box {
     margin-top: 7px;
-    padding: 8px 10px;
-    background: var(--card-sub);
-    border: 1px solid var(--line);
-    border-radius: 8px;
+    padding: 10px 12px;
+    background: var(--warn-soft);
+    border: 1.5px solid var(--warn);
+    border-left: 4px solid var(--warn);
+    border-radius: 10px;
+    transition: background .15s, border-color .15s;
+  }
+  .unit-picker-box #major-picker-title {
+    color: var(--warn);
+    font-weight: 800;
+  }
+  .unit-picker-box.has-selection {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .unit-picker-box.has-selection #major-picker-title {
+    color: var(--accent);
   }
   .unit-picker-head {
     display: flex;
@@ -1177,25 +1196,24 @@
     cursor: pointer;
     transition: background .12s, border-color .12s, color .12s;
     line-height: 1.3;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   .att-kw-chip:hover { border-color: var(--accent); }
   .att-chip-group.grp-good .att-kw-chip[aria-pressed="true"] {
-    background: var(--ok-soft);
+    background: var(--ok);
     border-color: var(--ok);
-    color: var(--ok);
-    font-weight: 800;
+    color: #fff;
   }
   .att-chip-group.grp-issue .att-kw-chip[aria-pressed="true"] {
-    background: var(--warn-soft);
+    background: var(--warn);
     border-color: var(--warn);
-    color: var(--warn);
-    font-weight: 800;
+    color: #fff;
   }
   .att-chip-group.grp-unit .att-kw-chip[aria-pressed="true"] {
-    background: var(--accent-soft);
+    background: var(--accent);
     border-color: var(--accent);
-    color: var(--accent);
-    font-weight: 800;
+    color: var(--accent-ink);
   }
   .att-unit-subhead {
     font-size: .74rem;
@@ -1368,15 +1386,14 @@
             <input type="text" id="unit-major" placeholder="例: 不定詞 / 一次関数の式とグラフ" aria-describedby="err-unit-major" autocomplete="off">
             <div class="suggest" id="suggest-major" role="listbox" hidden></div>
           </div>
-          <div class="unit-picker-box">
+          <div class="unit-picker-box" id="unit-picker-box">
             <div class="unit-picker-head">
-              <span class="chips-label" id="major-picker-title">単元一覧（複数選択可・再タップで解除）</span>
+              <span class="chips-label" id="major-picker-title">単元一覧（複数選択可）</span>
               <button type="button" class="toggle-btn" id="btn-more-majors">すべて表示</button>
             </div>
             <div class="chips" id="major-chips"></div>
           </div>
         </div>
-        <div class="chips" id="recent-units" hidden></div>
         <div class="meta"><span class="field-error" id="err-unit-major"></span></div>
       </section>
 
@@ -1393,7 +1410,7 @@
              ========================================== -->
         <div class="step-box" id="step-box-att">
           <div class="step-title">
-            <span><span class="step-num">1</span>授業の様子<span class="sub-hint">（キーワードから2項目を選択推奨）</span><span class="sub-hint" id="att-subj-hint"></span></span>
+            <span><span class="step-num">1</span>授業の様子<span class="sub-hint">（キーワードから2〜3項目を選択推奨）</span><span class="sub-hint" id="att-subj-hint"></span></span>
           </div>
 
           <div id="att-select-pane">
@@ -1412,8 +1429,8 @@
             <div class="live-preview-head">
               <label class="live-preview-label" for="preview-attitude-text">【授業の様子 出力内容】</label>
             </div>
-            <div class="edit-recommend-banner" id="att-edit-banner">✏️ 上のキーワードから2項目を選択したあと、具体的な様子や内容の追記・修正をしてください！</div>
-            <textarea id="preview-attitude-text" rows="3" placeholder="上のキーワードから2項目を選択したあと、ここで具体的な様子や内容の追記・修正をしてください"></textarea>
+            <div class="edit-recommend-banner" id="att-edit-banner">✏️ 上のキーワードから2〜3項目を選択したあと、具体的な様子や内容の追記・修正をしてください！</div>
+            <textarea id="preview-attitude-text" rows="3" placeholder="上のキーワードから2〜3項目を選択したあと、ここで具体的な様子や内容の追記・修正をしてください"></textarea>
           </div>
           <div class="meta"><span class="field-error" id="err-attitude"></span></div>
         </div>
@@ -1449,7 +1466,7 @@
           <div class="chips" id="hw-material-chips"></div>
 
           <div style="margin-top:12px">
-            <span class="field-label" style="display:block;margin-bottom:6px">2行目：取り組み方のアドバイス<span class="sub-hint">（A〜Eから選択・複数選択可）</span></span>
+            <span class="field-label" style="display:block;margin-bottom:6px">2行目：取り組み方のアドバイス<span class="sub-hint">（キーワードから絞り込んで選択）</span></span>
             <div id="imp-select-pane">
               <div id="imp-gauges-container"></div>
               <div class="candidates-wrap" id="imp-candidates-wrap" hidden>
@@ -2183,6 +2200,8 @@ const state = {
   // 軸ごとのスロット管理（各軸で複数の文例をチェックして組み合わせ可能！）
   activeAttFilterIds: [],
   selectedAttChips: [],
+  activeHwFilterIds: [],
+  selectedHwChips: [],
   attSlots: {
     focus: [],
     question: [],
@@ -3391,7 +3410,7 @@ function renderAttitudeCandidates() {
     btn.type = "button";
     btn.className = "att-kw-chip" + (pickedCount > 0 ? " has-picked" : "");
     btn.setAttribute("aria-pressed", String(isActive));
-    btn.textContent = (isActive ? "✓ " : "") + chipObj.label;
+    btn.textContent = chipObj.label;
 
     if (pickedCount > 0) {
       const cnt = document.createElement("span");
@@ -3575,12 +3594,50 @@ function renderAttitudeCandidates() {
     selLab.textContent = `選択中（${state.selectedAttChips.length}項目）:`;
     selBar.appendChild(selLab);
 
+    const totalAtt = state.selectedAttChips.length;
     state.selectedAttChips.forEach((item, idx) => {
       const pill = document.createElement("span");
       pill.className = "att-selected-pill";
+
+      if (totalAtt >= 2 && idx > 0) {
+        const leftBtn = document.createElement("button");
+        leftBtn.type = "button";
+        leftBtn.setAttribute("aria-label", `${item.label}を前へ移動`);
+        leftBtn.textContent = "◀";
+        leftBtn.addEventListener("click", () => {
+          const tmp = state.selectedAttChips[idx - 1];
+          state.selectedAttChips[idx - 1] = state.selectedAttChips[idx];
+          state.selectedAttChips[idx] = tmp;
+          renderAttitudeCandidates();
+          syncAttitudeBoxFromSelection();
+          updateSectionPreviews();
+          markStale();
+          saveCurrentStudentSlot();
+        });
+        pill.appendChild(leftBtn);
+      }
+
       const lbl = document.createElement("span");
       lbl.textContent = item.unitLabel ? `[${item.unitLabel}] ${item.label}` : item.label;
       pill.appendChild(lbl);
+
+      if (totalAtt >= 2 && idx < totalAtt - 1) {
+        const rightBtn = document.createElement("button");
+        rightBtn.type = "button";
+        rightBtn.setAttribute("aria-label", `${item.label}を後ろへ移動`);
+        rightBtn.textContent = "▶";
+        rightBtn.addEventListener("click", () => {
+          const tmp = state.selectedAttChips[idx + 1];
+          state.selectedAttChips[idx + 1] = state.selectedAttChips[idx];
+          state.selectedAttChips[idx] = tmp;
+          renderAttitudeCandidates();
+          syncAttitudeBoxFromSelection();
+          updateSectionPreviews();
+          markStale();
+          saveCurrentStudentSlot();
+        });
+        pill.appendChild(rightBtn);
+      }
 
       const rmBtn = document.createElement("button");
       rmBtn.type = "button";
@@ -3614,20 +3671,348 @@ function renderPointCandidates() {
   // 本日のポイントは完全手書き入力のため候補リスト描画なし
 }
 
+const HW_KEYWORD_CHIPS = {
+  "method": [
+    {
+      "id": "hw_note",
+      "label": "ノートを見ながら",
+      "variations": [
+        "まずは本日の授業ノートを見返してから取り組んでみましょう。",
+        "授業ノートを横に開き、例題の解き方を確認しながら1問ずつ進めてみてください。",
+        "迷った箇所は当てずっぽうで埋めず、ノートのお手本を見て手順を確かめましょう。"
+      ]
+    },
+    {
+      "id": "hw_retry",
+      "label": "自力で解き直し",
+      "variations": [
+        "まずは何も見ずに自分の力だけでどこまで解けるか試してみましょう。",
+        "授業で扱った解き方を思い出して、最初から最後まで自力で解き切ってみてください。",
+        "解説を読んで納得した問題は、解答を閉じて自分の手で解き直しておきましょう。"
+      ]
+    },
+    {
+      "id": "hw_process",
+      "label": "途中式・図を書く",
+      "variations": [
+        "頭の中だけで処理せず、途中式や図をノートに書き残しながら解いてみましょう。",
+        "ノートの余白を広く使い、1行ずつ丁寧に式を書きながら進めてみてください。",
+        "問題文の条件に線を引き、簡単な図やメモに整理してから式を立てましょう。"
+      ]
+    },
+    {
+      "id": "hw_basic",
+      "label": "基本問題に絞る",
+      "variations": [
+        "難しい問題に無理に挑戦せず、まずは基本問題を正確に解き切ることを目標にしましょう。",
+        "一番やさしい基本問題に絞り、授業と同じ手順で丁寧に解くところから始めてみてください。",
+        "問題数を絞り、基本の型を1問ずつ確実に解けるようにしていきましょう。"
+      ]
+    },
+    {
+      "id": "hw_mark",
+      "label": "丸つけ・間違い直し",
+      "variations": [
+        "丸つけの際、答えを赤ペンで写すだけで終えず、なぜ間違えたかを確認して解き直しましょう。",
+        "解いている途中で迷った問題には「△」をつけ、丸がついた問題も後で見直してみてください。",
+        "間違えた問題はその場で解答を伏せ、自分の手で正解できるまでやり直しておきましょう。"
+      ]
+    },
+    {
+      "id": "hw_check",
+      "label": "見直し・検算",
+      "variations": [
+        "答えが出たあと、符号や単位・約分忘れがないか1問ずつ見直してみましょう。",
+        "解き終えたあとに元の式へ代入するなど、確かめまでセットで行ってみてください。",
+        "書き間違いや読み落としを防ぐため、最後にもう一度問題文の条件と照らし合わせましょう。"
+      ]
+    }
+  ],
+  "pace": [
+    {
+      "id": "hw_early",
+      "label": "早めに取り組む",
+      "variations": [
+        "授業の記憶が新しい今日・明日のうちに、まず1ページ目から手をつけてみましょう。",
+        "日が空くと手順が抜けやすいため、なるべく早い段階で一度取り組んでみてください。",
+        "一度にまとめて終わらせず、1日10〜15分ずつ数日に分けて進めてみましょう。"
+      ]
+    },
+    {
+      "id": "hw_time",
+      "label": "時間を計って",
+      "variations": [
+        "テスト本番を意識し、制限時間を決めてスピードと正確さの両方を意識してみましょう。",
+        "1問に時間をかけすぎず、手が止まった問題には印をつけて次へ進む練習をしてみてください。",
+        "時間を計って一通り解き切ったあと、残りの時間で見直しまで行う流れを意識しましょう。"
+      ]
+    },
+    {
+      "id": "hw_memory",
+      "label": "暗記・反復",
+      "variations": [
+        "「見て覚える時間」と「答えを隠して思い出す時間」を分けて取り組んでみましょう。",
+        "一度にたくさん覚えようとせず、5〜10語ずつ小分けにして何も見ずに書けるか試してみてください。",
+        "1周目で間違えた語句だけに印をつけ、2回連続で正解できるまで反復してみましょう。"
+      ]
+    },
+    {
+      "id": "hw_exam",
+      "label": "テスト形式で挑戦",
+      "variations": [
+        "ノートや教科書を見ずに、テスト本番と同じつもりで一発満点を目指して解いてみましょう。",
+        "基本問題がスムーズに解けたら、少しひねりのある応用問題にも挑戦してみてください。",
+        "解けなかった問題は印をつけておき、次回授業ですぐ質問できるようにしておきましょう。"
+      ]
+    }
+  ]
+};
+
+function getAllHwChipDefs() {
+  const map = {};
+  HW_KEYWORD_CHIPS.method.forEach((c) => { map[c.id] = { ...c, group: "method" }; });
+  HW_KEYWORD_CHIPS.pace.forEach((c) => { map[c.id] = { ...c, group: "pace" }; });
+  return map;
+}
+
 function renderImpressionCandidates() {
   const wrap = $("imp-candidates-wrap");
   if (wrap) wrap.hidden = true;
-  const subjKey = getSubjKey(state.subject);
-  const subjGaugeProf = SUBJECT_GAUGE_PROFILES[subjKey];
-  renderInteractiveAxisGauges(
-    "imp-gauges-container",
-    subjGaugeProf.impression,
-    state.impRanks,
-    state.impSlots,
-    state.impAxisOffset,
-    getFilteredImpressionTemplates,
-    "err-impression"
-  );
+  const container = $("imp-gauges-container");
+  if (!container) return;
+  container.textContent = "";
+
+  if (!Array.isArray(state.selectedHwChips)) state.selectedHwChips = [];
+  if (!Array.isArray(state.activeHwFilterIds)) state.activeHwFilterIds = [];
+
+  const allDefs = getAllHwChipDefs();
+  state.activeHwFilterIds = state.activeHwFilterIds.filter((id) => Boolean(allDefs[id]));
+
+  const groupsWrap = document.createElement("div");
+  groupsWrap.className = "att-chip-groups";
+
+  const makeFilterChipBtn = (chipObj) => {
+    const isActive = state.activeHwFilterIds.includes(chipObj.id);
+    const pickedCount = state.selectedHwChips.filter((x) => x.chipId === chipObj.id).length;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "att-kw-chip" + (pickedCount > 0 ? " has-picked" : "");
+    btn.setAttribute("aria-pressed", String(isActive));
+    btn.textContent = chipObj.label;
+
+    if (pickedCount > 0) {
+      const cnt = document.createElement("span");
+      cnt.className = "kw-cnt";
+      cnt.textContent = String(pickedCount);
+      btn.appendChild(cnt);
+    }
+
+    btn.addEventListener("click", () => {
+      const idx = state.activeHwFilterIds.indexOf(chipObj.id);
+      if (idx >= 0) {
+        state.activeHwFilterIds.splice(idx, 1);
+      } else {
+        state.activeHwFilterIds.push(chipObj.id);
+      }
+      renderImpressionCandidates();
+    });
+    return btn;
+  };
+
+  // 1. 解き方・手順
+  const grpMethod = document.createElement("div");
+  grpMethod.className = "att-chip-group grp-unit";
+  const tMethod = document.createElement("div");
+  tMethod.className = "att-chip-group-title";
+  tMethod.textContent = "📝 解き方・手順（複数タップで候補を表示）";
+  const cMethod = document.createElement("div");
+  cMethod.className = "att-kw-chips";
+  HW_KEYWORD_CHIPS.method.forEach((ch) => cMethod.appendChild(makeFilterChipBtn(ch)));
+  grpMethod.append(tMethod, cMethod);
+  groupsWrap.appendChild(grpMethod);
+
+  // 2. ペース・暗記・本番意識
+  const grpPace = document.createElement("div");
+  grpPace.className = "att-chip-group grp-good";
+  const tPace = document.createElement("div");
+  tPace.className = "att-chip-group-title";
+  tPace.textContent = "⏱ ペース・暗記・本番意識（複数タップで候補を表示）";
+  const cPace = document.createElement("div");
+  cPace.className = "att-kw-chips";
+  HW_KEYWORD_CHIPS.pace.forEach((ch) => cPace.appendChild(makeFilterChipBtn(ch)));
+  grpPace.append(tPace, cPace);
+  groupsWrap.appendChild(grpPace);
+
+  container.appendChild(groupsWrap);
+
+  // 絞り込んだキーワードの候補一覧パネル
+  if (state.activeHwFilterIds.length > 0) {
+    const activeDefs = state.activeHwFilterIds.map((id) => allDefs[id]).filter(Boolean);
+    const totalCands = activeDefs.reduce((sum, d) => sum + d.variations.length, 0);
+
+    const panel = document.createElement("div");
+    panel.className = "att-cand-panel";
+
+    const pHead = document.createElement("div");
+    pHead.className = "att-cand-panel-head";
+    const pTitle = document.createElement("span");
+    pTitle.textContent = `▼ 宿題アドバイス候補（${activeDefs.length}キーワード・全${totalCands}件・タップで選択）`;
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "toggle-btn";
+    closeBtn.textContent = "絞り込みをすべて閉じる";
+    closeBtn.addEventListener("click", () => {
+      state.activeHwFilterIds = [];
+      renderImpressionCandidates();
+    });
+    pHead.append(pTitle, closeBtn);
+    panel.appendChild(pHead);
+
+    activeDefs.forEach((activeDef) => {
+      const subGroup = document.createElement("div");
+      subGroup.className = "att-cand-subgroup";
+
+      const subHead = document.createElement("div");
+      subHead.className = "att-cand-subgroup-head";
+      const subTitle = document.createElement("span");
+      subTitle.textContent = `■ ${activeDef.label}`;
+      const subClose = document.createElement("button");
+      subClose.type = "button";
+      subClose.className = "toggle-btn";
+      subClose.style.fontSize = ".7rem";
+      subClose.style.padding = "2px 7px";
+      subClose.textContent = "× 閉じる";
+      subClose.addEventListener("click", () => {
+        state.activeHwFilterIds = state.activeHwFilterIds.filter((id) => id !== activeDef.id);
+        renderImpressionCandidates();
+      });
+      subHead.append(subTitle, subClose);
+
+      const listEl = document.createElement("div");
+      listEl.className = "candidate-list";
+
+      activeDef.variations.forEach((tplText) => {
+        const isPicked = state.selectedHwChips.some((x) => x.text === tplText);
+        const row = document.createElement("div");
+        row.className = "cand-row";
+        row.style.gridTemplateColumns = "1fr";
+
+        const cBtn = document.createElement("button");
+        cBtn.type = "button";
+        cBtn.className = "cand-btn";
+        cBtn.setAttribute("aria-pressed", String(isPicked));
+
+        const chk = document.createElement("span");
+        chk.className = "cand-check";
+        chk.textContent = "✓";
+
+        const txtSpan = document.createElement("span");
+        txtSpan.textContent = tplText;
+
+        cBtn.append(chk, txtSpan);
+        cBtn.addEventListener("click", () => {
+          const idx = state.selectedHwChips.findIndex((x) => x.text === tplText);
+          if (idx >= 0) {
+            state.selectedHwChips.splice(idx, 1);
+          } else {
+            state.selectedHwChips.push({
+              chipId: activeDef.id,
+              label: activeDef.label,
+              text: tplText
+            });
+          }
+          if (state.selectedHwChips.length > 0) setError("err-homework", null);
+          renderImpressionCandidates();
+          syncHomeworkBoxFromSelection();
+          updateSectionPreviews();
+          markStale();
+          saveCurrentStudentSlot();
+        });
+
+        row.appendChild(cBtn);
+        listEl.appendChild(row);
+      });
+
+      subGroup.append(subHead, listEl);
+      panel.appendChild(subGroup);
+    });
+
+    container.appendChild(panel);
+  }
+
+  // 選択中チップ一覧バー
+  if (state.selectedHwChips.length > 0) {
+    const selBar = document.createElement("div");
+    selBar.className = "att-selected-bar";
+    const selLab = document.createElement("span");
+    selLab.className = "chips-label";
+    selLab.style.margin = "0";
+    selLab.textContent = `選択中（${state.selectedHwChips.length}件）:`;
+    selBar.appendChild(selLab);
+
+    const totalHw = state.selectedHwChips.length;
+    state.selectedHwChips.forEach((item, idx) => {
+      const pill = document.createElement("span");
+      pill.className = "att-selected-pill";
+
+      if (totalHw >= 2 && idx > 0) {
+        const leftBtn = document.createElement("button");
+        leftBtn.type = "button";
+        leftBtn.setAttribute("aria-label", `${item.label}を前へ移動`);
+        leftBtn.textContent = "◀";
+        leftBtn.addEventListener("click", () => {
+          const tmp = state.selectedHwChips[idx - 1];
+          state.selectedHwChips[idx - 1] = state.selectedHwChips[idx];
+          state.selectedHwChips[idx] = tmp;
+          renderImpressionCandidates();
+          syncHomeworkBoxFromSelection();
+          updateSectionPreviews();
+          markStale();
+          saveCurrentStudentSlot();
+        });
+        pill.appendChild(leftBtn);
+      }
+
+      const lbl = document.createElement("span");
+      lbl.textContent = item.label;
+      pill.appendChild(lbl);
+
+      if (totalHw >= 2 && idx < totalHw - 1) {
+        const rightBtn = document.createElement("button");
+        rightBtn.type = "button";
+        rightBtn.setAttribute("aria-label", `${item.label}を後ろへ移動`);
+        rightBtn.textContent = "▶";
+        rightBtn.addEventListener("click", () => {
+          const tmp = state.selectedHwChips[idx + 1];
+          state.selectedHwChips[idx + 1] = state.selectedHwChips[idx];
+          state.selectedHwChips[idx] = tmp;
+          renderImpressionCandidates();
+          syncHomeworkBoxFromSelection();
+          updateSectionPreviews();
+          markStale();
+          saveCurrentStudentSlot();
+        });
+        pill.appendChild(rightBtn);
+      }
+
+      const rmBtn = document.createElement("button");
+      rmBtn.type = "button";
+      rmBtn.setAttribute("aria-label", `${item.label}を解除`);
+      rmBtn.textContent = "×";
+      rmBtn.addEventListener("click", () => {
+        state.selectedHwChips.splice(idx, 1);
+        renderImpressionCandidates();
+        syncHomeworkBoxFromSelection();
+        updateSectionPreviews();
+        markStale();
+        saveCurrentStudentSlot();
+      });
+      pill.appendChild(rmBtn);
+      selBar.appendChild(pill);
+    });
+    container.appendChild(selBar);
+  }
 }
 
 /* 各セクションの確定テキスト取得（複数選択された文例も常に自然な順序で結合） */
@@ -3654,7 +4039,9 @@ function buildPointFromSelections() {
 
 function buildHomeworkFromSelections() {
   const mat = cleanClause($("hw-material") ? $("hw-material").value : "");
-  const secondLine = dedupeTopicInParagraph([state.impSlots.closing]);
+  const secondLine = Array.isArray(state.selectedHwChips)
+    ? state.selectedHwChips.map((x) => x.text).filter(Boolean).join("")
+    : "";
   if (mat && secondLine) {
     return `${mat}\n${secondLine}`;
   }
@@ -3746,20 +4133,20 @@ function updateAttitudePreviewBox(text, isEdited) {
   const ban = $("att-edit-banner");
   if (!box || !ban) return;
   const itemCount = getSelectedAttitudeAxisCount();
-  const notRecommendedCount = itemCount !== 2;
+  const notRecommendedCount = itemCount < 2 || itemCount > 3;
   box.classList.toggle("empty", !text);
   box.classList.toggle("edited", Boolean(text && isEdited && !notRecommendedCount));
 
   if (!text || itemCount === 0) {
-    ban.textContent = "⚠️ 選択項目が0項目です：上のキーワードから2項目を選択し、具体的な様子や内容の追記・修正をしてください！";
+    ban.textContent = "⚠️ 選択項目が0項目です：上のキーワードから2〜3項目を選択し、具体的な様子や内容の追記・修正をしてください！";
   } else if (itemCount === 1) {
-    ban.textContent = "⚠️ 現在1項目のみ選択中です（2項目の選択を推奨）：1項目だと短すぎるため、もう1項目選択するか具体的な様子を追記してください！";
-  } else if (itemCount >= 3) {
-    ban.textContent = `⚠️ 現在${itemCount}項目選択中です（2項目の選択を推奨）：3項目以上だと長くなりすぎるため、2項目に絞るか文面を調整してください！`;
+    ban.textContent = "⚠️ 現在1項目のみ選択中です（2〜3項目の選択を推奨）：1項目だと短すぎるため、もう1〜2項目選択するか具体的な様子を追記してください！";
+  } else if (itemCount >= 4) {
+    ban.textContent = `⚠️ 現在${itemCount}項目選択中です（2〜3項目の選択を推奨）：4項目以上だと長くなりやすいため、全体の文字数を見ながら調整してください！`;
   } else if (!isEdited) {
-    ban.textContent = "⚠️ 未手直し（2項目選択中）：具体的な様子や内容の追記、文脈がおかしい箇所の修正をしてください！";
+    ban.textContent = `⚠️ 未手直し（${itemCount}項目選択中）：具体的な様子や内容の追記、文脈がおかしい箇所の修正をしてください！`;
   } else {
-    ban.textContent = "✓ 手直し済み（2項目選択中・続けて加筆・修正できます）";
+    ban.textContent = `✓ 手直し済み（${itemCount}項目選択中・続けて加筆・修正できます）`;
   }
 }
 
@@ -3847,28 +4234,62 @@ function refreshSelectedSlotsForNewTopic(newCat) {
   }
 }
 
+let _lastMajorChipSig = "";
+
+function updateMajorChipActiveStates() {
+  const majorWrap = $("major-chips");
+  if (!majorWrap) return;
+  const selectedMajors = getSelectedMajorList();
+  const pickerBox = $("unit-picker-box");
+  if (pickerBox) {
+    pickerBox.classList.toggle("has-selection", selectedMajors.length > 0);
+  }
+  $("major-picker-title").textContent = selectedMajors.length > 0
+    ? `単元一覧（${selectedMajors.length}件選択中）`
+    : "単元一覧（未選択・ここから選んでください）";
+  Array.from(majorWrap.children).forEach((b) => {
+    const maj = b.getAttribute("data-major");
+    const isAct = selectedMajors.includes(maj);
+    b.classList.toggle("active", isAct);
+    b.setAttribute("aria-pressed", String(isAct));
+  });
+}
+
 function renderMajorAndMinorChips() {
   const trees = getMatchingTrees();
   const majorWrap = $("major-chips");
   if (!majorWrap) return;
+
+  const limit = state.showAllMajors ? trees.length : 18;
+  const visibleTrees = trees.slice(0, limit);
+  $("btn-more-majors").hidden = trees.length <= 18;
+  $("btn-more-majors").textContent = state.showAllMajors ? "コンパクト表示" : `全${trees.length}単元をすべて表示`;
+
+  const sig = visibleTrees.map((t) => t.cat).join(",");
+  if (sig === _lastMajorChipSig && majorWrap.children.length === visibleTrees.length) {
+    updateMajorChipActiveStates();
+    return;
+  }
+  _lastMajorChipSig = sig;
   majorWrap.textContent = "";
 
   const selectedMajors = getSelectedMajorList();
-  const limit = state.showAllMajors ? trees.length : 18;
-  $("btn-more-majors").hidden = trees.length <= 18;
-  $("btn-more-majors").textContent = state.showAllMajors ? "コンパクト表示" : `全${trees.length}単元をすべて表示`;
+  const pickerBox = $("unit-picker-box");
+  if (pickerBox) {
+    pickerBox.classList.toggle("has-selection", selectedMajors.length > 0);
+  }
   $("major-picker-title").textContent = selectedMajors.length > 0
-    ? `単元一覧（${selectedMajors.length}件選択中・複数選択可・再タップで解除）`
-    : "単元一覧（複数選択可）";
+    ? `単元一覧（${selectedMajors.length}件選択中）`
+    : "単元一覧（未選択・ここから選んでください）";
 
-  trees.slice(0, limit).forEach((t) => {
+  visibleTrees.forEach((t) => {
     const isAct = selectedMajors.includes(t.major);
     const b = document.createElement("button");
     b.type = "button";
-    const cls = ["chip"];
-    if (isAct) cls.push("active");
-    b.className = cls.join(" ");
-    b.textContent = (isAct ? "✓ " : "") + t.major;
+    b.className = "chip" + (isAct ? " active" : "");
+    b.setAttribute("data-major", t.major);
+    b.setAttribute("aria-pressed", String(isAct));
+    b.textContent = t.major;
     b.addEventListener("click", () => {
       const curMajors = getSelectedMajorList();
       const idx = curMajors.indexOf(t.major);
@@ -3901,9 +4322,9 @@ function renderMajorAndMinorChips() {
       const nextCat = resolveActiveCategory();
       refreshSelectedSlotsForNewTopic(nextCat);
       setError("err-unit-major", null, $("unit-major"));
+      updateMajorChipActiveStates();
       syncAllDynamicViews();
       markStale();
-      renderMajorAndMinorChips();
     });
     majorWrap.appendChild(b);
   });
@@ -3962,7 +4383,11 @@ function renderStaticControls() {
     state.selectedAttChips = [];
   state.attSlots = { focus: [], question: [], work: [], understand: [] };
     state.selectedPtSentences = [];
-    state.impSlots = { closing: [] };
+    state.selectedHwChips = [];
+    state.activeHwFilterIds = [];
+    state.selectedHwChips = [];
+  state.activeHwFilterIds = [];
+  state.impSlots = { closing: [] };
     setError("err-subject", null);
     renderMajorAndMinorChips();
     syncAllDynamicViews();
@@ -4521,30 +4946,7 @@ function renderRecentChips() {
     });
   }
 
-  const unitBox = $("recent-units");
-  unitBox.textContent = "";
-  unitBox.hidden = state.recentUnits.length === 0;
-  if (state.recentUnits.length) {
-    const lab = document.createElement("span");
-    lab.className = "chips-label";
-    lab.textContent = "最近の単元:";
-    unitBox.appendChild(lab);
-    state.recentUnits.forEach((uStr) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "chip";
-      b.textContent = uStr;
-      b.addEventListener("click", () => {
-        const [maj] = uStr.split("｜");
-        $("unit-major").value = maj || "";
-        setError("err-unit-major", null, $("unit-major"));
-        renderMajorAndMinorChips();
-        syncAllDynamicViews();
-        markStale();
-      });
-      unitBox.appendChild(b);
-    });
-  }
+  // 最近の単元は非表示（廃止）
 }
 
 let modalCallback = null;
@@ -4687,7 +5089,7 @@ async function onCopyClick() {
 /* =========================================================
    複数生徒の入力・切り替え管理（前の生徒に戻って再編集可能）
    ========================================================= */
-const SESSION_KEY_STUDENTS = "report_app_multi_students_v52";
+const SESSION_KEY_STUDENTS = "report_app_multi_students_v54";
 
 function createStudentSlot(inheritFrom = null) {
   return {
@@ -4710,6 +5112,7 @@ function createStudentSlot(inheritFrom = null) {
     selectedAttChips: [],
     attSlots: { focus: [], question: [], work: [], understand: [] },
     selectedPtSentences: [],
+    selectedHwChips: [],
     impSlots: { closing: [] },
     hwMaterial: "",
     previewAttText: "",
@@ -4745,6 +5148,7 @@ function saveCurrentStudentSlot() {
   slot.selectedAttChips = JSON.parse(JSON.stringify(state.selectedAttChips || []));
   slot.attSlots = JSON.parse(JSON.stringify(state.attSlots));
   slot.selectedPtSentences = [...state.selectedPtSentences];
+  slot.selectedHwChips = JSON.parse(JSON.stringify(state.selectedHwChips || []));
   slot.impSlots = JSON.parse(JSON.stringify(state.impSlots));
   slot.hwMaterial = $("hw-material").value;
   slot.previewAttText = $("preview-attitude-text").value;
@@ -4827,6 +5231,8 @@ function loadStudentSlot(idx) {
   state.selectedAttChips = JSON.parse(JSON.stringify(slot.selectedAttChips || []));
   state.attSlots = JSON.parse(JSON.stringify(slot.attSlots || { focus: [], question: [], work: [], understand: [] }));
   state.selectedPtSentences = [...(slot.selectedPtSentences || [])];
+  state.selectedHwChips = JSON.parse(JSON.stringify(slot.selectedHwChips || []));
+  state.activeHwFilterIds = [];
   state.impSlots = JSON.parse(JSON.stringify(slot.impSlots || { closing: [] }));
   $("hw-material").value = slot.hwMaterial || "";
 
@@ -4870,6 +5276,8 @@ function clearStudentSelections() {
   state.selectedAttChips = [];
   state.attSlots = { focus: [], question: [], work: [], understand: [] };
   state.selectedPtSentences = [];
+  state.selectedHwChips = [];
+  state.activeHwFilterIds = [];
   state.impSlots = { closing: [] };
   if ($("att-hw-memo")) $("att-hw-memo").value = "";
   state.secEdited = { att: false, pt: false, hw: false };
